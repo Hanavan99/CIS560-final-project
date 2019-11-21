@@ -1,0 +1,1 @@
+insert into Tasks (Name, Description) values ('Create new user', 'Create an account on the network for new hire');
