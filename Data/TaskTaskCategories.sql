@@ -1,0 +1,6 @@
+insert into Tasks.TaskTaskCategories (TaskID, TaskCategoryID) values ((SELECT TaskID FROM Tasks.Tasks WHERE [Name] = N'Create new user'), (SELECT TaskCategoryID FROM Tasks.TaskCategories WHERE [Name] = N'Mid Priority'));
+insert into Tasks.TaskTaskCategories (TaskID, TaskCategoryID) values ((SELECT TaskID FROM Tasks.Tasks WHERE [Name] = N'Computer won''t power on'), (SELECT TaskCategoryID FROM Tasks.TaskCategories WHERE [Name] = N'Mid Priority'));
+insert into Tasks.TaskTaskCategories (TaskID, TaskCategoryID) values ((SELECT TaskID FROM Tasks.Tasks WHERE [Name] = N'Update Roster'), (SELECT TaskCategoryID FROM Tasks.TaskCategories WHERE [Name] = N'Low Priority'));
+insert into Tasks.TaskTaskCategories (TaskID, TaskCategoryID) values ((SELECT TaskID FROM Tasks.Tasks WHERE [Name] = N'Update Accounting Software'), (SELECT TaskCategoryID FROM Tasks.TaskCategories WHERE [Name] = N'High Priority'));
+insert into Tasks.TaskTaskCategories (TaskID, TaskCategoryID) values ((SELECT TaskID FROM Tasks.Tasks WHERE [Name] = N'Email is not loading.'), (SELECT TaskCategoryID FROM Tasks.TaskCategories WHERE [Name] = N'Mid Priority'));
+	
