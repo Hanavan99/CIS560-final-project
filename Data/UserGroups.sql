@@ -1,5 +1,5 @@
-insert into UserGroups (Name, Description) values ('Desktop Support', 'Provide end user support');
-insert into UserGroups (Name, Description) values ('Patching', 'Update and maintain OS and software');
-insert into UserGroups (Name, Description) values ('Networking and Security', 'Provide and maintain a network and its security');
-insert into UserGroups (Name, Description) values ('Web', 'Maintain and update website');
-insert into UserGroups (Name, Description) values ('Hardware', 'Build and repair computers');
+insert into Users.UserGroups (GroupOwnerID, [Name], [Description]) values ((SELECT UserID FROM Users.Users WHERE [Name] = N'wcabrera0'), N'Desktop Support', N'Provide end user support');
+insert into Users.UserGroups (GroupOwnerID, [Name], [Description]) values ((SELECT UserID FROM Users.Users WHERE [Name] = N'abeddall1'), N'Patching', N'Update and maintain OS and software');
+insert into Users.UserGroups (GroupOwnerID, [Name], [Description]) values ((SELECT UserID FROM Users.Users WHERE [Name] = N'esandal2'), N'Networking and Security', N'Provide and maintain a network and its security');
+insert into Users.UserGroups (GroupOwnerID, [Name], [Description]) values ((SELECT UserID FROM Users.Users WHERE [Name] = N'kcarnell3'), N'Web', N'Maintain and update website');
+insert into Users.UserGroups (GroupOwnerID, [Name], [Description]) values ((SELECT UserID FROM Users.Users WHERE [Name] = N'twhorlton4'), N'Hardware', N'Build and repair computers');
