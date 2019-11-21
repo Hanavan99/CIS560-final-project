@@ -1,1 +1,0 @@
-insert into Roles (Name, Description) values ('Owner', 'Maintain and update website');
