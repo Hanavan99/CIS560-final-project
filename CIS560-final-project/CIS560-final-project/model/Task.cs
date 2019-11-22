@@ -2,7 +2,7 @@ using System;
 
 namespace CIS560_final_project.model
 {
-    class Task
+    public class Task
     {
 		public int TaskID { get; }
 		public string Name { get; }

@@ -2,7 +2,7 @@
 
 namespace CIS560_final_project.model
 {
-    class Roles
+    public class Role
     {
 		public int RoleID { get; }
 		public string Name { get; }

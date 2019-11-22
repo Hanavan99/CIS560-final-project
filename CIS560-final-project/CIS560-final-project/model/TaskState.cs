@@ -2,7 +2,7 @@ using System;
 
 namespace CIS560_final_project.model
 {
-    class TaskState
+    public class TaskState
     {
 		public int TaskStateID { get; }
 		public string Name { get; }

@@ -2,7 +2,7 @@ using System;
 
 namespace CIS560_final_project.model
 {
-    class UserGroup
+    public class UserGroup
     {
 		public int UserGroupID { get; }
 		public int GroupOwnerID { get; }

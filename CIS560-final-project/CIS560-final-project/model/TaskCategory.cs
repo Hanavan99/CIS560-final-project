@@ -2,7 +2,7 @@ using System;
 
 namespace CIS560_final_project.model
 {
-    class TaskCategory
+    public class TaskCategory
     {
 		public int TaskCategoryID { get; }
 		public int OwnerID { get; }
