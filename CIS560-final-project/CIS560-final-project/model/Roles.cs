@@ -11,7 +11,7 @@ namespace CIS560_final_project.model
 		public bool CanDeleteTasks { get; }
 		public bool CanModifyTasks { get; }
 		
-		public Role(int RoleID, string Name, bool CCT, bool CAT, bool, CDT, bool CMT){
+		public Role(int RoleID, string Name, bool CCT, bool CAT, bool CDT, bool CMT){
 			this.RoleID = RoleID;
 			this.Name = Name;
 			CanCreateTasks = CCT;
