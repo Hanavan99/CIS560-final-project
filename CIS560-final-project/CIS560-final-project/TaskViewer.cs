@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CIS560_final_project
 {
-    public partial class Form1 : Form
+    public partial class TaskViewer : Form
     {
-        public Form1()
+        public TaskViewer()
         {
             InitializeComponent();
+        }
+
+        private void TaskViewer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
