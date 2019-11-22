@@ -1,0 +1,11 @@
+C:\Code\560\560Project-UI\560Project-UI\bin\Debug\560Project-UI.exe.config
+C:\Code\560\560Project-UI\560Project-UI\bin\Debug\560Project-UI.exe
+C:\Code\560\560Project-UI\560Project-UI\bin\Debug\560Project-UI.pdb
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\560Project-UI.csprojAssemblyReference.cache
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\_560Project_UI.TaskOrganizer.resources
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\_560Project_UI.Properties.Resources.resources
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\560Project-UI.csproj.GenerateResource.cache
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\560Project-UI.csproj.CoreCompileInputs.cache
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\560Project-UI.exe
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\560Project-UI.pdb
+C:\Code\560\560Project-UI\560Project-UI\obj\Debug\_560Project_UI.Task.resources
