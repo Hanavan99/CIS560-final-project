@@ -11,7 +11,7 @@ namespace CIS560_final_project.model
 		public string Color { get; }
 		
 		public TaskCategory(int TaskCategoryID, int OwnerID, string Name, string Description, string Color){
-			this.TaskCategoryID = TaskCategory;
+			this.TaskCategoryID = TaskCategoryID;
 			this.OwnerID = OwnerID;
 			this.Name = Name;
 			this.Description = Description;
