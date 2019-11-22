@@ -41,7 +41,7 @@ CREATE TABLE Users.UserGroups (
 	UserGroupID INT NOT NULL IDENTITY(1, 1),
 	GroupOwnerID INT NOT NULL,
 	[Name] NVARCHAR(64) NOT NULL UNIQUE,
-	[Description] NVARCHAR(512) NOT NULL
+	[Description] NVARCHAR(512)
 
 	CONSTRAINT PK_Users_UserGroups_UserGroupID PRIMARY KEY(UserGroupID),
 	CONSTRAINT FK_Users_UserGroups_GroupOwnerID FOREIGN KEY(GroupOwnerID) REFERENCES Users.Users(UserID)
@@ -61,7 +61,7 @@ CREATE TABLE Users.UserGroupUsers (
 CREATE TABLE Tasks.TaskStates (
 	TaskStateID INT NOT NULL IDENTITY(1, 1),
 	[Name] NVARCHAR(64) NOT NULL,
-	[Description] NVARCHAR(512) NOT NULL,
+	[Description] NVARCHAR(512),
 	Color CHAR(6) NOT NULL DEFAULT('000000')
 
 	CONSTRAINT PK_Tasks_TaskStates_TaskStateID PRIMARY KEY(TaskStateID),
