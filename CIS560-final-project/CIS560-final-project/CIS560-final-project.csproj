@@ -53,13 +53,18 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\Role.cs" />
+    <Compile Include="model\Task.cs" />
+    <Compile Include="model\TaskCategory.cs" />
+    <Compile Include="model\TaskState.cs" />
+    <Compile Include="model\User.cs" />
+    <Compile Include="model\UserGroup.cs" />
     <Compile Include="TaskViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TaskViewer.Designer.cs">
       <DependentUpon>TaskViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\Roles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Login.resx">
@@ -90,6 +95,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
