@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.uxUsername = new System.Windows.Forms.TextBox();
+            this.uxPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.zxCancel = new System.Windows.Forms.Button();
             this.zxLogin = new System.Windows.Forms.Button();
@@ -45,19 +45,20 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
             // 
-            // textBox1
+            // uxUsername
             // 
-            this.textBox1.Location = new System.Drawing.Point(122, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 22);
-            this.textBox1.TabIndex = 1;
+            this.uxUsername.Location = new System.Drawing.Point(122, 12);
+            this.uxUsername.Name = "uxUsername";
+            this.uxUsername.Size = new System.Drawing.Size(208, 22);
+            this.uxUsername.TabIndex = 1;
             // 
-            // textBox2
+            // uxPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(122, 40);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(208, 22);
-            this.textBox2.TabIndex = 2;
+            this.uxPassword.Location = new System.Drawing.Point(122, 40);
+            this.uxPassword.Name = "uxPassword";
+            this.uxPassword.Size = new System.Drawing.Size(208, 22);
+            this.uxPassword.TabIndex = 2;
+            this.uxPassword.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -95,8 +96,8 @@
             this.Controls.Add(this.zxLogin);
             this.Controls.Add(this.zxCancel);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.uxPassword);
+            this.Controls.Add(this.uxUsername);
             this.Controls.Add(this.label1);
             this.Name = "Login";
             this.Text = "Login";
@@ -108,8 +109,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox uxUsername;
+        private System.Windows.Forms.TextBox uxPassword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button zxCancel;
         private System.Windows.Forms.Button zxLogin;

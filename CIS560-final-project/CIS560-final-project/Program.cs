@@ -14,6 +14,8 @@ namespace CIS560_final_project
         [STAThread]
         static void Main()
         {
+            IDatabaseManager database = null;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());

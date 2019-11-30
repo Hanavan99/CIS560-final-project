@@ -7,21 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using 
+using CIS560_final_project.database;
 
 namespace CIS560_final_project
 {
     public partial class Login : Form
     {
-        public Login(IDatabaseManager manager)
+        private IDatabaseManager database;
+
+        public Login(IDatabaseManager database)
         {
             InitializeComponent();
+            this.database = database;
         }
 
         private void zxLogin_Click(object sender, EventArgs e)
         {
-            new TaskViewer().Show();
-            Hide();
+            if (database.VerifyUser(uxUsername.Text, uxPassword.Text)) { 
+                new TaskViewer(database).Show();
+                Hide();
+            } else
+            {
+                MessageBox.Show("Invalid username or password.");
+            }
         }
 
         private void zxCancel_Click(object sender, EventArgs e) => Application.Exit();

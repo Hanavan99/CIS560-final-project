@@ -21,9 +21,19 @@ namespace CIS560_final_project.database
 
         TaskCategory UpdateTaskCategory(TaskCategory TaskCategory, User Owner, string Name, string Description, string Color);
 
+        List<TaskCategory> GetTaskCategoriesForOwner(User Owner);
+
+        List<TaskCategory> GetTaskCategories();
+
         UserGroup CreateUserGroup(User Owner, string Name, string Description);
 
         UserGroup UpdateUserGroup(UserGroup UserGroup, User Owner, string Name, string Description);
+
+        List<UserGroup> GetUserGroupsForOwner(User Owner);
+
+        List<UserGroup> GetUserGroupsForUser(User User);
+
+        List<UserGroup> GetUsersInUserGroup(UserGroup);
 
         void AddUserToGroup(UserGroup UserGroup, User User, Role Role);
 
@@ -33,12 +43,20 @@ namespace CIS560_final_project.database
 
         Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate);
 
+        List<Task> GetTasksForOwner(User Owner);
+
+        List<Task> GetTasksForUserGroup(UserGroup UserGroup);
+
         TaskState CreateTaskState(string Name, string Description, string Color);
 
         TaskState UpdateTaskState(TaskState TaskState, string Name, string Description, string Color);
 
+        List<TaskState> GetTaskStates();
+
         Role CreateRole(string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT);
 
         Role UpdateRole(Role Role, string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT);
+
+        List<Role> GetRoles();
     }
 }

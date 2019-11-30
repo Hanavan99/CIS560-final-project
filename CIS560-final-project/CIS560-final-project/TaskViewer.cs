@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CIS560_final_project.database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,12 @@ namespace CIS560_final_project
 {
     public partial class TaskViewer : Form
     {
-        public TaskViewer()
+        private IDatabaseManager database;
+
+        public TaskViewer(IDatabaseManager database)
         {
             InitializeComponent();
+            this.database = database;
         }
 
         private void TaskViewer_FormClosed(object sender, FormClosedEventArgs e)
