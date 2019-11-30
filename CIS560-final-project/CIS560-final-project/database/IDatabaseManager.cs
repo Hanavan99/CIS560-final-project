@@ -33,7 +33,7 @@ namespace CIS560_final_project.database
 
         List<UserGroup> GetUserGroupsForUser(User User);
 
-        List<UserGroup> GetUsersInUserGroup(UserGroup);
+        List<UserGroup> GetUsersInUserGroup(UserGroup UserGroup);
 
         void AddUserToGroup(UserGroup UserGroup, User User, Role Role);
 
