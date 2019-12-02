@@ -66,11 +66,11 @@ namespace CIS560_final_project.database
     }
 
 
-    /*public class DatabaseManagerImpl : IDatabaseManager
+    public class DatabaseManagerImpl : IDatabaseManager
     {
         readonly string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
 
-        public List<User> GetUsersInUserGroup(UserGroup UserGroup)// done?
+        public List<User> GetUsersInUserGroup(UserGroup UserGroup)// done
         {
             List<User> users = new List<User>();
 
@@ -155,15 +155,17 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()), 
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroup"], Owner, reader["Name"].ToString(), reader["Description"].ToString());
+                    TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["Name"].ToString(), reader["Description"].ToString(), reader["Color"].ToString());
+                    Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()),
                                         reader["Name"].ToString(),
                                         reader["Description"].ToString(),
-                                        int.Parse(reader["OwnerUserID"].ToString()),
-                                        int.Parse(reader["OwnerUserID"].ToString()),
-                                        int.Parse(reader["TaskStateID"].ToString()),
-                                        reader["DueDate"].ToString(), 
-                                        reader["StartDate"].ToString(), 
-                                        reader["CompletionDate"].ToString());
+                                        tempUserGroup,
+                                        Owner,
+                                        tempTaskState,
+                                        (DateTime)reader["DueDate"],
+                                        (DateTime)reader["StartDate"],
+                                        (DateTime)reader["CompletionDate"], null);
 
                     tasks.Add(tempTask);
                 }
@@ -183,9 +185,28 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public bool VerifyUser(string Name, string Password)
+        public User VerifyUser(string Name, string Password)//done?
         {
-            throw new NotImplementedException();
+            User tempUser;
+            SqlConnection scon = new SqlConnection(connectionString);
+
+            scon.Open();
+            string query = "SELECT * FROM Users.Users UU WHERE UU.Name = " + Name + "and UU.Password = PWDENCRYPT(" + Password + ")";
+            SqlCommand cmd = new SqlCommand(query, scon);
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    tempUser = new User((int)reader["UserID"], (string)reader["Name"], (string)reader["Email"], (string)reader["PasswordHash"]);
+                }
+                else
+                {
+                    tempUser = null;
+                }
+            }
+            scon.Close();
+            return tempUser;
         }
 
         public TaskCategory CreateTaskCategory(User Owner, string Name, string Description, string Color)
@@ -238,9 +259,18 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
+        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate)
         {
-            throw new NotImplementedException();
+            SqlConnection scon = new SqlConnection(connectionString);
+            scon.Open();
+
+            string query = "INSERT INTO Tasks.Tasks([Name], [Description], OwnerUserID, TaskStateID, DueDate, StartDate, CompletionDate) values (" + Name + ", " + Description + ", (SELECT UserID FROM Users.Users WHERE [Name] = N'" + Owner.Name + "'), (SELECT TaskStateID FROM Tasks.TaskStates WHERE[Name] = N'" + TaskState.Name + "'), '" + DueDate + "', '" + StartDate + "', '" + CompletionDate + "');";
+            SqlCommand cmd = new SqlCommand(query, scon);
+
+            int TaskID = (int)cmd.ExecuteScalar();
+            scon.Close();
+            Task tempTask = new Task(TaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate, null);
+            return tempTask;
         }
 
         public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
@@ -289,6 +319,21 @@ namespace CIS560_final_project.database
         }
 
         List<Role> IDatabaseManager.GetRoles()
+        {
+            throw new NotImplementedException();
+        }
+
+        User IDatabaseManager.VerifyUser(string Name, string Password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
             throw new NotImplementedException();
         }
