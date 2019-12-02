@@ -5,13 +5,13 @@ namespace CIS560_final_project.model
     public class UserGroup
     {
 		public int UserGroupID { get; }
-		public int GroupOwnerID { get; }
+		public User Owner { get; }
 		public string Name { get; }
 		public string Description { get; }
 		
-		public UserGroup(int UserGroupID, int GroupOwnerID, string Name, string Description){
+		public UserGroup(int UserGroupID, User Owner, string Name, string Description){
 			this.UserGroupID = UserGroupID;
-			this.GroupOwnerID = GroupOwnerID;
+			this.Owner = Owner;
 			this.Name = Name;
 			this.Description = Description;
 		}
