@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.zxCalendar = new System.Windows.Forms.MonthCalendar();
-            this.zxTaskList = new System.Windows.Forms.DataGridView();
+            this.uxCalendar = new System.Windows.Forms.MonthCalendar();
+            this.uxTaskList = new System.Windows.Forms.DataGridView();
             this.TaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaskState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaskCategories = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,26 +45,30 @@
             this.deleteSelectedTasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.zxTaskList)).BeginInit();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.uxUserGroup = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.uxTaskList)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // zxCalendar
+            // uxCalendar
             // 
-            this.zxCalendar.Location = new System.Drawing.Point(18, 33);
-            this.zxCalendar.Name = "zxCalendar";
-            this.zxCalendar.TabIndex = 0;
+            this.uxCalendar.Location = new System.Drawing.Point(13, 33);
+            this.uxCalendar.Name = "uxCalendar";
+            this.uxCalendar.TabIndex = 0;
             // 
-            // zxTaskList
+            // uxTaskList
             // 
-            this.zxTaskList.AllowUserToAddRows = false;
-            this.zxTaskList.AllowUserToDeleteRows = false;
-            this.zxTaskList.AllowUserToResizeRows = false;
-            this.zxTaskList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.uxTaskList.AllowUserToAddRows = false;
+            this.uxTaskList.AllowUserToDeleteRows = false;
+            this.uxTaskList.AllowUserToResizeRows = false;
+            this.uxTaskList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.zxTaskList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zxTaskList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.uxTaskList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.uxTaskList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TaskName,
             this.TaskState,
             this.TaskCategories,
@@ -73,13 +77,13 @@
             this.DueDate,
             this.StartDate,
             this.CompletionDate});
-            this.zxTaskList.Location = new System.Drawing.Point(292, 33);
-            this.zxTaskList.Name = "zxTaskList";
-            this.zxTaskList.ReadOnly = true;
-            this.zxTaskList.RowHeadersWidth = 51;
-            this.zxTaskList.RowTemplate.Height = 24;
-            this.zxTaskList.Size = new System.Drawing.Size(837, 621);
-            this.zxTaskList.TabIndex = 1;
+            this.uxTaskList.Location = new System.Drawing.Point(287, 33);
+            this.uxTaskList.Name = "uxTaskList";
+            this.uxTaskList.ReadOnly = true;
+            this.uxTaskList.RowHeadersWidth = 51;
+            this.uxTaskList.RowTemplate.Height = 24;
+            this.uxTaskList.Size = new System.Drawing.Size(842, 621);
+            this.uxTaskList.TabIndex = 1;
             // 
             // TaskName
             // 
@@ -196,23 +200,54 @@
             // editGroupsToolStripMenuItem
             // 
             this.editGroupsToolStripMenuItem.Name = "editGroupsToolStripMenuItem";
-            this.editGroupsToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.editGroupsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.editGroupsToolStripMenuItem.Text = "Edit Groups...";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.uxUserGroup);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(13, 253);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(262, 170);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filters";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "User Group:";
+            // 
+            // uxUserGroup
+            // 
+            this.uxUserGroup.FormattingEnabled = true;
+            this.uxUserGroup.Location = new System.Drawing.Point(98, 22);
+            this.uxUserGroup.Name = "uxUserGroup";
+            this.uxUserGroup.Size = new System.Drawing.Size(158, 24);
+            this.uxUserGroup.TabIndex = 1;
             // 
             // TaskViewer
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1141, 666);
-            this.Controls.Add(this.zxTaskList);
-            this.Controls.Add(this.zxCalendar);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.uxTaskList);
+            this.Controls.Add(this.uxCalendar);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TaskViewer";
             this.Text = "Task Manager";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TaskViewer_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.zxTaskList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxTaskList)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,8 +255,8 @@
 
         #endregion
 
-        private System.Windows.Forms.MonthCalendar zxCalendar;
-        private System.Windows.Forms.DataGridView zxTaskList;
+        private System.Windows.Forms.MonthCalendar uxCalendar;
+        private System.Windows.Forms.DataGridView uxTaskList;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskName;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskState;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskCategories;
@@ -237,6 +272,9 @@
         private System.Windows.Forms.ToolStripMenuItem deleteSelectedTasksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editGroupsToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox uxUserGroup;
+        private System.Windows.Forms.Label label1;
     }
 }
 

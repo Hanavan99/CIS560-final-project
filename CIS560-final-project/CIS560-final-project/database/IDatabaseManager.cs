@@ -85,7 +85,7 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    userID.Add(reader.GetInt(0));
+                    userID.Add(reader.GetInt32(0));
                 }
             }
 
@@ -93,13 +93,13 @@ namespace CIS560_final_project.database
             foreach (int i in userID)
             {
                 query = "Select Name, Email From Users.Users Where UserID = " + i;
-                cmd = SqlCommand(query, scon);
+                cmd = new SqlCommand(query, scon);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        userName.Add(reader["Name"].GetValue(0).ToString());
-                        email.Add(reader["Email"].GetValue(0).ToString());
+                        userName.Add(reader["Name"].ToString());
+                        email.Add(reader["Email"].ToString());
                     }
                 }
             }
@@ -128,7 +128,7 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    TaskState tempTaskState = new TaskState(reader["TaskStateID"].GetValue(0).ToInt32(), reader["Name"].GetValue(0).ToString(), reader["Description"].GetValue(0).ToString(), reader["Color"].GetValue(0).ToString());
+                    TaskState tempTaskState = new TaskState(reader["TaskStateID"].ToInt32(), reader["Name"].GetValue(0).ToString(), reader["Description"].GetValue(0).ToString(), reader["Color"].GetValue(0).ToString());
                     ts.Add(tempTaskState);
                 }
             }
@@ -151,7 +151,7 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    Role tempRole = new Role(reader["RoleID"].GetValue(0).ToInt32(), reader["Name"].GetValue(0).ToString(), (bool)reader["CanCreateTasks"], (bool)reader["CanAssignTasks"], (bool)reader["CanDeleteTasks"], (bool)reader["CanModifyTasks"]);
+                    Role tempRole = new Role(int.Parse(reader["RoleID"].ToString()), reader["Name"].ToString(), reader["CanCreateTasks"].Equals(1) ? true : false, reader["CanAssignTasks"].Equals(1) ? true : false, reader["CanDeleteTasks"].Equals(1) ? true : false, reader["CanModifyTasks"].Equals(1) ? true : false);
                     roles.Add(tempRole);
                 }
             }
@@ -175,14 +175,15 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    Role tempTask = new Task(reader["TaskID"].GetValue(0).ToInt32(), 
-                                        reader["Name"].GetValue(0).ToString(),
-                                        reader["Description"].GetValue(0).ToString(),
-                                        reader["OwnerUserID"].GetValue(0).ToInt32(),
-                                        reader["TaskStateID"].GetValue(0).ToInt32(),
-                                        (DateTime)reader["DueDate"], 
-                                        (DateTime)reader["StartDate"], 
-                                        (DateTime)reader["CompletionDate"]);
+                    Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()), 
+                                        reader["Name"].ToString(),
+                                        reader["Description"].ToString(),
+                                        int.Parse(reader["OwnerUserID"].ToString()),
+                                        int.Parse(reader["OwnerUserID"].ToString()),
+                                        int.Parse(reader["TaskStateID"].ToString()),
+                                        reader["DueDate"].ToString(), 
+                                        reader["StartDate"].ToString(), 
+                                        reader["CompletionDate"].ToString());
 
                     tasks.Add(tempTask);
                 }
