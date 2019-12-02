@@ -11,19 +11,24 @@ using System.Windows.Forms;
 
 namespace CIS560_final_project
 {
-    public partial class TaskViewer : Form
+    public partial class EditTasksForm : Form
     {
         private IDatabaseManager database;
 
-        public TaskViewer(IDatabaseManager database)
+        public EditTasksForm(IDatabaseManager database)
         {
             InitializeComponent();
             this.database = database;
         }
 
-        private void TaskViewer_FormClosed(object sender, FormClosedEventArgs e)
+        private void uxEditGroups_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            new EditGroupsForm(database).Show();
+        }
+
+        private void EditTasksForm_Load(object sender, EventArgs e)
+        {
+            //database.GetTasksForUser();
         }
     }
 }

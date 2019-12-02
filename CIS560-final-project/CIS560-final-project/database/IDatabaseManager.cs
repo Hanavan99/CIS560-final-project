@@ -48,6 +48,8 @@ namespace CIS560_final_project.database
         List<Task> GetTasksForOwner(User Owner);// done?
 //
         List<Task> GetTasksForUserGroup(UserGroup UserGroup);
+
+        List<Task> GetTasksForUser(User User);
 //
         TaskState CreateTaskState(string Name, string Description, string Color);
 

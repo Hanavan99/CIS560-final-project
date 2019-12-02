@@ -1,6 +1,6 @@
 ﻿namespace CIS560_final_project
 {
-    partial class TaskViewer
+    partial class EditTasksForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,14 +40,16 @@
             this.CompletionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editSelectedTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSelectedTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedTasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uxEditGroups = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.uxUserGroup = new System.Windows.Forms.ComboBox();
+            this.uxFilterAll = new System.Windows.Forms.RadioButton();
+            this.uxFilterUserGroup = new System.Windows.Forms.RadioButton();
+            this.uxFilterOwner = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.uxTaskList)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -164,74 +166,101 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editSelectedTaskToolStripMenuItem,
             this.createTaskToolStripMenuItem,
+            this.editSelectedTaskToolStripMenuItem,
             this.deleteSelectedTasksToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.editToolStripMenuItem.Text = "Tasks";
             // 
-            // editSelectedTaskToolStripMenuItem
-            // 
-            this.editSelectedTaskToolStripMenuItem.Name = "editSelectedTaskToolStripMenuItem";
-            this.editSelectedTaskToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
-            this.editSelectedTaskToolStripMenuItem.Text = "Edit Selected Task...";
-            // 
             // createTaskToolStripMenuItem
             // 
             this.createTaskToolStripMenuItem.Name = "createTaskToolStripMenuItem";
-            this.createTaskToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
+            this.createTaskToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
             this.createTaskToolStripMenuItem.Text = "Create Task...";
+            // 
+            // editSelectedTaskToolStripMenuItem
+            // 
+            this.editSelectedTaskToolStripMenuItem.Name = "editSelectedTaskToolStripMenuItem";
+            this.editSelectedTaskToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.editSelectedTaskToolStripMenuItem.Text = "Edit Selected Task...";
             // 
             // deleteSelectedTasksToolStripMenuItem
             // 
             this.deleteSelectedTasksToolStripMenuItem.Name = "deleteSelectedTasksToolStripMenuItem";
-            this.deleteSelectedTasksToolStripMenuItem.Size = new System.Drawing.Size(253, 26);
-            this.deleteSelectedTasksToolStripMenuItem.Text = "Delete Selected Task(s)...";
+            this.deleteSelectedTasksToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
+            this.deleteSelectedTasksToolStripMenuItem.Text = "Delete Selected Task(s)";
             // 
             // groupsToolStripMenuItem
             // 
             this.groupsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editGroupsToolStripMenuItem});
+            this.uxEditGroups});
             this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
             this.groupsToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.groupsToolStripMenuItem.Text = "Groups";
             // 
-            // editGroupsToolStripMenuItem
+            // uxEditGroups
             // 
-            this.editGroupsToolStripMenuItem.Name = "editGroupsToolStripMenuItem";
-            this.editGroupsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.editGroupsToolStripMenuItem.Text = "Edit Groups...";
+            this.uxEditGroups.Name = "uxEditGroups";
+            this.uxEditGroups.Size = new System.Drawing.Size(224, 26);
+            this.uxEditGroups.Text = "Edit Groups...";
+            this.uxEditGroups.Click += new System.EventHandler(this.uxEditGroups_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.uxFilterOwner);
+            this.groupBox1.Controls.Add(this.uxFilterUserGroup);
+            this.groupBox1.Controls.Add(this.uxFilterAll);
             this.groupBox1.Controls.Add(this.uxUserGroup);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 253);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(262, 170);
+            this.groupBox1.Size = new System.Drawing.Size(262, 136);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filters";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "User Group:";
-            // 
             // uxUserGroup
             // 
             this.uxUserGroup.FormattingEnabled = true;
-            this.uxUserGroup.Location = new System.Drawing.Point(98, 22);
+            this.uxUserGroup.Location = new System.Drawing.Point(6, 75);
             this.uxUserGroup.Name = "uxUserGroup";
-            this.uxUserGroup.Size = new System.Drawing.Size(158, 24);
+            this.uxUserGroup.Size = new System.Drawing.Size(250, 24);
             this.uxUserGroup.TabIndex = 1;
             // 
-            // TaskViewer
+            // uxFilterAll
+            // 
+            this.uxFilterAll.AutoSize = true;
+            this.uxFilterAll.Location = new System.Drawing.Point(6, 21);
+            this.uxFilterAll.Name = "uxFilterAll";
+            this.uxFilterAll.Size = new System.Drawing.Size(81, 21);
+            this.uxFilterAll.TabIndex = 2;
+            this.uxFilterAll.TabStop = true;
+            this.uxFilterAll.Text = "All tasks";
+            this.uxFilterAll.UseVisualStyleBackColor = true;
+            // 
+            // uxFilterUserGroup
+            // 
+            this.uxFilterUserGroup.AutoSize = true;
+            this.uxFilterUserGroup.Location = new System.Drawing.Point(6, 48);
+            this.uxFilterUserGroup.Name = "uxFilterUserGroup";
+            this.uxFilterUserGroup.Size = new System.Drawing.Size(104, 21);
+            this.uxFilterUserGroup.TabIndex = 3;
+            this.uxFilterUserGroup.TabStop = true;
+            this.uxFilterUserGroup.Text = "User group:";
+            this.uxFilterUserGroup.UseVisualStyleBackColor = true;
+            // 
+            // uxFilterOwner
+            // 
+            this.uxFilterOwner.AutoSize = true;
+            this.uxFilterOwner.Location = new System.Drawing.Point(6, 106);
+            this.uxFilterOwner.Name = "uxFilterOwner";
+            this.uxFilterOwner.Size = new System.Drawing.Size(70, 21);
+            this.uxFilterOwner.TabIndex = 4;
+            this.uxFilterOwner.TabStop = true;
+            this.uxFilterOwner.Text = "Owner";
+            this.uxFilterOwner.UseVisualStyleBackColor = true;
+            // 
+            // EditTasksForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1141, 666);
@@ -240,9 +269,9 @@
             this.Controls.Add(this.uxCalendar);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "TaskViewer";
+            this.Name = "EditTasksForm";
             this.Text = "Task Manager";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TaskViewer_FormClosed);
+            this.Load += new System.EventHandler(this.EditTasksForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.uxTaskList)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -271,10 +300,12 @@
         private System.Windows.Forms.ToolStripMenuItem createTaskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteSelectedTasksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editGroupsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uxEditGroups;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox uxUserGroup;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton uxFilterOwner;
+        private System.Windows.Forms.RadioButton uxFilterUserGroup;
+        private System.Windows.Forms.RadioButton uxFilterAll;
     }
 }
 
