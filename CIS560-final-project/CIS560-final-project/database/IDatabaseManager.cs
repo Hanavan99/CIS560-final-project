@@ -43,7 +43,7 @@ namespace CIS560_final_project.database
 
         Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate);
 
-        Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate);
+        Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate);
 
         List<Task> GetTasksForOwner(User Owner);// done?
 //
