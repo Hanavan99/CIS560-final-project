@@ -220,6 +220,7 @@
             this.uxUserGroup.Name = "uxUserGroup";
             this.uxUserGroup.Size = new System.Drawing.Size(227, 21);
             this.uxUserGroup.TabIndex = 1;
+            this.uxUserGroup.SelectedIndexChanged += new System.EventHandler(this.uxUserGroup_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -278,6 +279,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "EditTasksForm";
             this.Text = "Task Manager";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditTasksForm_FormClosed);
             this.Load += new System.EventHandler(this.EditTasksForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.uxTaskList)).EndInit();

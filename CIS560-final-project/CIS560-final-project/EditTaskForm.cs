@@ -39,7 +39,11 @@ namespace CIS560_final_project
                 uxOwner.Text = task.Owner.Name;
                 uxStartDate.Value = task.StartDate;
                 uxDueDate.Value = task.DueDate;
-                uxCompletionDate.Value = task.CompletionDate;
+                if (task.CompletionDate != null)
+                {
+                    uxCompletionDate.Value = (DateTime)task.CompletionDate;
+                    uxCompleted.Checked = true;
+                }
             }
             else
             {
@@ -63,13 +67,18 @@ namespace CIS560_final_project
             }
             else
             {
+                DateTime? t = null;
+                if (uxCompleted.Checked)
+                {
+                    t = uxCompletionDate.Value;
+                }
                 if (task != null)
                 {
-                    database.UpdateTask(task, uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, task.Owner, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value, task.TaskCategories);
+                    database.UpdateTask(task, uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, task.Owner, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, t, task.TaskCategories);
                 }
                 else
                 {
-                    database.CreateTask(uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, user, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value, new List<TaskCategory>());
+                    database.CreateTask(uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, user, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, t, new List<TaskCategory>());
                 }
                 Close();
             }
@@ -78,6 +87,11 @@ namespace CIS560_final_project
         private void uxCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void uxCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            uxCompletionDate.Enabled = uxCompleted.Checked;
         }
     }
 }
