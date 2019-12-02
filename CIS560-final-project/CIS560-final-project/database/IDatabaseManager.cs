@@ -206,14 +206,14 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Users.Users UU WHERE UU.Name = " + Name + "and UU.Password = PWDENCRYPT(" + Password + ")";
+            string query = "SELECT * FROM Users.Users UU WHERE UU.Name = '" + Name + "' and PWDCOMPARE('" + Password + "', UU.PasswordHash) = 1";
             SqlCommand cmd = new SqlCommand(query, scon);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
                 {
-                    tempUser = new User((int)reader["UserID"], (string)reader["Name"], (string)reader["Email"], (string)reader["PasswordHash"]);
+                    tempUser = new User((int)reader["UserID"], (string)reader["Name"], (string)reader["Email"], null);
                 }
                 else
                 {
@@ -259,11 +259,6 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public List<UserGroup> GetUserGroupsForUser(User User)
-        {
-            throw new NotImplementedException();
-        }
-
         public void AddUserToGroup(UserGroup UserGroup, User User, Role Role)
         {
             throw new NotImplementedException();
@@ -279,7 +274,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "INSERT INTO Tasks.Tasks([Name], [Description], OwnerUserID, TaskStateID, DueDate, StartDate, CompletionDate) values (" + Name + ", " + Description + ", (SELECT UserID FROM Users.Users WHERE [Name] = N'" + Owner.Name + "'), (SELECT TaskStateID FROM Tasks.TaskStates WHERE[Name] = N'" + TaskState.Name + "'), '" + DueDate + "', '" + StartDate + "', '" + CompletionDate + "');";
+            string query = "INSERT INTO Tasks.Tasks([Name], [Description], OwnerUserID, UserGroupID, TaskStateID, DueDate, StartDate, CompletionDate) OUTPUT INSERTED.TaskID values ('" + Name + "', '" + Description + "', (SELECT UserID FROM Users.Users WHERE [Name] = N'" + Owner.Name + "'), " + UserGroup.UserGroupID + ", (SELECT TaskStateID FROM Tasks.TaskStates WHERE[Name] = N'" + TaskState.Name + "'), '" + DueDate + "', '" + StartDate + "', '" + CompletionDate + "')";
             SqlCommand cmd = new SqlCommand(query, scon);
 
             int TaskID = (int)cmd.ExecuteScalar();
@@ -305,7 +300,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Tasks.Tasks WHERE OwnerUserID = " + User.UserID;// modify the query
+            string query = "SELECT * FROM Tasks.Tasks T INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID WHERE UGU.UserID = " + User.UserID;// modify the query
             SqlCommand cmd = new SqlCommand(query, scon);
             List<TaskCategory> ltc = new List<TaskCategory>();
 
@@ -313,7 +308,7 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroup"], User, reader["Name"].ToString(), reader["Description"].ToString());
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], User, reader["Name"].ToString(), reader["Description"].ToString());
                     TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["Name"].ToString(), reader["Description"].ToString(), reader["Color"].ToString());
                     Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()),
                                         reader["Name"].ToString(),
@@ -356,6 +351,29 @@ namespace CIS560_final_project.database
         public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
             throw new NotImplementedException();
+        }
+
+        public List<UserGroup> GetUserGroupsForUser(User User)
+        {
+            List<UserGroup> userGroups = new List<UserGroup>();
+
+            SqlConnection scon = new SqlConnection(connectionString);
+
+            scon.Open();
+            string query = "SELECT * FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID WHERE UGU.UserID = " + User.UserID;
+            SqlCommand cmd = new SqlCommand(query, scon);
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], User, (string)reader["Name"], (string)reader["Description"]);
+                    userGroups.Add(tempUserGroup);
+                }
+            }
+
+            scon.Close();
+            return userGroups;
         }
     }// end of class*/
 }// end of namespace

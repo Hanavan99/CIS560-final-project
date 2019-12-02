@@ -74,13 +74,15 @@ CREATE TABLE Tasks.Tasks (
 	Description NVARCHAR(256) NOT NULL,
 	OwnerUserID INT,
 	TaskStateID INT,
+	UserGroupID INT NOT NULL,
 	DueDate DATETIME2 NOT NULL,
 	StartDate DATETIME2 NOT NULL,
 	CompletionDate DATETIME2 NOT NULL
 
 	CONSTRAINT PK_Tasks_Tasks_TaskID PRIMARY KEY(TaskID),
 	CONSTRAINT FK_Tasks_Tasks_OwnerUserID FOREIGN KEY(OwnerUserID) REFERENCES Users.Users(UserID),
-	CONSTRAINT FK_Tasks_Tasks_TaskStateID FOREIGN KEY (TaskStateID) REFERENCES Tasks.TaskStates(TaskStateID)
+	CONSTRAINT FK_Tasks_Tasks_TaskStateID FOREIGN KEY (TaskStateID) REFERENCES Tasks.TaskStates(TaskStateID),
+	CONSTRAINT FK_Tasks_Tasks_UserGroupID FOREIGN KEY (UserGroupID) REFERENCES Users.UserGroups(UserGroupID)
 );
 
 CREATE TABLE Tasks.TaskCategories (
