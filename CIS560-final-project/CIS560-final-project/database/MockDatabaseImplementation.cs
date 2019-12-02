@@ -29,13 +29,13 @@ namespace CIS560_final_project.database
             Role owner = new Role(0, "Owner", true, true, true, true);
             _roles.Add(owner);
 
-            UserGroup desktopSupport = new UserGroup(0, 0, "Desktop Support", "Provide end user support");
+            UserGroup desktopSupport = new UserGroup(0, wcabrera0, "Desktop Support", "Provide end user support");
             _userGroups.Add(desktopSupport);
 
             _userRoleInGroup.Add(new Tuple<User, UserGroup>(wcabrera0, desktopSupport), owner);
             _userRoleInGroup.Add(new Tuple<User, UserGroup>(demo, desktopSupport), owner);
 
-            _tasks.Add(new model.Task(0, "Testing", "A desc", 0, 1, 0, "now", "never", "sometime in the future"));
+            //_tasks.Add(new model.Task(0, "Testing", "A desc", 0, 1, 0, "now", "never", "sometime in the future"));
         }
 
         public void AddUserToGroup(UserGroup UserGroup, User User, Role Role)
@@ -55,7 +55,7 @@ namespace CIS560_final_project.database
         public model.Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
         {
             int currentTaskID = 0;
-            model.Task task = new model.Task(currentTaskID, Name, Description, UserGroup.UserGroupID, Owner.UserID, TaskState.TaskStateID, DueDate, StartDate, CompletionDate);
+            model.Task task = new model.Task(currentTaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate);
             currentTaskID++;
             _tasks.Add(task);
             return task;
@@ -64,7 +64,7 @@ namespace CIS560_final_project.database
         public TaskCategory CreateTaskCategory(User Owner, string Name, string Description, string Color)
         {
             int currentTaskCategoryID = 0;
-            TaskCategory taskCategory = new TaskCategory(currentTaskCategoryID, Owner.UserID, Name, Description, Color);
+            TaskCategory taskCategory = new TaskCategory(currentTaskCategoryID, Owner, Name, Description, Color);
             currentTaskCategoryID++;
             _taskCategories.Add(taskCategory);
             return taskCategory;
@@ -91,7 +91,7 @@ namespace CIS560_final_project.database
         public UserGroup CreateUserGroup(User Owner, string Name, string Description)
         {
             int currentUserGroupID = 1;
-            UserGroup userGroup = new UserGroup(currentUserGroupID, Owner.UserID, Name, Description);
+            UserGroup userGroup = new UserGroup(currentUserGroupID, Owner, Name, Description);
             currentUserGroupID++;
             _userGroups.Add(userGroup);
             return userGroup;
@@ -127,7 +127,7 @@ namespace CIS560_final_project.database
                 {
                     foreach(model.Task aTask in _tasks)
                     {
-                        if(aTask.UserGroupID == userGroup.Key.Item2.UserGroupID)
+                        if(aTask.UserGroup.UserGroupID == userGroup.Key.Item2.UserGroupID)
                         {
                             filteredTasks.Add(aTask);
                         }
