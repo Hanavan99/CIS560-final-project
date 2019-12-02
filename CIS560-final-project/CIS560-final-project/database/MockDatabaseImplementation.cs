@@ -157,7 +157,17 @@ namespace CIS560_final_project.database
 
         public List<UserGroup> GetUserGroupsForUser(User User)
         {
-            throw new NotImplementedException();
+            List<UserGroup> filterdUserGroups = new List<UserGroup>();
+
+            foreach (KeyValuePair<Tuple<User, UserGroup>, Role> userGroup in _userRoleInGroup)
+            {
+                if (userGroup.Key.Item1.UserID == User.UserID)
+                {
+                    filterdUserGroups.Add(userGroup.Key.Item2);
+                }
+            }
+
+            return filterdUserGroups;
         }
 
         public List<UserGroup> GetUsersInUserGroup(UserGroup UserGroup)
