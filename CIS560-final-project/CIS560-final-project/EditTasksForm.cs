@@ -1,4 +1,5 @@
 ﻿using CIS560_final_project.database;
+using CIS560_final_project.model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,14 @@ namespace CIS560_final_project
     public partial class EditTasksForm : Form
     {
         private IDatabaseManager database;
+        private User user;
 
-        public EditTasksForm(IDatabaseManager database)
+        public EditTasksForm(IDatabaseManager database, User user)
         {
             InitializeComponent();
             this.database = database;
+            this.user = user;
+
         }
 
         private void uxEditGroups_Click(object sender, EventArgs e)
@@ -29,6 +33,13 @@ namespace CIS560_final_project
         private void EditTasksForm_Load(object sender, EventArgs e)
         {
             //database.GetTasksForUser();
+            List<model.Task> tasks = database.GetTasksForUser(user);
+            DataGridViewRowCollection col = uxTaskList.Rows;
+            col.Clear();
+            foreach (model.Task task in tasks)
+            {
+                col.Add(new object[] { task.Name, null, null, task.UserGroupID, task.OwnerUserID, task.DueDate, task.StartDate, task.CompletionDate});
+            }
         }
     }
 }
