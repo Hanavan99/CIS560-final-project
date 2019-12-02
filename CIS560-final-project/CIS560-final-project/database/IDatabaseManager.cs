@@ -68,7 +68,7 @@ namespace CIS560_final_project.database
 
     public class DatabaseManagerImpl : IDatabaseManager
     {
-        string connectionString = "Server=[server_name];Database=[database_name];Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
+        string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
 
         List<UserGroup> GetUsersInUserGroup(UserGroup userGroup)// done?
         {
