@@ -38,11 +38,15 @@ namespace CIS560_final_project.database
             TaskState notStarted = new TaskState(0, "Not Started", "", "D3D3D3");
             _taskStates.Add(notStarted);
 
+            List<TaskCategory> testTaskCategories = new List<TaskCategory>();
+            TaskCategory highPriority = new TaskCategory(0, wcabrera0, "High Priority", "", "ffa500");
+            testTaskCategories.Add(highPriority);
+
             DateTime date1 = new DateTime(2019, 12, 1, 0, 0, 0);
             DateTime date2 = new DateTime(2019, 11, 1, 0, 0, 0);
             DateTime date3 = new DateTime(2019, 12, 1, 0, 0, 0);
 
-            _tasks.Add(new model.Task(0, "Testing", "A desc", desktopSupport, demo, notStarted, date1 , date2, date3));
+            _tasks.Add(new model.Task(0, "Testing", "A desc", desktopSupport, demo, notStarted, date1 , date2, date3, testTaskCategories));
         }
 
         public void AddUserToGroup(UserGroup UserGroup, User User, Role Role)
@@ -59,10 +63,10 @@ namespace CIS560_final_project.database
             return role;
         }
 
-        public model.Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate)
+        public model.Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
             int currentTaskID = 0;
-            model.Task task = new model.Task(currentTaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate);
+            model.Task task = new model.Task(currentTaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate, TaskCategories);
             currentTaskID++;
             _tasks.Add(task);
             return task;
@@ -70,7 +74,7 @@ namespace CIS560_final_project.database
 
         public TaskCategory CreateTaskCategory(User Owner, string Name, string Description, string Color)
         {
-            int currentTaskCategoryID = 0;
+            int currentTaskCategoryID = 1;
             TaskCategory taskCategory = new TaskCategory(currentTaskCategoryID, Owner, Name, Description, Color);
             currentTaskCategoryID++;
             _taskCategories.Add(taskCategory);
@@ -106,12 +110,12 @@ namespace CIS560_final_project.database
 
         public List<Role> GetRoles()
         {
-            throw new NotImplementedException();
+            return _roles;
         }
 
         public List<TaskCategory> GetTaskCategories()
         {
-            throw new NotImplementedException();
+            return _taskCategories;
         }
 
         public List<TaskCategory> GetTaskCategoriesForOwner(User Owner)
@@ -147,7 +151,17 @@ namespace CIS560_final_project.database
 
         public List<model.Task> GetTasksForUserGroup(UserGroup UserGroup)
         {
-            throw new NotImplementedException();
+            List<model.Task> filteredTasks = new List<model.Task>();
+
+            foreach (model.Task aTask in _tasks)
+            {
+              if (aTask.UserGroup.UserGroupID == UserGroup.UserGroupID)
+              {
+                filteredTasks.Add(aTask);
+              }
+            }
+
+            return filteredTasks;
         }
 
         public List<TaskState> GetTaskStates()
@@ -175,9 +189,19 @@ namespace CIS560_final_project.database
             return filterdUserGroups;
         }
 
-        public List<UserGroup> GetUsersInUserGroup(UserGroup UserGroup)
+        public List<User> GetUsersInUserGroup(UserGroup UserGroup)
         {
-            throw new NotImplementedException();
+            List<User> filteredUsers = new List<User>();
+
+            foreach (KeyValuePair<Tuple<User, UserGroup>, Role> userGroup in _userRoleInGroup)
+            {
+                if (userGroup.Key.Item2.UserGroupID == UserGroup.UserGroupID)
+                {
+                    filteredUsers.Add(userGroup.Key.Item1);
+                }
+            }
+
+            return filteredUsers;
         }
 
         public Role UpdateRole(Role Role, string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT)
@@ -185,7 +209,7 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public model.Task UpdateTask(model.Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate)
+        public model.Task UpdateTask(model.Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
             foreach (model.Task aTask in _tasks)
             {
@@ -193,7 +217,7 @@ namespace CIS560_final_project.database
                 {
                     int id = aTask.TaskID;
                     _tasks.Remove(aTask);
-                    model.Task task = new model.Task(id, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate);
+                    model.Task task = new model.Task(id, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate, TaskCategories);
                     _tasks.Add(task);
                     return task;
                 }
@@ -236,11 +260,6 @@ namespace CIS560_final_project.database
             }
 
             return null;
-        }
-
-        List<User> IDatabaseManager.GetUsersInUserGroup(UserGroup UserGroup)
-        {
-            throw new NotImplementedException();
         }
     }
 }

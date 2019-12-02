@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace CIS560_final_project.model
 {
@@ -13,8 +14,9 @@ namespace CIS560_final_project.model
 		public DateTime DueDate  { get; }
 		public DateTime StartDate  { get; }
 		public DateTime CompletionDate { get; }
+        public List<TaskCategory> TaskCategories { get; }
 		
-		public Task(int TaskID, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate){
+		public Task(int TaskID, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories){
 			this.TaskID = TaskID;
 			this.Name = Name;
 			this.Description = Description;
@@ -24,6 +26,7 @@ namespace CIS560_final_project.model
 			this.DueDate = DueDate;
 			this.StartDate = StartDate;
 			this.CompletionDate = CompletionDate;
+            this.TaskCategories = TaskCategories;
 		}
 	}
 }
