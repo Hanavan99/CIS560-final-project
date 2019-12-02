@@ -259,7 +259,7 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate)
+        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
@@ -274,11 +274,6 @@ namespace CIS560_final_project.database
         }
 
         public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Task> IDatabaseManager.GetTasksForOwner(User Owner)
         {
             throw new NotImplementedException();
         }
@@ -303,32 +298,12 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        List<TaskState> IDatabaseManager.GetTaskStates()
-        {
-            throw new NotImplementedException();
-        }
-
         public Role CreateRole(string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT)
         {
             throw new NotImplementedException();
         }
 
         public Role UpdateRole(Role Role, string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Role> IDatabaseManager.GetRoles()
-        {
-            throw new NotImplementedException();
-        }
-
-        User IDatabaseManager.VerifyUser(string Name, string Password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
             throw new NotImplementedException();
         }
