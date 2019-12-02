@@ -35,7 +35,7 @@ namespace CIS560_final_project.database
 
         List<UserGroup> GetUserGroupsForUser(User User);
 //
-        List<UserGroup> GetUsersInUserGroup(UserGroup UserGroup);// done?
+        List<User> GetUsersInUserGroup(UserGroup UserGroup);// done?
 
         void AddUserToGroup(UserGroup UserGroup, User User, Role Role);
 
@@ -66,57 +66,35 @@ namespace CIS560_final_project.database
     }
 
 
-    public class DatabaseManagerImpl : IDatabaseManager
+    /*public class DatabaseManagerImpl : IDatabaseManager
     {
-        string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
+        readonly string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
 
-        List<UserGroup> GetUsersInUserGroup(UserGroup userGroup)// done?
+        public List<User> GetUsersInUserGroup(UserGroup UserGroup)// done?
         {
-            List<int> userID = new List<int>();
-            List<string> userName = new List<string>();
-            List<string> email = new List<string>();
             List<User> users = new List<User>();
 
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT UserID FROM Users.UserGroupUsers WHERE UserGroupID = " + userGroup.UserGroupID;
+            string query = "SELECT * FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID"
+                            + "INNER JOIN Users.Users U ON UGU.UserID = U.UserID WHERE UG.UserGroupID = " + UserGroup.UserGroupID;
             SqlCommand cmd = new SqlCommand(query, scon);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    userID.Add(reader.GetInt32(0));
+                    User tempUser = new User((int)reader["UserID"], (string)reader["Name"], (string)reader["Email"], (string)reader["PasswordHash"]);
+                    users.Add(tempUser);
                 }
-            }
-
-
-            foreach (int i in userID)
-            {
-                query = "Select Name, Email From Users.Users Where UserID = " + i;
-                cmd = new SqlCommand(query, scon);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        userName.Add(reader["Name"].ToString());
-                        email.Add(reader["Email"].ToString());
-                    }
-                }
-            }
-
-            for (int i = 0; i < userID.Count; i++)
-            {
-                User tempUser = new User(userID[i], userName[i], email[i], "");
-                users.Add(tempUser);
             }
 
             scon.Close();
             return users;
         }
 
-        List<TaskState> GetTaskStates()// done?
+        public List<TaskState> GetTaskStates()// done?
         {
             List<TaskState> ts = new List<TaskState>();
 
@@ -130,7 +108,7 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    TaskState tempTaskState = new TaskState(reader["TaskStateID"].ToInt32(), reader["Name"].GetValue(0).ToString(), reader["Description"].GetValue(0).ToString(), reader["Color"].GetValue(0).ToString());
+                    TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], (string)reader["Name"], (string)reader["Description"], (string)reader["Color"]);
                     ts.Add(tempTaskState);
                 }
             }
@@ -139,7 +117,7 @@ namespace CIS560_final_project.database
             return ts;
         }
 
-        List<Role> GetRoles()// done?
+        public List<Role> GetRoles()// done?
         {
             List<Role> roles = new List<Role>();
 
@@ -163,7 +141,7 @@ namespace CIS560_final_project.database
 
         }
 
-        List<Task> GetTasksForOwner(User Owner)// done?
+        public List<Task> GetTasksForOwner(User Owner)// done?
         {
             List<Task> tasks = new List<Task>();
 
@@ -195,7 +173,124 @@ namespace CIS560_final_project.database
             return tasks;
         }
 
+        public User CreateUser(string Name, string Email, string Password)
+        {
+            throw new NotImplementedException();
+        }
 
+        public User UpdateUser(User user, string Name, string Email, string Password)
+        {
+            throw new NotImplementedException();
+        }
 
-    }// end of class
+        public bool VerifyUser(string Name, string Password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TaskCategory CreateTaskCategory(User Owner, string Name, string Description, string Color)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TaskCategory UpdateTaskCategory(TaskCategory TaskCategory, User Owner, string Name, string Description, string Color)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TaskCategory> GetTaskCategoriesForOwner(User Owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TaskCategory> GetTaskCategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserGroup CreateUserGroup(User Owner, string Name, string Description)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserGroup UpdateUserGroup(UserGroup UserGroup, User Owner, string Name, string Description)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<UserGroup> GetUserGroupsForOwner(User Owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<UserGroup> GetUserGroupsForUser(User User)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddUserToGroup(UserGroup UserGroup, User User, Role Role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateUserInGroup(UserGroup UserGroup, User User, Role Role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Task> IDatabaseManager.GetTasksForOwner(User Owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Task> GetTasksForUserGroup(UserGroup UserGroup)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Task> GetTasksForUser(User User)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TaskState CreateTaskState(string Name, string Description, string Color)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TaskState UpdateTaskState(TaskState TaskState, string Name, string Description, string Color)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<TaskState> IDatabaseManager.GetTaskStates()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Role CreateRole(string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Role UpdateRole(Role Role, string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Role> IDatabaseManager.GetRoles()
+        {
+            throw new NotImplementedException();
+        }
+    }// end of class*/
 }// end of namespace

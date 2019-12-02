@@ -243,10 +243,10 @@
             this.uxFilterUserGroup.AutoSize = true;
             this.uxFilterUserGroup.Location = new System.Drawing.Point(6, 48);
             this.uxFilterUserGroup.Name = "uxFilterUserGroup";
-            this.uxFilterUserGroup.Size = new System.Drawing.Size(100, 21);
+            this.uxFilterUserGroup.Size = new System.Drawing.Size(104, 21);
             this.uxFilterUserGroup.TabIndex = 3;
             this.uxFilterUserGroup.TabStop = true;
-            this.uxFilterUserGroup.Text = "User group";
+            this.uxFilterUserGroup.Text = "User group:";
             this.uxFilterUserGroup.UseVisualStyleBackColor = true;
             // 
             // uxFilterOwner
