@@ -285,7 +285,37 @@ namespace CIS560_final_project.database
 
         public List<Task> GetTasksForUser(User User)
         {
-            throw new NotImplementedException();
+            List<Task> tasks = new List<Task>();
+
+            SqlConnection scon = new SqlConnection(connectionString);
+
+            scon.Open();
+            string query = "SELECT * FROM Tasks.Tasks WHERE OwnerUserID = " + User.UserID;// modify the query
+            SqlCommand cmd = new SqlCommand(query, scon);
+            List<TaskCategory> ltc = new List<TaskCategory>();
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroup"], User, reader["Name"].ToString(), reader["Description"].ToString());
+                    TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["Name"].ToString(), reader["Description"].ToString(), reader["Color"].ToString());
+                    Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()),
+                                        reader["Name"].ToString(),
+                                        reader["Description"].ToString(),
+                                        tempUserGroup,
+                                        User,
+                                        tempTaskState,
+                                        (DateTime)reader["DueDate"],
+                                        (DateTime)reader["StartDate"],
+                                        (DateTime)reader["CompletionDate"], ltc);
+
+                    tasks.Add(tempTask);
+                }
+            }
+
+            scon.Close();
+            return tasks;
         }
 
         public TaskState CreateTaskState(string Name, string Description, string Color)
