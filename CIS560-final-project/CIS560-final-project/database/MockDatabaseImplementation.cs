@@ -92,6 +92,11 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
+        public List<model.Task> GetTasksForUser(User User)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<model.Task> GetTasksForUserGroup(UserGroup UserGroup)
         {
             throw new NotImplementedException();

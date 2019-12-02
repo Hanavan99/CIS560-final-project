@@ -66,7 +66,7 @@ namespace CIS560_final_project.database
     }
 
 
-    public class DatabaseManagerImpl : IDatabaseManager
+    /*public class DatabaseManagerImpl : IDatabaseManager
     {
         string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
 
@@ -197,5 +197,5 @@ namespace CIS560_final_project.database
 
 
 
-    }// end of class
+    }// end of class*/
 }// end of namespace

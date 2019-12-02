@@ -41,37 +41,37 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 17);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
             // 
             // uxUsername
             // 
-            this.uxUsername.Location = new System.Drawing.Point(122, 12);
+            this.uxUsername.Location = new System.Drawing.Point(116, 12);
             this.uxUsername.Name = "uxUsername";
-            this.uxUsername.Size = new System.Drawing.Size(208, 22);
+            this.uxUsername.Size = new System.Drawing.Size(208, 20);
             this.uxUsername.TabIndex = 1;
             // 
             // uxPassword
             // 
-            this.uxPassword.Location = new System.Drawing.Point(122, 40);
+            this.uxPassword.Location = new System.Drawing.Point(116, 38);
             this.uxPassword.Name = "uxPassword";
-            this.uxPassword.Size = new System.Drawing.Size(208, 22);
+            this.uxPassword.Size = new System.Drawing.Size(208, 20);
             this.uxPassword.TabIndex = 2;
             this.uxPassword.UseSystemPasswordChar = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 43);
+            this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 17);
+            this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Password:";
             // 
             // zxCancel
             // 
-            this.zxCancel.Location = new System.Drawing.Point(255, 69);
+            this.zxCancel.Location = new System.Drawing.Point(249, 64);
             this.zxCancel.Name = "zxCancel";
             this.zxCancel.Size = new System.Drawing.Size(75, 23);
             this.zxCancel.TabIndex = 4;
@@ -81,7 +81,7 @@
             // 
             // zxLogin
             // 
-            this.zxLogin.Location = new System.Drawing.Point(174, 69);
+            this.zxLogin.Location = new System.Drawing.Point(168, 64);
             this.zxLogin.Name = "zxLogin";
             this.zxLogin.Size = new System.Drawing.Size(75, 23);
             this.zxLogin.TabIndex = 5;
@@ -89,17 +89,17 @@
             this.zxLogin.UseVisualStyleBackColor = true;
             this.zxLogin.Click += new System.EventHandler(this.zxLogin_Click);
             // 
-            // Login
+            // LoginForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(340, 102);
+            this.ClientSize = new System.Drawing.Size(336, 98);
             this.Controls.Add(this.zxLogin);
             this.Controls.Add(this.zxCancel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.uxPassword);
             this.Controls.Add(this.uxUsername);
             this.Controls.Add(this.label1);
-            this.Name = "Login";
+            this.Name = "LoginForm";
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
