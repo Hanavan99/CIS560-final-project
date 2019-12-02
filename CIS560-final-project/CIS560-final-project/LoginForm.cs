@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CIS560_final_project.database;
+using CIS560_final_project.model;
 
 namespace CIS560_final_project
 {
@@ -23,8 +24,9 @@ namespace CIS560_final_project
 
         private void zxLogin_Click(object sender, EventArgs e)
         {
-            if (database.VerifyUser(uxUsername.Text, uxPassword.Text)) { 
-                new EditTasksForm(database).Show();
+            User user = database.VerifyUser(uxUsername.Text, uxPassword.Text);
+            if (user != null) { 
+                new EditTasksForm(database, user).Show();
                 Hide();
             } else
             {

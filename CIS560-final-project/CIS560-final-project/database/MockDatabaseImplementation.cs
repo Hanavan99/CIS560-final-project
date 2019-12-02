@@ -33,6 +33,9 @@ namespace CIS560_final_project.database
             _userGroups.Add(desktopSupport);
 
             _userRoleInGroup.Add(new Tuple<User, UserGroup>(wcabrera0, desktopSupport), owner);
+            _userRoleInGroup.Add(new Tuple<User, UserGroup>(demo, desktopSupport), owner);
+
+            _tasks.Add(new model.Task(0, "Testing", "A desc", 0, 1, 0, "now", "never", "sometime in the future"));
         }
 
         public void AddUserToGroup(UserGroup UserGroup, User User, Role Role)
@@ -195,15 +198,20 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public bool VerifyUser(string Name, string Password)
+        public User VerifyUser(string Name, string Password)
         {
             foreach (User userName in _users)
             {
                 if (userName.Name == Name)
-                    return true;
+                    return userName;
             }
 
-            return false;
+            return null;
+        }
+
+        List<User> IDatabaseManager.GetUsersInUserGroup(UserGroup UserGroup)
+        {
+            throw new NotImplementedException();
         }
     }
 }

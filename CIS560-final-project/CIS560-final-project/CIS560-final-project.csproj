@@ -47,11 +47,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="database\IDatabaseManager.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="database\MockDatabaseImplementation.cs" />
+    <Compile Include="EditGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="EditGroupForm.Designer.cs">
+      <DependentUpon>EditGroupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditGroupsForm.Designer.cs">
+      <DependentUpon>EditGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditTasksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditTasksForm.Designer.cs">
+      <DependentUpon>EditTasksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="model\Role.cs" />
     <Compile Include="model\Task.cs" />
@@ -59,16 +78,19 @@
     <Compile Include="model\TaskState.cs" />
     <Compile Include="model\User.cs" />
     <Compile Include="model\UserGroup.cs" />
-    <Compile Include="TaskViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TaskViewer.Designer.cs">
-      <DependentUpon>TaskViewer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="EditGroupForm.resx">
+      <DependentUpon>EditGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditGroupsForm.resx">
+      <DependentUpon>EditGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditTasksForm.resx">
+      <DependentUpon>EditTasksForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,9 +101,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="TaskViewer.resx">
-      <DependentUpon>TaskViewer.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
