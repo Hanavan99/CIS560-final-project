@@ -58,7 +58,7 @@ namespace CIS560_final_project.database
             return role;
         }
 
-        public model.Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
+        public model.Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate)
         {
             int currentTaskID = 0;
             model.Task task = new model.Task(currentTaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate);
