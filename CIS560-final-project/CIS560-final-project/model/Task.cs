@@ -14,7 +14,7 @@ namespace CIS560_final_project.model
 		public string StartDate  { get; }
 		public string CompletionDate { get; }
 		
-		public Task(int TaskID, string Name, string Description, UserGroup UserGroup, User OwnerUser, TaskState TaskState, string DueDate, string StartDate, string CompletionDate){
+		public Task(int TaskID, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate){
 			this.TaskID = TaskID;
 			this.Name = Name;
 			this.Description = Description;
