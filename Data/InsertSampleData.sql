@@ -4,26 +4,26 @@ INSERT INTO Users.Roles ([Name], CanCreateTasks, CanAssignTasks, CanDeleteTasks,
 INSERT INTO Users.Roles ([Name], CanCreateTasks, CanAssignTasks, CanDeleteTasks, CanModifyTasks) values (N'Guest', 0, 0, 0, 0);
 
 --Users.Users
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('wcabrera0', 'msouthworth0@virginia.edu', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('abeddall1', 'pfeatonby1@timesonline.co.uk', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('esandal2', 'mhucknall2@live.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('kcarnell3', 'ssatchel3@php.net', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('twhorlton4', 'talven4@mozilla.org', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('bcrunkhurn5', 'dchisman5@reverbnation.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('brosson6', 'rflegg6@blogspot.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('sfleming7', 'dband7@drupal.org', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('afairest8', 'sbarclay8@yale.edu', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('semberson9', 'bbrockhouse9@stumbleupon.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('pweinera', 'rmuzzia@geocities.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('tpenniellb', 'iodlinb@xrea.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('rspowagec', 'mistonc@google.com.au', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('tgurnerd', 'lhickinbottomd@blogtalkradio.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('bderislye', 'rschottlie@whitehouse.gov', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('acumesf', 'llovef@unc.edu', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('asiggeryg', 'lkorneichukg@homestead.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('scoopeyh', 'cpatnellih@answers.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('emccarrelli', 'mcalwelli@yelp.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
-INSERT INTO Users.Users (Name, Email, PasswordHash) values ('fmcquodej', 'lcowthardj@comsenz.com', '9f4dca77c2be9c1549cb1c246cdbc34ff6785508');
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('wcabrera0', 'msouthworth0@virginia.edu', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('abeddall1', 'pfeatonby1@timesonline.co.uk', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('esandal2', 'mhucknall2@live.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('kcarnell3', 'ssatchel3@php.net', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('twhorlton4', 'talven4@mozilla.org', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('bcrunkhurn5', 'dchisman5@reverbnation.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('brosson6', 'rflegg6@blogspot.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('sfleming7', 'dband7@drupal.org', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('afairest8', 'sbarclay8@yale.edu', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('semberson9', 'bbrockhouse9@stumbleupon.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('pweinera', 'rmuzzia@geocities.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('tpenniellb', 'iodlinb@xrea.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('rspowagec', 'mistonc@google.com.au', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('tgurnerd', 'lhickinbottomd@blogtalkradio.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('bderislye', 'rschottlie@whitehouse.gov', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('acumesf', 'llovef@unc.edu', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('asiggeryg', 'lkorneichukg@homestead.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('scoopeyh', 'cpatnellih@answers.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('emccarrelli', 'mcalwelli@yelp.com', PWDENCRYPT("test"));
+INSERT INTO Users.Users (Name, Email, PasswordHash) values ('fmcquodej', 'lcowthardj@comsenz.com', PWDENCRYPT("test"));
 
 --Users.UserGroups
 INSERT INTO Users.UserGroups (GroupOwnerID, [Name], [Description]) values ((SELECT UserID FROM Users.Users WHERE [Name] = N'wcabrera0'), N'Desktop Support', N'Provide end user support');
