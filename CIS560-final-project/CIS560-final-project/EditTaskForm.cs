@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CIS560_final_project.database;
+using CIS560_final_project.model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,39 @@ namespace CIS560_final_project
 {
     public partial class EditTaskForm : Form
     {
-        public EditTaskForm()
+        private IDatabaseManager database;
+        private User user;
+        private model.Task task;
+
+        public EditTaskForm(IDatabaseManager database, User user, model.Task task)
         {
+            this.database = database;
+            this.user = user;
+            this.task = task;
             InitializeComponent();
+        }
+
+        private void EditTaskForm_Load(object sender, EventArgs e)
+        {
+            uxTaskName.Text = task.Name;
+            uxDescription.Text = task.Description;
+            uxTaskState.Items.AddRange(database.GetTaskStates().ToArray());
+            uxUserGroup.Items.AddRange(database.GetUserGroupsForUser(user).ToArray());
+            uxOwner.Text = task.Owner.Name;
+            uxStartDate.Value = task.StartDate;
+            uxDueDate.Value = task.DueDate;
+            uxCompletionDate.Value = task.CompletionDate;
+        }
+
+        private void uxSave_Click(object sender, EventArgs e)
+        {
+            database.UpdateTask(task, uxTaskName.Text, uxDescription.Text, (UserGroup) uxUserGroup.SelectedItem, task.Owner, (TaskState) uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value);
+            Close();
+        }
+
+        private void uxCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

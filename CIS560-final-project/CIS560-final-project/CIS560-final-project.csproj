@@ -60,6 +60,12 @@
     <Compile Include="EditGroupsForm.Designer.cs">
       <DependentUpon>EditGroupsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditTaskForm.Designer.cs">
+      <DependentUpon>EditTaskForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditTasksForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditGroupsForm.resx">
       <DependentUpon>EditGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditTaskForm.resx">
+      <DependentUpon>EditTaskForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditTasksForm.resx">
       <DependentUpon>EditTasksForm.cs</DependentUpon>

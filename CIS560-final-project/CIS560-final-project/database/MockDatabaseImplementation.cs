@@ -194,6 +194,7 @@ namespace CIS560_final_project.database
                     int id = aTask.TaskID;
                     _tasks.Remove(aTask);
                     model.Task task = new model.Task(id, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate);
+                    _tasks.Add(task);
                     return task;
                 }
             }

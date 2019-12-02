@@ -38,8 +38,31 @@ namespace CIS560_final_project
             col.Clear();
             foreach (model.Task task in tasks)
             {
-                col.Add(new object[] { task.Name, null, null, task.UserGroupID, task.OwnerUserID, task.DueDate, task.StartDate, task.CompletionDate});
+                col.Add(new object[] { task.Name, null, null, null, null, task.DueDate, task.StartDate, task.CompletionDate});
             }
+        }
+
+        private void uxCreateTask_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void uxEditTask_Click(object sender, EventArgs e)
+        {
+            List<model.Task> tasks = database.GetTasksForUser(user);
+            new EditTaskForm(database, user, tasks[uxTaskList.SelectedRows[0].Index]).ShowDialog();
+            tasks = database.GetTasksForUser(user);
+            DataGridViewRowCollection col = uxTaskList.Rows;
+            col.Clear();
+            foreach (model.Task task in tasks)
+            {
+                col.Add(new object[] { task.Name, null, null, null, null, task.DueDate, task.StartDate, task.CompletionDate });
+            }
+        }
+
+        private void EditTasksForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

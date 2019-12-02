@@ -15,5 +15,10 @@ namespace CIS560_final_project.model
 			this.Name = Name;
 			this.Description = Description;
 		}
-	}
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
 }
