@@ -83,7 +83,7 @@ namespace CIS560_final_project.database
 
         public TaskState CreateTaskState(string Name, string Description, string Color)
         {
-            int currentTaskStateID = 0;
+            int currentTaskStateID = 1;
             TaskState taskState = new TaskState(currentTaskStateID, Name, Description, Color);
             _taskStates.Add(taskState);
             currentTaskStateID++;
