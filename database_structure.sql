@@ -77,7 +77,7 @@ CREATE TABLE Tasks.Tasks (
 	UserGroupID INT NOT NULL,
 	DueDate DATETIME2 NOT NULL,
 	StartDate DATETIME2 NOT NULL,
-	CompletionDate DATETIME2 NOT NULL
+	CompletionDate DATETIME2
 
 	CONSTRAINT PK_Tasks_Tasks_TaskID PRIMARY KEY(TaskID),
 	CONSTRAINT FK_Tasks_Tasks_OwnerUserID FOREIGN KEY(OwnerUserID) REFERENCES Users.Users(UserID),

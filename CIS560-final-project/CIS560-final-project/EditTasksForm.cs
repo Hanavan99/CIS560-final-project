@@ -79,10 +79,10 @@ namespace CIS560_final_project
                 }
                 if ((uxFilterDateRange.Checked && task.DueDate >= uxDateRange.SelectionStart && task.DueDate < uxDateRange.SelectionEnd)
                     || (uxFilterUserGroup.Checked && task.UserGroup.UserGroupID.Equals(((UserGroup)uxUserGroup.SelectedItem).UserGroupID))
-                    || (uxFilterOwner.Checked && task.Owner.Equals(user))
+                    || (uxFilterOwner.Checked && task.Owner.UserID.Equals(user.UserID))
                     || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked))
                 {
-                    col.Add(new object[] { task, task.TaskState.Name, taskCategories.ToString(), task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate });
+                    col.Add(new object[] { task, task.TaskState.Name, taskCategories.ToString(), task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate != null ? task.CompletionDate.ToString() : "Not Completed" });
                 }
             }
         }
@@ -105,6 +105,11 @@ namespace CIS560_final_project
         }
 
         private void uxDateRange_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            UpdateTaskList();
+        }
+
+        private void uxUserGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTaskList();
         }

@@ -43,9 +43,9 @@ namespace CIS560_final_project.database
 
         void UpdateUserInGroup(UserGroup UserGroup, User User, Role Role);
 
-        Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories);
+        Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories);
 
-        Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories);
+        Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories);
 
         List<Task> GetTasksForOwner(User Owner);// done?
 //
@@ -269,13 +269,21 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
+        public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories)
         {
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "INSERT INTO Tasks.Tasks([Name], [Description], OwnerUserID, UserGroupID, TaskStateID, DueDate, StartDate, CompletionDate) OUTPUT INSERTED.TaskID values ('" + Name + "', '" + Description + "', (SELECT UserID FROM Users.Users WHERE [Name] = N'" + Owner.Name + "'), " + UserGroup.UserGroupID + ", (SELECT TaskStateID FROM Tasks.TaskStates WHERE[Name] = N'" + TaskState.Name + "'), '" + DueDate + "', '" + StartDate + "', '" + CompletionDate + "')";
+            string query = "INSERT INTO Tasks.Tasks([Name], [Description], OwnerUserID, UserGroupID, TaskStateID, DueDate, StartDate, CompletionDate) OUTPUT INSERTED.TaskID values (@Name, @Description, @OwnerUserID, @UserGroupID, @TaskStateID, @DueDate, @StartDate, @CompletionDate)";
             SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@Name", Name);
+            cmd.Parameters.AddWithValue("@Description", Description);
+            cmd.Parameters.AddWithValue("@OwnerUserID", Owner.UserID);
+            cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
+            cmd.Parameters.AddWithValue("@TaskStateID", TaskState.TaskStateID);
+            cmd.Parameters.AddWithValue("@DueDate", DueDate);
+            cmd.Parameters.AddWithValue("@StartDate", StartDate);
+            cmd.Parameters.AddWithValue("@CompletionDate", CompletionDate != null ? (object)CompletionDate : (object)DBNull.Value);
 
             int TaskID = (int)cmd.ExecuteScalar();
             scon.Close();
@@ -283,14 +291,23 @@ namespace CIS560_final_project.database
             return tempTask;
         }
 
-        public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
+        public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories)
         {
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "UPDATE Tasks.Tasks SET [Name] = '" + Name + "', [Description] = '" + Description + "', OwnerUserID = " + Owner.UserID + ", UserGroupID = " + UserGroup.UserGroupID + ", TaskStateID = " + TaskState.TaskStateID + ", DueDate = '" + DueDate + "', StartDate = '" + StartDate + "', CompletionDate = '" + CompletionDate + "' WHERE TaskID = " + Task.TaskID;
-            //MessageBox.Show(query);
+            string query = "UPDATE Tasks.Tasks SET [Name] = @Name, [Description] = @Description, OwnerUserID = @OwnerUserID, UserGroupID = @UserGroupID, TaskStateID = @TaskStateID, DueDate = @DueDate, StartDate = @StartDate, CompletionDate = @CompletionDate WHERE TaskID = @TaskID";
             SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@TaskID", Task.TaskID);
+            cmd.Parameters.AddWithValue("@Name", Name);
+            cmd.Parameters.AddWithValue("@Description", Description);
+            cmd.Parameters.AddWithValue("@OwnerUserID", Owner.UserID);
+            cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
+            cmd.Parameters.AddWithValue("@TaskStateID", TaskState.TaskStateID);
+            cmd.Parameters.AddWithValue("@DueDate", DueDate);
+            cmd.Parameters.AddWithValue("@StartDate", StartDate);
+            cmd.Parameters.AddWithValue("@CompletionDate", CompletionDate != null ? (object) CompletionDate : (object) DBNull.Value);
+            cmd.ExecuteNonQuery();
 
             scon.Close();
             Task tempTask = new Task(Task.TaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate, null);
@@ -309,7 +326,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT T.TaskID, T.TaskStateID, T.[Name] AS TaskName, T.[Description] AS TaskDescription, TS.[Name] AS TaskStateName, TS.[Description] AS TaskStateDescription, T.[Description] AS TaskDescription, T.DueDate, T.StartDate, T.CompletionDate, T.UserGroupID, UG.[Name] AS UserGroupName, UG.[Description] AS UserGroupDescription, TS.Color FROM Tasks.Tasks T INNER JOIN Tasks.TaskStates TS ON T.TaskStateID = TS.TaskStateID INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID INNER JOIN Users.UserGroups UG ON UGU.UserGroupID = UG.UserGroupID WHERE UGU.UserID = " + User.UserID;// modify the query
+            string query = "SELECT U.UserID, U.[Name] AS UserName, U.Email AS UserEmail, T.TaskID, T.TaskStateID, T.[Name] AS TaskName, T.[Description] AS TaskDescription, TS.[Name] AS TaskStateName, TS.[Description] AS TaskStateDescription, T.[Description] AS TaskDescription, T.DueDate, T.StartDate, T.CompletionDate, T.UserGroupID, UG.[Name] AS UserGroupName, UG.[Description] AS UserGroupDescription, TS.Color FROM Tasks.Tasks T INNER JOIN Tasks.TaskStates TS ON T.TaskStateID = TS.TaskStateID INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID INNER JOIN Users.UserGroups UG ON UGU.UserGroupID = UG.UserGroupID INNER JOIN Users.Users U ON T.OwnerUserID = U.UserID WHERE UGU.UserID = " + User.UserID;// modify the query
             SqlCommand cmd = new SqlCommand(query, scon);
             List<TaskCategory> ltc = new List<TaskCategory>();
 
@@ -323,11 +340,11 @@ namespace CIS560_final_project.database
                                         reader["TaskName"].ToString(),
                                         reader["TaskDescription"].ToString(),
                                         tempUserGroup,
-                                        User, // fix this
+                                        new User((int)reader["UserID"], (string)reader["UserName"], (string)reader["UserEmail"], null), // fix this
                                         tempTaskState,
                                         (DateTime)reader["DueDate"],
                                         (DateTime)reader["StartDate"],
-                                        (DateTime)reader["CompletionDate"], ltc);
+                                        reader["CompletionDate"].Equals(DBNull.Value) ? null : (DateTime?)reader["CompletionDate"], ltc);
 
                     tasks.Add(tempTask);
                 }

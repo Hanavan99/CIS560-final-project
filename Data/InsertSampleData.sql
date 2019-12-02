@@ -89,7 +89,6 @@ INSERT INTO Users.UserGroupUsers (UserGroupID, UserID, RoleID) values
 --Tasks.TaskStates
 INSERT INTO Tasks.TaskStates ([Name], [Description], Color) values (N'Not Started', N'', N'D3D3D3');
 INSERT INTO Tasks.TaskStates ([Name], [Description], Color) values (N'In Progress', N'', N'00ffff');
-INSERT INTO Tasks.TaskStates ([Name], [Description], Color) values (N'Completed', N'', N'008000');
 INSERT INTO Tasks.TaskStates ([Name], [Description], Color) values (N'On Hold', N'', N'ffff00');
 
 --Tasks.Tasks

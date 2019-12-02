@@ -44,9 +44,9 @@
             this.uxCompletionDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.uxCancel = new System.Windows.Forms.Button();
             this.uxSave = new System.Windows.Forms.Button();
+            this.uxCompleted = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // uxTaskName
@@ -160,6 +160,7 @@
             // 
             // uxCompletionDate
             // 
+            this.uxCompletionDate.Enabled = false;
             this.uxCompletionDate.Location = new System.Drawing.Point(112, 338);
             this.uxCompletionDate.Name = "uxCompletionDate";
             this.uxCompletionDate.Size = new System.Drawing.Size(201, 20);
@@ -183,15 +184,6 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Due date:";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 344);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Completion date:";
-            // 
             // uxCancel
             // 
             this.uxCancel.Location = new System.Drawing.Point(238, 364);
@@ -212,14 +204,25 @@
             this.uxSave.UseVisualStyleBackColor = true;
             this.uxSave.Click += new System.EventHandler(this.uxSave_Click);
             // 
+            // uxCompleted
+            // 
+            this.uxCompleted.AutoSize = true;
+            this.uxCompleted.Location = new System.Drawing.Point(15, 341);
+            this.uxCompleted.Name = "uxCompleted";
+            this.uxCompleted.Size = new System.Drawing.Size(79, 17);
+            this.uxCompleted.TabIndex = 19;
+            this.uxCompleted.Text = "Completed:";
+            this.uxCompleted.UseVisualStyleBackColor = true;
+            this.uxCompleted.CheckedChanged += new System.EventHandler(this.uxCompleted_CheckedChanged);
+            // 
             // EditTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(325, 396);
+            this.Controls.Add(this.uxCompleted);
             this.Controls.Add(this.uxSave);
             this.Controls.Add(this.uxCancel);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.uxCompletionDate);
@@ -262,8 +265,8 @@
         private System.Windows.Forms.DateTimePicker uxCompletionDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button uxCancel;
         private System.Windows.Forms.Button uxSave;
+        private System.Windows.Forms.CheckBox uxCompleted;
     }
 }

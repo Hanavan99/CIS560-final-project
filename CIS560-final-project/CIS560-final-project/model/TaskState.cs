@@ -20,5 +20,14 @@ namespace CIS560_final_project.model
         {
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType().Equals(this.GetType()))
+            {
+                return TaskStateID == ((TaskState)obj).TaskStateID;
+            }
+            return false;
+        }
     }
 }

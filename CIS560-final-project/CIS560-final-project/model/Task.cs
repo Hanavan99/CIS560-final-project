@@ -13,10 +13,10 @@ namespace CIS560_final_project.model
 		public TaskState TaskState { get; }
 		public DateTime DueDate  { get; }
 		public DateTime StartDate  { get; }
-		public DateTime CompletionDate { get; }
+		public DateTime? CompletionDate { get; }
         public List<TaskCategory> TaskCategories { get; }
 		
-		public Task(int TaskID, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories){
+		public Task(int TaskID, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories){
 			this.TaskID = TaskID;
 			this.Name = Name;
 			this.Description = Description;
