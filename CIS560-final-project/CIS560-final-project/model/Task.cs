@@ -28,5 +28,10 @@ namespace CIS560_final_project.model
 			this.CompletionDate = CompletionDate;
             this.TaskCategories = TaskCategories;
 		}
-	}
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
 }

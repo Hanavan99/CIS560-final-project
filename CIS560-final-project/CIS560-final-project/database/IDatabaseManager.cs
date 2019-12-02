@@ -68,7 +68,7 @@ namespace CIS560_final_project.database
 
     public class DatabaseManagerImpl : IDatabaseManager
     {
-        readonly string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
+        readonly string connectionString = "Persist Security Info=False;User ID = hanavan; Password=*****;Initial Catalog = AdventureWorks; Server=MySqlServer";
 
         public List<User> GetUsersInUserGroup(UserGroup UserGroup)// done
         {
@@ -319,11 +319,6 @@ namespace CIS560_final_project.database
         }
 
         List<Role> IDatabaseManager.GetRoles()
-        {
-            throw new NotImplementedException();
-        }
-
-        User IDatabaseManager.VerifyUser(string Name, string Password)
         {
             throw new NotImplementedException();
         }

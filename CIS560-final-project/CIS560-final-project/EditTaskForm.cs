@@ -40,7 +40,8 @@ namespace CIS560_final_project
                 uxStartDate.Value = task.StartDate;
                 uxDueDate.Value = task.DueDate;
                 uxCompletionDate.Value = task.CompletionDate;
-            } else
+            }
+            else
             {
                 uxOwner.Text = user.Name;
             }
@@ -48,14 +49,30 @@ namespace CIS560_final_project
 
         private void uxSave_Click(object sender, EventArgs e)
         {
-            if (task != null)
+            if (string.IsNullOrWhiteSpace(uxTaskName.Text))
             {
-                database.UpdateTask(task, uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, task.Owner, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value);
-            } else
-            {
-                database.CreateTask(uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, user, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value);
+                MessageBox.Show("Please enter a valid task name");
             }
-            Close();
+            else if (uxTaskState.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a task state");
+            }
+            else if (uxUserGroup.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a user group");
+            }
+            else
+            {
+                if (task != null)
+                {
+                    database.UpdateTask(task, uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, task.Owner, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value, task.TaskCategories);
+                }
+                else
+                {
+                    database.CreateTask(uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, user, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value, new List<TaskCategory>());
+                }
+                Close();
+            }
         }
 
         private void uxCancel_Click(object sender, EventArgs e)

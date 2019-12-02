@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.uxCalendar = new System.Windows.Forms.MonthCalendar();
+            this.uxDateRange = new System.Windows.Forms.MonthCalendar();
             this.uxTaskList = new System.Windows.Forms.DataGridView();
             this.TaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaskState = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,21 +45,24 @@
             this.deleteSelectedTasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxEditGroups = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.uxFilterOwner = new System.Windows.Forms.RadioButton();
-            this.uxFilterUserGroup = new System.Windows.Forms.RadioButton();
-            this.uxFilterAll = new System.Windows.Forms.RadioButton();
             this.uxUserGroup = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.uxFilterDateRange = new System.Windows.Forms.CheckBox();
+            this.uxFilterUserGroup = new System.Windows.Forms.CheckBox();
+            this.uxFilterOwner = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.uxTaskList)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // uxCalendar
+            // uxDateRange
             // 
-            this.uxCalendar.Location = new System.Drawing.Point(13, 33);
-            this.uxCalendar.Name = "uxCalendar";
-            this.uxCalendar.TabIndex = 0;
+            this.uxDateRange.Enabled = false;
+            this.uxDateRange.Location = new System.Drawing.Point(6, 48);
+            this.uxDateRange.MaxSelectionCount = 365;
+            this.uxDateRange.Name = "uxDateRange";
+            this.uxDateRange.TabIndex = 0;
+            this.uxDateRange.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.uxDateRange_DateChanged);
             // 
             // uxTaskList
             // 
@@ -79,12 +82,12 @@
             this.DueDate,
             this.StartDate,
             this.CompletionDate});
-            this.uxTaskList.Location = new System.Drawing.Point(252, 33);
+            this.uxTaskList.Location = new System.Drawing.Point(258, 27);
             this.uxTaskList.Name = "uxTaskList";
             this.uxTaskList.ReadOnly = true;
             this.uxTaskList.RowHeadersWidth = 51;
             this.uxTaskList.RowTemplate.Height = 24;
-            this.uxTaskList.Size = new System.Drawing.Size(877, 621);
+            this.uxTaskList.Size = new System.Drawing.Size(871, 627);
             this.uxTaskList.TabIndex = 1;
             // 
             // TaskName
@@ -204,63 +207,66 @@
             // uxEditGroups
             // 
             this.uxEditGroups.Name = "uxEditGroups";
-            this.uxEditGroups.Size = new System.Drawing.Size(144, 22);
+            this.uxEditGroups.Size = new System.Drawing.Size(180, 22);
             this.uxEditGroups.Text = "Edit Groups...";
             this.uxEditGroups.Click += new System.EventHandler(this.uxEditGroups_Click);
+            // 
+            // uxUserGroup
+            // 
+            this.uxUserGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.uxUserGroup.Enabled = false;
+            this.uxUserGroup.FormattingEnabled = true;
+            this.uxUserGroup.Location = new System.Drawing.Point(6, 246);
+            this.uxUserGroup.Name = "uxUserGroup";
+            this.uxUserGroup.Size = new System.Drawing.Size(227, 21);
+            this.uxUserGroup.TabIndex = 1;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.uxFilterOwner);
             this.groupBox1.Controls.Add(this.uxFilterUserGroup);
-            this.groupBox1.Controls.Add(this.uxFilterAll);
             this.groupBox1.Controls.Add(this.uxUserGroup);
-            this.groupBox1.Location = new System.Drawing.Point(12, 207);
+            this.groupBox1.Controls.Add(this.uxFilterDateRange);
+            this.groupBox1.Controls.Add(this.uxDateRange);
+            this.groupBox1.Location = new System.Drawing.Point(13, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(228, 121);
+            this.groupBox1.Size = new System.Drawing.Size(239, 299);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filters";
             // 
-            // uxFilterOwner
+            // uxFilterDateRange
             // 
-            this.uxFilterOwner.AutoSize = true;
-            this.uxFilterOwner.Location = new System.Drawing.Point(6, 92);
-            this.uxFilterOwner.Name = "uxFilterOwner";
-            this.uxFilterOwner.Size = new System.Drawing.Size(56, 17);
-            this.uxFilterOwner.TabIndex = 4;
-            this.uxFilterOwner.TabStop = true;
-            this.uxFilterOwner.Text = "Owner";
-            this.uxFilterOwner.UseVisualStyleBackColor = true;
+            this.uxFilterDateRange.AutoSize = true;
+            this.uxFilterDateRange.Location = new System.Drawing.Point(6, 19);
+            this.uxFilterDateRange.Name = "uxFilterDateRange";
+            this.uxFilterDateRange.Size = new System.Drawing.Size(82, 17);
+            this.uxFilterDateRange.TabIndex = 0;
+            this.uxFilterDateRange.Text = "Date range:";
+            this.uxFilterDateRange.UseVisualStyleBackColor = true;
+            this.uxFilterDateRange.CheckedChanged += new System.EventHandler(this.uxFilterDateRange_CheckedChanged);
             // 
             // uxFilterUserGroup
             // 
             this.uxFilterUserGroup.AutoSize = true;
-            this.uxFilterUserGroup.Location = new System.Drawing.Point(6, 42);
+            this.uxFilterUserGroup.Location = new System.Drawing.Point(7, 223);
             this.uxFilterUserGroup.Name = "uxFilterUserGroup";
-            this.uxFilterUserGroup.Size = new System.Drawing.Size(80, 17);
-            this.uxFilterUserGroup.TabIndex = 3;
-            this.uxFilterUserGroup.TabStop = true;
+            this.uxFilterUserGroup.Size = new System.Drawing.Size(81, 17);
+            this.uxFilterUserGroup.TabIndex = 1;
             this.uxFilterUserGroup.Text = "User group:";
             this.uxFilterUserGroup.UseVisualStyleBackColor = true;
+            this.uxFilterUserGroup.CheckedChanged += new System.EventHandler(this.uxFilterUserGroup_CheckedChanged);
             // 
-            // uxFilterAll
+            // uxFilterOwner
             // 
-            this.uxFilterAll.AutoSize = true;
-            this.uxFilterAll.Location = new System.Drawing.Point(6, 19);
-            this.uxFilterAll.Name = "uxFilterAll";
-            this.uxFilterAll.Size = new System.Drawing.Size(64, 17);
-            this.uxFilterAll.TabIndex = 2;
-            this.uxFilterAll.TabStop = true;
-            this.uxFilterAll.Text = "All tasks";
-            this.uxFilterAll.UseVisualStyleBackColor = true;
-            // 
-            // uxUserGroup
-            // 
-            this.uxUserGroup.FormattingEnabled = true;
-            this.uxUserGroup.Location = new System.Drawing.Point(6, 65);
-            this.uxUserGroup.Name = "uxUserGroup";
-            this.uxUserGroup.Size = new System.Drawing.Size(216, 21);
-            this.uxUserGroup.TabIndex = 1;
+            this.uxFilterOwner.AutoSize = true;
+            this.uxFilterOwner.Location = new System.Drawing.Point(6, 274);
+            this.uxFilterOwner.Name = "uxFilterOwner";
+            this.uxFilterOwner.Size = new System.Drawing.Size(57, 17);
+            this.uxFilterOwner.TabIndex = 2;
+            this.uxFilterOwner.Text = "Owner";
+            this.uxFilterOwner.UseVisualStyleBackColor = true;
+            this.uxFilterOwner.CheckedChanged += new System.EventHandler(this.uxFilterOwner_CheckedChanged);
             // 
             // EditTasksForm
             // 
@@ -268,7 +274,6 @@
             this.ClientSize = new System.Drawing.Size(1141, 666);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.uxTaskList);
-            this.Controls.Add(this.uxCalendar);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "EditTasksForm";
@@ -287,7 +292,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MonthCalendar uxCalendar;
+        private System.Windows.Forms.MonthCalendar uxDateRange;
         private System.Windows.Forms.DataGridView uxTaskList;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskName;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskState;
@@ -304,11 +309,11 @@
         private System.Windows.Forms.ToolStripMenuItem deleteSelectedTasksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uxEditGroups;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox uxUserGroup;
-        private System.Windows.Forms.RadioButton uxFilterOwner;
-        private System.Windows.Forms.RadioButton uxFilterUserGroup;
-        private System.Windows.Forms.RadioButton uxFilterAll;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox uxFilterOwner;
+        private System.Windows.Forms.CheckBox uxFilterUserGroup;
+        private System.Windows.Forms.CheckBox uxFilterDateRange;
     }
 }
 

@@ -37,50 +37,55 @@
             // uxGroupList
             // 
             this.uxGroupList.FormattingEnabled = true;
-            this.uxGroupList.ItemHeight = 16;
-            this.uxGroupList.Location = new System.Drawing.Point(12, 13);
+            this.uxGroupList.Location = new System.Drawing.Point(9, 11);
+            this.uxGroupList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uxGroupList.Name = "uxGroupList";
-            this.uxGroupList.Size = new System.Drawing.Size(249, 308);
+            this.uxGroupList.Size = new System.Drawing.Size(188, 251);
             this.uxGroupList.TabIndex = 0;
             // 
             // uxEditGroup
             // 
-            this.uxEditGroup.Location = new System.Drawing.Point(12, 356);
+            this.uxEditGroup.Location = new System.Drawing.Point(9, 289);
+            this.uxEditGroup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uxEditGroup.Name = "uxEditGroup";
-            this.uxEditGroup.Size = new System.Drawing.Size(249, 23);
+            this.uxEditGroup.Size = new System.Drawing.Size(187, 19);
             this.uxEditGroup.TabIndex = 1;
             this.uxEditGroup.Text = "View/Edit Group...";
             this.uxEditGroup.UseVisualStyleBackColor = true;
             // 
             // uxCreateGroup
             // 
-            this.uxCreateGroup.Location = new System.Drawing.Point(12, 327);
+            this.uxCreateGroup.Location = new System.Drawing.Point(9, 266);
+            this.uxCreateGroup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uxCreateGroup.Name = "uxCreateGroup";
-            this.uxCreateGroup.Size = new System.Drawing.Size(249, 23);
+            this.uxCreateGroup.Size = new System.Drawing.Size(187, 19);
             this.uxCreateGroup.TabIndex = 2;
             this.uxCreateGroup.Text = "Create New Group...";
             this.uxCreateGroup.UseVisualStyleBackColor = true;
             // 
             // uxDeleteGroups
             // 
-            this.uxDeleteGroups.Location = new System.Drawing.Point(12, 386);
+            this.uxDeleteGroups.Location = new System.Drawing.Point(9, 314);
+            this.uxDeleteGroups.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uxDeleteGroups.Name = "uxDeleteGroups";
-            this.uxDeleteGroups.Size = new System.Drawing.Size(249, 23);
+            this.uxDeleteGroups.Size = new System.Drawing.Size(187, 19);
             this.uxDeleteGroups.TabIndex = 3;
             this.uxDeleteGroups.Text = "Delete Selected Group(s)";
             this.uxDeleteGroups.UseVisualStyleBackColor = true;
             // 
             // EditGroupsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 423);
+            this.ClientSize = new System.Drawing.Size(205, 344);
             this.Controls.Add(this.uxDeleteGroups);
             this.Controls.Add(this.uxCreateGroup);
             this.Controls.Add(this.uxEditGroup);
             this.Controls.Add(this.uxGroupList);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "EditGroupsForm";
             this.Text = "Edit Groups";
+            this.Load += new System.EventHandler(this.EditGroupsForm_Load);
             this.ResumeLayout(false);
 
         }

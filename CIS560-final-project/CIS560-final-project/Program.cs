@@ -15,7 +15,7 @@ namespace CIS560_final_project
         [STAThread]
         static void Main()
         {
-            IDatabaseManager database = new MockDatabaseImplementation();
+            IDatabaseManager database = new DatabaseManagerImpl();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

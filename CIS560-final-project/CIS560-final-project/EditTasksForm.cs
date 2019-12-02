@@ -27,12 +27,14 @@ namespace CIS560_final_project
 
         private void uxEditGroups_Click(object sender, EventArgs e)
         {
-            new EditGroupsForm(database).Show();
+            new EditGroupsForm(database, user).Show();
         }
 
         private void EditTasksForm_Load(object sender, EventArgs e)
         {
             UpdateTaskList();
+            uxUserGroup.Items.AddRange(database.GetUserGroupsForUser(user).ToArray());
+            uxUserGroup.SelectedIndex = 0;
         }
 
         private void uxCreateTask_Click(object sender, EventArgs e)
@@ -43,9 +45,14 @@ namespace CIS560_final_project
 
         private void uxEditTask_Click(object sender, EventArgs e)
         {
-            List<model.Task> tasks = database.GetTasksForUser(user);
-            new EditTaskForm(database, user, tasks[uxTaskList.SelectedRows[0].Index]).ShowDialog();
-            UpdateTaskList();
+            if (uxTaskList.SelectedRows.Count > 0)
+            {
+                new EditTaskForm(database, user, (model.Task) uxTaskList.SelectedRows[0].Cells[0].Value).ShowDialog();
+                UpdateTaskList();
+            } else
+            {
+                MessageBox.Show("Please select a task to edit.");
+            }
         }
 
         private void EditTasksForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -60,8 +67,46 @@ namespace CIS560_final_project
             col.Clear();
             foreach (model.Task task in tasks)
             {
-                col.Add(new object[] { task.Name, task.TaskState.Name, null, task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate });
+                StringBuilder taskCategories = new StringBuilder();
+                foreach (TaskCategory tc in task.TaskCategories)
+                {
+                    taskCategories.Append(tc.Name);
+                    taskCategories.Append(", ");
+                }
+                if (taskCategories.Length >= 2)
+                {
+                    taskCategories.Length -= 2;
+                }
+                if ((uxFilterDateRange.Checked && task.DueDate >= uxDateRange.SelectionStart && task.DueDate < uxDateRange.SelectionEnd)
+                    || (uxFilterUserGroup.Checked && task.UserGroup.Equals(uxUserGroup.SelectedItem))
+                    || (uxFilterOwner.Checked && task.Owner.Equals(user))
+                    || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked))
+                {
+                    col.Add(new object[] { task, task.TaskState.Name, taskCategories.ToString(), task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate });
+                }
             }
+        }
+
+        private void uxFilterDateRange_CheckedChanged(object sender, EventArgs e)
+        {
+            uxDateRange.Enabled = uxFilterDateRange.Checked;
+            UpdateTaskList();
+        }
+
+        private void uxFilterUserGroup_CheckedChanged(object sender, EventArgs e)
+        {
+            uxUserGroup.Enabled = uxFilterUserGroup.Checked;
+            UpdateTaskList();
+        }
+
+        private void uxFilterOwner_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateTaskList();
+        }
+
+        private void uxDateRange_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            UpdateTaskList();
         }
     }
 }
