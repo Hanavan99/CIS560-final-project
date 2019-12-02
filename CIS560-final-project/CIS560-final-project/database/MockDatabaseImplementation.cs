@@ -36,6 +36,7 @@ namespace CIS560_final_project.database
             _userRoleInGroup.Add(new Tuple<User, UserGroup>(demo, desktopSupport), owner);
 
             TaskState notStarted = new TaskState(0, "Not Started", "", "D3D3D3");
+            _taskStates.Add(notStarted);
 
             DateTime date1 = new DateTime(2019, 12, 1, 0, 0, 0);
             DateTime date2 = new DateTime(2019, 11, 1, 0, 0, 0);
@@ -151,7 +152,7 @@ namespace CIS560_final_project.database
 
         public List<TaskState> GetTaskStates()
         {
-            throw new NotImplementedException();
+            return _taskStates;
         }
 
         public List<UserGroup> GetUserGroupsForOwner(User Owner)
@@ -186,7 +187,18 @@ namespace CIS560_final_project.database
 
         public model.Task UpdateTask(model.Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate)
         {
-            throw new NotImplementedException();
+            foreach (model.Task aTask in _tasks)
+            {
+                if(aTask.TaskID == Task.TaskID)
+                {
+                    int id = aTask.TaskID;
+                    _tasks.Remove(aTask);
+                    model.Task task = new model.Task(id, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate);
+                    return task;
+                }
+            }
+
+            return null;
         }
 
         public TaskCategory UpdateTaskCategory(TaskCategory TaskCategory, User Owner, string Name, string Description, string Color)
