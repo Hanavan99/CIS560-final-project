@@ -1,6 +1,6 @@
 ﻿namespace CIS560_final_project
 {
-    partial class Login
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.

@@ -11,11 +11,11 @@ using CIS560_final_project.database;
 
 namespace CIS560_final_project
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
         private IDatabaseManager database;
 
-        public Login(IDatabaseManager database)
+        public LoginForm(IDatabaseManager database)
         {
             InitializeComponent();
             this.database = database;
@@ -24,7 +24,7 @@ namespace CIS560_final_project
         private void zxLogin_Click(object sender, EventArgs e)
         {
             if (database.VerifyUser(uxUsername.Text, uxPassword.Text)) { 
-                new TaskViewer(database).Show();
+                new EditTasksForm(database).Show();
                 Hide();
             } else
             {
