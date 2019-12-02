@@ -7,6 +7,8 @@ using CIS560_final_project.model;
 using Task = CIS560_final_project.model.Task;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Windows.Forms;
 
 namespace CIS560_final_project.database
 {
@@ -68,7 +70,20 @@ namespace CIS560_final_project.database
 
     public class DatabaseManagerImpl : IDatabaseManager
     {
-        readonly string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
+
+        string connectionString;
+
+        public DatabaseManagerImpl() {
+            try
+            {
+                StreamReader reader = new StreamReader("D:/CIS560/sqlconnstr.txt");
+                connectionString = reader.ReadLine();
+                reader.Close();
+            } catch (IOException e)
+            {
+                MessageBox.Show("Failed to read SQL string");
+            }
+        }
 
         public List<User> GetUsersInUserGroup(UserGroup UserGroup)// done
         {
