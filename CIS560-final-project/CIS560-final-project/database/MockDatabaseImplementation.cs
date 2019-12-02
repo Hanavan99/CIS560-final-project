@@ -184,7 +184,7 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public model.Task UpdateTask(model.Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
+        public model.Task UpdateTask(model.Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate)
         {
             throw new NotImplementedException();
         }
