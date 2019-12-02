@@ -15,6 +15,8 @@ namespace CIS560_final_project.database
         Dictionary<Tuple<User, UserGroup>, Role> _userRoleInGroup = new Dictionary<Tuple<User, UserGroup>, Role>();
 
         List<model.Task> _tasks = new List<model.Task>();
+        List<TaskCategory> _taskCategories = new List<TaskCategory>();
+        List<TaskState> _taskStates = new List<TaskState>();
 
         public MockDatabaseImplementation()
         {
@@ -40,7 +42,11 @@ namespace CIS560_final_project.database
 
         public Role CreateRole(string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT)
         {
-            throw new NotImplementedException();
+            int currentRoleID = 1;
+            Role role = new Role(currentRoleID, Name, CCreateT, CAssignT, CDeleteT, CModifyT);
+            _roles.Add(role);
+            currentRoleID++;
+            return role;
         }
 
         public model.Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
@@ -54,22 +60,38 @@ namespace CIS560_final_project.database
 
         public TaskCategory CreateTaskCategory(User Owner, string Name, string Description, string Color)
         {
-            throw new NotImplementedException();
+            int currentTaskCategoryID = 0;
+            TaskCategory taskCategory = new TaskCategory(currentTaskCategoryID, Owner.UserID, Name, Description, Color);
+            currentTaskCategoryID++;
+            _taskCategories.Add(taskCategory);
+            return taskCategory;
         }
 
         public TaskState CreateTaskState(string Name, string Description, string Color)
         {
-            throw new NotImplementedException();
+            int currentTaskStateID = 0;
+            TaskState taskState = new TaskState(currentTaskStateID, Name, Description, Color);
+            _taskStates.Add(taskState);
+            currentTaskStateID++;
+            return taskState;
         }
 
         public User CreateUser(string Name, string Email, string Password)
         {
-            throw new NotImplementedException();
+            int currentUserID = 2;
+            User user = new User(currentUserID, Name, Email, Password);
+            _users.Add(user);
+            currentUserID++;
+            return user;
         }
 
         public UserGroup CreateUserGroup(User Owner, string Name, string Description)
         {
-            throw new NotImplementedException();
+            int currentUserGroupID = 1;
+            UserGroup userGroup = new UserGroup(currentUserGroupID, Owner.UserID, Name, Description);
+            currentUserGroupID++;
+            _userGroups.Add(userGroup);
+            return userGroup;
         }
 
         public List<Role> GetRoles()
@@ -88,6 +110,11 @@ namespace CIS560_final_project.database
         }
 
         public List<model.Task> GetTasksForOwner(User Owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<model.Task> GetTasksForUser(User User)
         {
             throw new NotImplementedException();
         }
