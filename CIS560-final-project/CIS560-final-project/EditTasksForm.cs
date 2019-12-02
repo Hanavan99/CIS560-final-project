@@ -80,9 +80,10 @@ namespace CIS560_final_project
                 if ((uxFilterDateRange.Checked && task.DueDate >= uxDateRange.SelectionStart && task.DueDate < uxDateRange.SelectionEnd)
                     || (uxFilterUserGroup.Checked && task.UserGroup.UserGroupID.Equals(((UserGroup)uxUserGroup.SelectedItem).UserGroupID))
                     || (uxFilterOwner.Checked && task.Owner.UserID.Equals(user.UserID))
-                    || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked))
+                    || (uxFilterNotCompleted.Checked && task.CompletionDate == null)
+                    || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked && !uxFilterNotCompleted.Checked))
                 {
-                    col.Add(new object[] { task, task.TaskState.Name, taskCategories.ToString(), task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate != null ? task.CompletionDate.ToString() : "Not Completed" });
+                    col.Add(new object[] { task, task.CompletionDate != null ? "Completed" : task.TaskState.Name, taskCategories.ToString(), task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate != null ? task.CompletionDate.ToString() : "Not Completed" });
                 }
             }
         }
@@ -110,6 +111,11 @@ namespace CIS560_final_project
         }
 
         private void uxUserGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTaskList();
+        }
+
+        private void uxFilterNotCompleted_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTaskList();
         }
