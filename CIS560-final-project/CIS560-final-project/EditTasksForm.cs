@@ -32,37 +32,36 @@ namespace CIS560_final_project
 
         private void EditTasksForm_Load(object sender, EventArgs e)
         {
-            //database.GetTasksForUser();
-            List<model.Task> tasks = database.GetTasksForUser(user);
-            DataGridViewRowCollection col = uxTaskList.Rows;
-            col.Clear();
-            foreach (model.Task task in tasks)
-            {
-                col.Add(new object[] { task.Name, null, null, null, null, task.DueDate, task.StartDate, task.CompletionDate});
-            }
+            UpdateTaskList();
         }
 
         private void uxCreateTask_Click(object sender, EventArgs e)
         {
-            
+            new EditTaskForm(database, user, null).ShowDialog();
+            UpdateTaskList();
         }
 
         private void uxEditTask_Click(object sender, EventArgs e)
         {
             List<model.Task> tasks = database.GetTasksForUser(user);
             new EditTaskForm(database, user, tasks[uxTaskList.SelectedRows[0].Index]).ShowDialog();
-            tasks = database.GetTasksForUser(user);
-            DataGridViewRowCollection col = uxTaskList.Rows;
-            col.Clear();
-            foreach (model.Task task in tasks)
-            {
-                col.Add(new object[] { task.Name, null, null, null, null, task.DueDate, task.StartDate, task.CompletionDate });
-            }
+            UpdateTaskList();
         }
 
         private void EditTasksForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void UpdateTaskList()
+        {
+            List<model.Task> tasks = database.GetTasksForUser(user);
+            DataGridViewRowCollection col = uxTaskList.Rows;
+            col.Clear();
+            foreach (model.Task task in tasks)
+            {
+                col.Add(new object[] { task.Name, task.TaskState.Name, null, task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate });
+            }
         }
     }
 }

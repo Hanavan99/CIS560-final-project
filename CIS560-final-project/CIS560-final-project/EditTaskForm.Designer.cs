@@ -84,6 +84,7 @@
             // 
             // uxTaskState
             // 
+            this.uxTaskState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.uxTaskState.FormattingEnabled = true;
             this.uxTaskState.Location = new System.Drawing.Point(112, 174);
             this.uxTaskState.Name = "uxTaskState";
@@ -110,6 +111,7 @@
             // 
             // uxUserGroup
             // 
+            this.uxUserGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.uxUserGroup.FormattingEnabled = true;
             this.uxUserGroup.Location = new System.Drawing.Point(112, 232);
             this.uxUserGroup.Name = "uxUserGroup";

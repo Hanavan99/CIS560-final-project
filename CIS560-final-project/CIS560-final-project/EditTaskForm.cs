@@ -28,19 +28,33 @@ namespace CIS560_final_project
 
         private void EditTaskForm_Load(object sender, EventArgs e)
         {
-            uxTaskName.Text = task.Name;
-            uxDescription.Text = task.Description;
             uxTaskState.Items.AddRange(database.GetTaskStates().ToArray());
             uxUserGroup.Items.AddRange(database.GetUserGroupsForUser(user).ToArray());
-            uxOwner.Text = task.Owner.Name;
-            uxStartDate.Value = task.StartDate;
-            uxDueDate.Value = task.DueDate;
-            uxCompletionDate.Value = task.CompletionDate;
+            if (task != null)
+            {
+                uxTaskName.Text = task.Name;
+                uxDescription.Text = task.Description;
+                uxTaskState.SelectedItem = task.TaskState;
+                uxUserGroup.SelectedItem = task.UserGroup;
+                uxOwner.Text = task.Owner.Name;
+                uxStartDate.Value = task.StartDate;
+                uxDueDate.Value = task.DueDate;
+                uxCompletionDate.Value = task.CompletionDate;
+            } else
+            {
+                uxOwner.Text = user.Name;
+            }
         }
 
         private void uxSave_Click(object sender, EventArgs e)
         {
-            database.UpdateTask(task, uxTaskName.Text, uxDescription.Text, (UserGroup) uxUserGroup.SelectedItem, task.Owner, (TaskState) uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value);
+            if (task != null)
+            {
+                database.UpdateTask(task, uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, task.Owner, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value);
+            } else
+            {
+                database.CreateTask(uxTaskName.Text, uxDescription.Text, (UserGroup)uxUserGroup.SelectedItem, user, (TaskState)uxTaskState.SelectedItem, uxDueDate.Value, uxStartDate.Value, uxCompletionDate.Value);
+            }
             Close();
         }
 
