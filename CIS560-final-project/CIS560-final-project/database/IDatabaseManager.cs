@@ -283,9 +283,18 @@ namespace CIS560_final_project.database
             return tempTask;
         }
 
-        public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, string DueDate, string StartDate, string CompletionDate)
+        public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
-            throw new NotImplementedException();
+            SqlConnection scon = new SqlConnection(connectionString);
+            scon.Open();
+
+            string query = "UPDATE Tasks.Tasks SET [Name] = '" + Name + "', [Description] = '" + Description + "', OwnerUserID = " + Owner.UserID + ", UserGroupID = " + UserGroup.UserGroupID + ", TaskStateID = " + TaskState.TaskStateID + ", DueDate = '" + DueDate + "', StartDate = '" + StartDate + "', CompletionDate = '" + CompletionDate + "' WHERE TaskID = " + Task.TaskID;
+            //MessageBox.Show(query);
+            SqlCommand cmd = new SqlCommand(query, scon);
+
+            scon.Close();
+            Task tempTask = new Task(Task.TaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate, null);
+            return tempTask;
         }
 
         public List<Task> GetTasksForUserGroup(UserGroup UserGroup)
@@ -300,7 +309,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Tasks.Tasks T INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID WHERE UGU.UserID = " + User.UserID;// modify the query
+            string query = "SELECT T.TaskID, T.TaskStateID, T.[Name] AS TaskName, T.[Description] AS TaskDescription, TS.[Name] AS TaskStateName, TS.[Description] AS TaskStateDescription, T.[Description] AS TaskDescription, T.DueDate, T.StartDate, T.CompletionDate, T.UserGroupID, UG.[Name] AS UserGroupName, UG.[Description] AS UserGroupDescription, TS.Color FROM Tasks.Tasks T INNER JOIN Tasks.TaskStates TS ON T.TaskStateID = TS.TaskStateID INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID INNER JOIN Users.UserGroups UG ON UGU.UserGroupID = UG.UserGroupID WHERE UGU.UserID = " + User.UserID;// modify the query
             SqlCommand cmd = new SqlCommand(query, scon);
             List<TaskCategory> ltc = new List<TaskCategory>();
 
@@ -308,13 +317,13 @@ namespace CIS560_final_project.database
             {
                 while (reader.Read())
                 {
-                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], User, reader["Name"].ToString(), reader["Description"].ToString());
-                    TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["Name"].ToString(), reader["Description"].ToString(), reader["Color"].ToString());
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], User, reader["UserGroupName"].ToString(), reader["UserGroupDescription"].ToString());
+                    TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["TaskStateName"].ToString(), reader["TaskStateDescription"].ToString(), reader["Color"].ToString());
                     Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()),
-                                        reader["Name"].ToString(),
-                                        reader["Description"].ToString(),
+                                        reader["TaskName"].ToString(),
+                                        reader["TaskDescription"].ToString(),
                                         tempUserGroup,
-                                        User,
+                                        User, // fix this
                                         tempTaskState,
                                         (DateTime)reader["DueDate"],
                                         (DateTime)reader["StartDate"],
@@ -344,11 +353,6 @@ namespace CIS560_final_project.database
         }
 
         public Role UpdateRole(Role Role, string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime CompletionDate, List<TaskCategory> TaskCategories)
         {
             throw new NotImplementedException();
         }

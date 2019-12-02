@@ -78,7 +78,7 @@ namespace CIS560_final_project
                     taskCategories.Length -= 2;
                 }
                 if ((uxFilterDateRange.Checked && task.DueDate >= uxDateRange.SelectionStart && task.DueDate < uxDateRange.SelectionEnd)
-                    || (uxFilterUserGroup.Checked && task.UserGroup.Equals(uxUserGroup.SelectedItem))
+                    || (uxFilterUserGroup.Checked && task.UserGroup.UserGroupID.Equals(((UserGroup)uxUserGroup.SelectedItem).UserGroupID))
                     || (uxFilterOwner.Checked && task.Owner.Equals(user))
                     || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked))
                 {
