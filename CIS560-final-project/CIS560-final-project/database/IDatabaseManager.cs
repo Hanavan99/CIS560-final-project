@@ -7,6 +7,8 @@ using CIS560_final_project.model;
 using Task = CIS560_final_project.model.Task;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Windows.Forms;
 
 namespace CIS560_final_project.database
 {
@@ -68,7 +70,20 @@ namespace CIS560_final_project.database
 
     public class DatabaseManagerImpl : IDatabaseManager
     {
-        readonly string connectionString = "Server=mssql.cs.ksu.edu;Database=hanavan;Trusted_Connection=true";// PLEASE ENTER YOUR CONNECTION STRING HERE
+
+        string connectionString;
+
+        public DatabaseManagerImpl() {
+            try
+            {
+                StreamReader reader = new StreamReader("D:/CIS560/sqlconnstr.txt");
+                connectionString = reader.ReadLine();
+                reader.Close();
+            } catch (IOException e)
+            {
+                MessageBox.Show("Failed to read SQL string");
+            }
+        }
 
         public List<User> GetUsersInUserGroup(UserGroup UserGroup)// done
         {
@@ -285,7 +300,37 @@ namespace CIS560_final_project.database
 
         public List<Task> GetTasksForUser(User User)
         {
-            throw new NotImplementedException();
+            List<Task> tasks = new List<Task>();
+
+            SqlConnection scon = new SqlConnection(connectionString);
+
+            scon.Open();
+            string query = "SELECT * FROM Tasks.Tasks WHERE OwnerUserID = " + User.UserID;// modify the query
+            SqlCommand cmd = new SqlCommand(query, scon);
+            List<TaskCategory> ltc = new List<TaskCategory>();
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroup"], User, reader["Name"].ToString(), reader["Description"].ToString());
+                    TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["Name"].ToString(), reader["Description"].ToString(), reader["Color"].ToString());
+                    Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()),
+                                        reader["Name"].ToString(),
+                                        reader["Description"].ToString(),
+                                        tempUserGroup,
+                                        User,
+                                        tempTaskState,
+                                        (DateTime)reader["DueDate"],
+                                        (DateTime)reader["StartDate"],
+                                        (DateTime)reader["CompletionDate"], ltc);
+
+                    tasks.Add(tempTask);
+                }
+            }
+
+            scon.Close();
+            return tasks;
         }
 
         public TaskState CreateTaskState(string Name, string Description, string Color)
