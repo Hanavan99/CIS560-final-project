@@ -37,7 +37,11 @@ namespace CIS560_final_project.database
 
             TaskState notStarted = new TaskState(0, "Not Started", "", "D3D3D3");
 
-            _tasks.Add(new model.Task(0, "Testing", "A desc", desktopSupport, demo, notStarted, "now", "never", "sometime in the future"));
+            DateTime date1 = new DateTime(2019, 12, 1, 0, 0, 0);
+            DateTime date2 = new DateTime(2019, 11, 1, 0, 0, 0);
+            DateTime date3 = new DateTime(2019, 12, 1, 0, 0, 0);
+
+            _tasks.Add(new model.Task(0, "Testing", "A desc", desktopSupport, demo, notStarted, date1 , date2, date3));
         }
 
         public void AddUserToGroup(UserGroup UserGroup, User User, Role Role)
