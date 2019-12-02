@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CIS560_final_project.database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,11 +15,11 @@ namespace CIS560_final_project
         [STAThread]
         static void Main()
         {
-            IDatabaseManager database = null;
+            IDatabaseManager database = new MockDatabaseImplementation();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new LoginForm(database));
         }
     }
 }
