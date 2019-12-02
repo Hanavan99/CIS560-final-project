@@ -116,7 +116,23 @@ namespace CIS560_final_project.database
 
         public List<model.Task> GetTasksForUser(User User)
         {
-            throw new NotImplementedException();
+            List<model.Task> filteredTasks = new List<model.Task>();
+
+            foreach (KeyValuePair<Tuple<User, UserGroup>, Role> userGroup in _userRoleInGroup)
+            {
+                if (userGroup.Key.Item1.UserID == User.UserID)
+                {
+                    foreach(model.Task aTask in _tasks)
+                    {
+                        if(aTask.UserGroupID == userGroup.Key.Item2.UserGroupID)
+                        {
+                            filteredTasks.Add(aTask);
+                        }
+                    }
+                }
+            }
+
+            return filteredTasks;
         }
 
         public List<model.Task> GetTasksForUserGroup(UserGroup UserGroup)
