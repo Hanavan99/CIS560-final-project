@@ -83,6 +83,8 @@ INSERT INTO Users.UserGroupUsers (UserGroupID, UserID, RoleID) values
 	((SELECT UserGroupID FROM Users.UserGroups WHERE [Name] = N'Hardware'), (SELECT UserID FROM Users.Users WHERE [Name] = N'demo'), (SELECT RoleID FROM Users.Roles WHERE [Name] = N'Member'));
 INSERT INTO Users.UserGroupUsers (UserGroupID, UserID, RoleID) values 
 	((SELECT UserGroupID FROM Users.UserGroups WHERE [Name] = N'560Testing'), (SELECT UserID FROM Users.Users WHERE [Name] = N'demo2'), (SELECT RoleID FROM Users.Roles WHERE [Name] = N'Owner'));
+INSERT INTO Users.UserGroupUsers (UserGroupID, UserID, RoleID) values 
+	((SELECT UserGroupID FROM Users.UserGroups WHERE [Name] = N'Hardware'), (SELECT UserID FROM Users.Users WHERE [Name] = N'demo2'), (SELECT RoleID FROM Users.Roles WHERE [Name] = N'Member'));
 
 --Tasks.TaskStates
 INSERT INTO Tasks.TaskStates ([Name], [Description], Color) values (N'Not Started', N'', N'D3D3D3');
