@@ -348,15 +348,27 @@ namespace CIS560_final_project.database
             cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
             cmd.Parameters.AddWithValue("@UserID", User.UserID);
             cmd.Parameters.AddWithValue("@RoleID", Role.RoleID);
-            cmd.ExecuteNonQuery();
 
             scon.Close();
+
             return new KeyValuePair<User, Role>(User, Role);
         }
 
         public KeyValuePair<User, Role> UpdateUserInUserGroup(UserGroup UserGroup, User User, Role Role)
         {
-            throw new NotImplementedException();
+            SqlConnection scon = new SqlConnection(connectionString);
+            scon.Open();
+
+            string query = "UPDATE Users.UserGroupUsers SET UserGroupID = @UserGroupID, UserID = @UserID, RoleID = @RoleID WHERE UserGroupID = @UserGroupID";
+            SqlCommand cmd = new SqlCommand(query, scon);
+
+            cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
+            cmd.Parameters.AddWithValue("@UserID", User.UserID);
+            cmd.Parameters.AddWithValue("RoleID", Role.RoleID);
+
+            scon.Close();
+
+            return new KeyValuePair<User, Role>(User, Role);
         }
     }
 }
