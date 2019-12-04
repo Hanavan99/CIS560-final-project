@@ -80,8 +80,8 @@ namespace CIS560_final_project
                     || (uxFilterUserGroup.Checked && task.UserGroup.UserGroupID.Equals(((UserGroup)uxUserGroup.SelectedItem).UserGroupID))
                     || (uxFilterOwner.Checked && task.Owner.UserID.Equals(user.UserID))
                     || (uxFilterNotCompleted.Checked && task.CompletionDate == null)
-                    || (uxFilterName.Checked && task.Name.Contains(uxTaskName.Text))
-                    || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked && !uxFilterNotCompleted.Checked))
+                    || (uxFilterName.Checked && task.Name.ToUpper().Contains(uxTaskName.Text.ToUpper()))
+                    || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked && !uxFilterNotCompleted.Checked && !uxFilterName.Checked))
                 {
                     col.Add(new object[] { task, task.CompletionDate != null ? "Completed" : task.TaskState.Name, taskCategories.ToString(), task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate != null ? task.CompletionDate.ToString() : "Not Completed" });
                 }
@@ -122,6 +122,12 @@ namespace CIS560_final_project
 
         private void uxTaskName_TextChanged(object sender, EventArgs e)
         {
+            UpdateTaskList();
+        }
+
+        private void uxFilterName_CheckedChanged(object sender, EventArgs e)
+        {
+            uxTaskName.Enabled = uxFilterName.Checked;
             UpdateTaskList();
         }
     }

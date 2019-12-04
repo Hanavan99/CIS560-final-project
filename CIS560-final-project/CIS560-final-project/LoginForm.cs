@@ -35,5 +35,13 @@ namespace CIS560_final_project
         }
 
         private void zxCancel_Click(object sender, EventArgs e) => Application.Exit();
+
+        private void uxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                zxLogin_Click(sender, e);
+            }
+        }
     }
 }

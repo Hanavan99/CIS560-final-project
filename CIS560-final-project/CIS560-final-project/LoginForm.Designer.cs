@@ -41,7 +41,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 17);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
             // 
@@ -49,23 +49,24 @@
             // 
             this.uxUsername.Location = new System.Drawing.Point(122, 12);
             this.uxUsername.Name = "uxUsername";
-            this.uxUsername.Size = new System.Drawing.Size(208, 22);
+            this.uxUsername.Size = new System.Drawing.Size(208, 20);
             this.uxUsername.TabIndex = 1;
             // 
             // uxPassword
             // 
             this.uxPassword.Location = new System.Drawing.Point(122, 40);
             this.uxPassword.Name = "uxPassword";
-            this.uxPassword.Size = new System.Drawing.Size(208, 22);
+            this.uxPassword.Size = new System.Drawing.Size(208, 20);
             this.uxPassword.TabIndex = 2;
             this.uxPassword.UseSystemPasswordChar = true;
+            this.uxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uxPassword_KeyDown);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 17);
+            this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Password:";
             // 
@@ -89,7 +90,7 @@
             this.zxLogin.UseVisualStyleBackColor = true;
             this.zxLogin.Click += new System.EventHandler(this.zxLogin_Click);
             // 
-            // Login
+            // LoginForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(340, 102);
@@ -99,7 +100,7 @@
             this.Controls.Add(this.uxPassword);
             this.Controls.Add(this.uxUsername);
             this.Controls.Add(this.label1);
-            this.Name = "Login";
+            this.Name = "LoginForm";
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();

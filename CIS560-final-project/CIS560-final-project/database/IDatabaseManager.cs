@@ -15,53 +15,55 @@ namespace CIS560_final_project.database
     public interface IDatabaseManager
     {
 
-        User CreateUser(string Name, string Email, string Password);
+        User CreateUser(string name, string email, string password);
 
-        User UpdateUser(User user, string Name, string Email, string Password);
+        User UpdateUser(User user, string name, string email, string password);
 
-        User VerifyUser(string Name, string Password);
+        User VerifyUser(string name, string password);
 
-        TaskCategory CreateTaskCategory(User Owner, string Name, string Description, string Color);
+        TaskCategory CreateTaskCategory(User owner, string name, string description, string color);
 
-        TaskCategory UpdateTaskCategory(TaskCategory TaskCategory, User Owner, string Name, string Description, string Color);
+        TaskCategory UpdateTaskCategory(TaskCategory taskCategory, User owner, string name, string description, string color);
 
-        List<TaskCategory> GetTaskCategoriesForOwner(User Owner);
+        List<TaskCategory> GetTaskCategoriesForOwner(User owner);
 
         List<TaskCategory> GetTaskCategories();
 
-        UserGroup CreateUserGroup(User Owner, string Name, string Description);
+        UserGroup CreateUserGroup(User owner, string name, string description);
 
-        UserGroup UpdateUserGroup(UserGroup UserGroup, User Owner, string Name, string Description);
+        UserGroup UpdateUserGroup(UserGroup userGroup, User owner, string name, string description);
 
-        List<UserGroup> GetUserGroupsForOwner(User Owner);
+        List<UserGroup> GetUserGroupsForOwner(User owner);
 
-        List<UserGroup> GetUserGroupsForUser(User User);
+        List<UserGroup> GetUserGroupsForUser(User user);
 
-        Dictionary<User, Role> GetUsersInUserGroup(UserGroup UserGroup);
+        Dictionary<User, Role> GetUsersInUserGroup(UserGroup userGroup);
 
-        KeyValuePair<User, Role> AddUserToUserGroup(UserGroup UserGroup, User User, Role Role);
+        KeyValuePair<User, Role> AddUserToUserGroup(UserGroup userGroup, User user, Role role);
 
-        KeyValuePair<User, Role> UpdateUserInUserGroup(UserGroup UserGroup, User User, Role Role);
+        KeyValuePair<User, Role> UpdateUserInUserGroup(UserGroup userGroup, User user, Role role);
 
-        Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories);
+        Task CreateTask(string name, string description, UserGroup userGroup, User owner, TaskState taskState, DateTime dueDate, DateTime startDate, DateTime? completionDate, List<TaskCategory> taskCategories);
 
-        Task UpdateTask(Task Task, string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories);
+        Task UpdateTask(Task task, string name, string description, UserGroup userGroup, User owner, TaskState taskState, DateTime dueDate, DateTime startDate, DateTime? completionDate, List<TaskCategory> taskCategories);
 
-        List<Task> GetTasksForOwner(User Owner);
+        List<Task> GetTasksForOwner(User owner);
 
-        List<Task> GetTasksForUserGroup(UserGroup UserGroup);
+        List<Task> GetTasksForUserGroup(UserGroup userGroup);
 
-        List<Task> GetTasksForUser(User User);
+        List<Task> GetTasksForUser(User user);
 
-        TaskState CreateTaskState(string Name, string Description, string Color);
+        TaskState CreateTaskState(string name, string description, string color);
 
-        TaskState UpdateTaskState(TaskState TaskState, string Name, string Description, string Color);
+        TaskState UpdateTaskState(TaskState taskState, string name, string description, string color);
 
         List<TaskState> GetTaskStates();
 
-        Role CreateRole(string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT);
+        Role CreateRole(string name, bool canCreateTasks, bool canAssignTasks, bool canDeleteTasks, bool canModifyTasks);
 
-        Role UpdateRole(Role Role, string Name, bool CCreateT, bool CAssignT, bool CDeleteT, bool CModifyT);
+        Role UpdateRole(Role role, string name, bool canCreateTasks, bool canAssignTasks, bool canDeleteTasks, bool canModifyTasks);
+
+        Role GetRoleForUser(User user);
 
         List<Role> GetRoles();
 

@@ -295,9 +295,11 @@
             this.uxFilterName.TabIndex = 4;
             this.uxFilterName.Text = "Search by task name:";
             this.uxFilterName.UseVisualStyleBackColor = true;
+            this.uxFilterName.CheckedChanged += new System.EventHandler(this.uxFilterName_CheckedChanged);
             // 
             // uxTaskName
             // 
+            this.uxTaskName.Enabled = false;
             this.uxTaskName.Location = new System.Drawing.Point(6, 344);
             this.uxTaskName.Name = "uxTaskName";
             this.uxTaskName.Size = new System.Drawing.Size(227, 20);
