@@ -339,12 +339,12 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "SELECT UGU.UserGroupID, UGU.UserID, UGU.RoleID, U.UserID, U.[Name] AS UserName, U.Email," +
-                "R.RoleID, R.[Name] AS RoleName, R.CanCreateTasks, R.CanAssignTasks, R.CanDeleteTasks, R.CanModifyTasks" +
-                " FROM Users.UserGroupUsers UGU" +
-                    "INNER JOIN Users.Users U ON UGU.UserID=U.UserID" +
-                    "INNER JOIN Users.Roles R ON UGU.RoleID=R.RoleID" +
-                "WHERE UserGroupID = @UserGroupID";
+            string query = "SELECT UGU.UserGroupID, UGU.UserID, UGU.RoleID, U.UserID, U.[Name] AS UserName, U.Email, " +
+                "R.RoleID, R.[Name] AS RoleName, R.CanCreateTasks, R.CanAssignTasks, R.CanDeleteTasks, R.CanModifyTasks " +
+                "FROM Users.UserGroupUsers UGU " +
+                    "INNER JOIN Users.Users U ON UGU.UserID=U.UserID " +
+                    "INNER JOIN Users.Roles R ON UGU.RoleID=R.RoleID " +
+                "WHERE UGU.UserGroupID = @UserGroupID";
 
             SqlCommand cmd = new SqlCommand(query, scon);
             cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
@@ -354,7 +354,7 @@ namespace CIS560_final_project.database
                 while (reader.Read())
                 {
                     User tempUser = new User((int)reader["UserID"], (string)reader["UserName"], (string)reader["Email"], null);
-                    Role tempRole = new Role((int)reader["RoleID"], (string)reader["RoleName"], (bool)reader["CanCreaeTask"], (bool)reader["CanAssignTasks"], (bool)reader["CanDeleteTasks"], (bool)reader["CanModifyTasks"]);
+                    Role tempRole = new Role((int)reader["RoleID"], (string)reader["RoleName"], (bool)reader["CanCreateTasks"], (bool)reader["CanAssignTasks"], (bool)reader["CanDeleteTasks"], (bool)reader["CanModifyTasks"]);
 
                     dic.Add(tempUser, tempRole);
                 }
@@ -397,6 +397,11 @@ namespace CIS560_final_project.database
             scon.Close();
 
             return new KeyValuePair<User, Role>(User, Role);
+        }
+
+        public Role GetRoleForUser(User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }
