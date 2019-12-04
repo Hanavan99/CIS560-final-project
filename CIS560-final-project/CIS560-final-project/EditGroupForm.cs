@@ -29,7 +29,7 @@ namespace CIS560_final_project
         private void EditGroupForm_Load(object sender, EventArgs e)
         {
             DataGridViewRowCollection col = uxGroupTable.Rows;
-            col.Clear();
+            col.Clear();   
             foreach (KeyValuePair<User, Role> kvp in database.GetUsersInUserGroup(userGroup))
             {
                 col.Add(new object[] { kvp.Key.Name, kvp.Key.Email, kvp.Value.Name });

@@ -23,28 +23,28 @@ namespace CIS560_final_project.database
                 connectionString = reader.ReadLine();
                 reader.Close();
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 MessageBox.Show("Failed to read SQL string");
             }
         }
 
-        public List<User> GetUsersInUserGroup(UserGroup UserGroup)// done
+        public List<User> GetUsersInUserGroup(UserGroup UserGroup)
         {
             List<User> users = new List<User>();
 
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID"
-                            + "INNER JOIN Users.Users U ON UGU.UserID = U.UserID WHERE UG.UserGroupID = " + UserGroup.UserGroupID;
+            string query = "SELECT U.UserID, U.Name, U.Email FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID INNER JOIN Users.Users U ON UGU.UserID = U.UserID WHERE UG.UserGroupID = @UserGroupID";
             SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    User tempUser = new User((int)reader["UserID"], (string)reader["Name"], (string)reader["Email"], (string)reader["PasswordHash"]);
+                    User tempUser = new User((int)reader["UserID"], (string)reader["Name"], (string)reader["Email"], null);
                     users.Add(tempUser);
                 }
             }
@@ -60,7 +60,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Tasks.TaskStates";
+            string query = "SELECT TS.TaskStateID, TS.[Name], TS.[Description], TS.Color,  FROM Tasks.TaskStates TS";
             SqlCommand cmd = new SqlCommand(query, scon);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
@@ -76,14 +76,14 @@ namespace CIS560_final_project.database
             return ts;
         }
 
-        public List<Role> GetRoles()// done?
+        public List<Role> GetRoles()
         {
             List<Role> roles = new List<Role>();
 
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Users.Roles";
+            string query = "SELECT R.RoleID, R.[Name], R.CanCreateTasks, R.CanAssignTasks, R.CanDeleteTasks, R.CanModifyTasks FROM Users.Roles R";
             SqlCommand cmd = new SqlCommand(query, scon);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
@@ -107,8 +107,9 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Tasks.Tasks WHERE OwnerUserID = " + Owner.UserID;
+            string query = "SELECT * FROM Tasks.Tasks WHERE OwnerUserID = @OwnerUserID";
             SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@OwnerUserID", Owner.UserID);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
