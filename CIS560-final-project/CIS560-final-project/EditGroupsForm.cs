@@ -39,7 +39,7 @@ namespace CIS560_final_project
         {
             if (uxGroupList.SelectedItem != null)
             {
-
+                new EditGroupForm(database, user, (UserGroup) uxGroupList.SelectedItem).ShowDialog();
             } else
             {
                 MessageBox.Show("Please select a group from the list.");

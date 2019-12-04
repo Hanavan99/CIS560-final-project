@@ -36,8 +36,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteSelectedUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSelectedUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSelectedUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.uxGroupTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -52,11 +52,12 @@
             this.uxGroupTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserName,
             this.Role});
-            this.uxGroupTable.Location = new System.Drawing.Point(12, 31);
+            this.uxGroupTable.Location = new System.Drawing.Point(9, 25);
+            this.uxGroupTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uxGroupTable.Name = "uxGroupTable";
             this.uxGroupTable.RowHeadersWidth = 51;
             this.uxGroupTable.RowTemplate.Height = 24;
-            this.uxGroupTable.Size = new System.Drawing.Size(492, 327);
+            this.uxGroupTable.Size = new System.Drawing.Size(369, 266);
             this.uxGroupTable.TabIndex = 0;
             // 
             // UserName
@@ -80,7 +81,8 @@
             this.usersToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(516, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(387, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,37 +93,39 @@
             this.editSelectedUserToolStripMenuItem,
             this.deleteSelectedUsersToolStripMenuItem});
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.usersToolStripMenuItem.Text = "Users";
             // 
             // addUserToolStripMenuItem
             // 
             this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
-            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
+            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.addUserToolStripMenuItem.Text = "Add User...";
-            // 
-            // deleteSelectedUsersToolStripMenuItem
-            // 
-            this.deleteSelectedUsersToolStripMenuItem.Name = "deleteSelectedUsersToolStripMenuItem";
-            this.deleteSelectedUsersToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
-            this.deleteSelectedUsersToolStripMenuItem.Text = "Delete Selected User(s)";
             // 
             // editSelectedUserToolStripMenuItem
             // 
             this.editSelectedUserToolStripMenuItem.Name = "editSelectedUserToolStripMenuItem";
-            this.editSelectedUserToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
+            this.editSelectedUserToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.editSelectedUserToolStripMenuItem.Text = "Edit Selected User...";
+            // 
+            // deleteSelectedUsersToolStripMenuItem
+            // 
+            this.deleteSelectedUsersToolStripMenuItem.Name = "deleteSelectedUsersToolStripMenuItem";
+            this.deleteSelectedUsersToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.deleteSelectedUsersToolStripMenuItem.Text = "Delete Selected User(s)";
             // 
             // EditGroupForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 370);
+            this.ClientSize = new System.Drawing.Size(387, 301);
             this.Controls.Add(this.uxGroupTable);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "EditGroupForm";
             this.Text = "EditGroupForm";
+            this.Load += new System.EventHandler(this.EditGroupForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.uxGroupTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.menuStrip1.ResumeLayout(false);

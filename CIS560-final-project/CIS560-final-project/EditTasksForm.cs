@@ -27,7 +27,7 @@ namespace CIS560_final_project
 
         private void uxEditGroups_Click(object sender, EventArgs e)
         {
-            new EditGroupsForm(database, user).Show();
+            new EditGroupsForm(database, user).ShowDialog();
         }
 
         private void EditTasksForm_Load(object sender, EventArgs e)

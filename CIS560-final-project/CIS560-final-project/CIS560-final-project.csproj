@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="database\DatabaseManagerImpl.cs" />
     <Compile Include="database\IDatabaseManager.cs" />
     <Compile Include="database\MockDatabaseImplementation.cs" />
     <Compile Include="EditGroupForm.cs">
