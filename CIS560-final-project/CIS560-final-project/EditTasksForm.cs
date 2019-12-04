@@ -19,10 +19,9 @@ namespace CIS560_final_project
 
         public EditTasksForm(IDatabaseManager database, User user)
         {
-            InitializeComponent();
             this.database = database;
             this.user = user;
-
+            InitializeComponent();
         }
 
         private void uxEditGroups_Click(object sender, EventArgs e)
@@ -81,6 +80,7 @@ namespace CIS560_final_project
                     || (uxFilterUserGroup.Checked && task.UserGroup.UserGroupID.Equals(((UserGroup)uxUserGroup.SelectedItem).UserGroupID))
                     || (uxFilterOwner.Checked && task.Owner.UserID.Equals(user.UserID))
                     || (uxFilterNotCompleted.Checked && task.CompletionDate == null)
+                    || (uxFilterName.Checked && task.Name.Contains(uxTaskName.Text))
                     || (!uxFilterDateRange.Checked && !uxFilterUserGroup.Checked && !uxFilterOwner.Checked && !uxFilterNotCompleted.Checked))
                 {
                     col.Add(new object[] { task, task.CompletionDate != null ? "Completed" : task.TaskState.Name, taskCategories.ToString(), task.UserGroup.Name, task.Owner.Name, task.DueDate, task.StartDate, task.CompletionDate != null ? task.CompletionDate.ToString() : "Not Completed" });
@@ -116,6 +116,11 @@ namespace CIS560_final_project
         }
 
         private void uxFilterNotCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateTaskList();
+        }
+
+        private void uxTaskName_TextChanged(object sender, EventArgs e)
         {
             UpdateTaskList();
         }

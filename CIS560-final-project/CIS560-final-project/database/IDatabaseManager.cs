@@ -39,9 +39,9 @@ namespace CIS560_final_project.database
 
         Dictionary<User, Role> GetUsersInUserGroup(UserGroup UserGroup);
 
-        void AddUserToGroup(UserGroup UserGroup, User User, Role Role);
+        KeyValuePair<User, Role> AddUserToUserGroup(UserGroup UserGroup, User User, Role Role);
 
-        void UpdateUserInGroup(UserGroup UserGroup, User User, Role Role);
+        KeyValuePair<User, Role> UpdateUserInUserGroup(UserGroup UserGroup, User User, Role Role);
 
         Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories);
 

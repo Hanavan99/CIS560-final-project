@@ -47,10 +47,12 @@
             this.uxEditGroups = new System.Windows.Forms.ToolStripMenuItem();
             this.uxUserGroup = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.uxFilterDateRange = new System.Windows.Forms.CheckBox();
-            this.uxFilterUserGroup = new System.Windows.Forms.CheckBox();
-            this.uxFilterOwner = new System.Windows.Forms.CheckBox();
             this.uxFilterNotCompleted = new System.Windows.Forms.CheckBox();
+            this.uxFilterOwner = new System.Windows.Forms.CheckBox();
+            this.uxFilterUserGroup = new System.Windows.Forms.CheckBox();
+            this.uxFilterDateRange = new System.Windows.Forms.CheckBox();
+            this.uxFilterName = new System.Windows.Forms.CheckBox();
+            this.uxTaskName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.uxTaskList)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -225,6 +227,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.uxTaskName);
+            this.groupBox1.Controls.Add(this.uxFilterName);
             this.groupBox1.Controls.Add(this.uxFilterNotCompleted);
             this.groupBox1.Controls.Add(this.uxFilterOwner);
             this.groupBox1.Controls.Add(this.uxFilterUserGroup);
@@ -233,32 +237,21 @@
             this.groupBox1.Controls.Add(this.uxDateRange);
             this.groupBox1.Location = new System.Drawing.Point(13, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(239, 333);
+            this.groupBox1.Size = new System.Drawing.Size(239, 410);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filters";
             // 
-            // uxFilterDateRange
+            // uxFilterNotCompleted
             // 
-            this.uxFilterDateRange.AutoSize = true;
-            this.uxFilterDateRange.Location = new System.Drawing.Point(6, 19);
-            this.uxFilterDateRange.Name = "uxFilterDateRange";
-            this.uxFilterDateRange.Size = new System.Drawing.Size(103, 17);
-            this.uxFilterDateRange.TabIndex = 0;
-            this.uxFilterDateRange.Text = "Due date range:";
-            this.uxFilterDateRange.UseVisualStyleBackColor = true;
-            this.uxFilterDateRange.CheckedChanged += new System.EventHandler(this.uxFilterDateRange_CheckedChanged);
-            // 
-            // uxFilterUserGroup
-            // 
-            this.uxFilterUserGroup.AutoSize = true;
-            this.uxFilterUserGroup.Location = new System.Drawing.Point(7, 223);
-            this.uxFilterUserGroup.Name = "uxFilterUserGroup";
-            this.uxFilterUserGroup.Size = new System.Drawing.Size(81, 17);
-            this.uxFilterUserGroup.TabIndex = 1;
-            this.uxFilterUserGroup.Text = "User group:";
-            this.uxFilterUserGroup.UseVisualStyleBackColor = true;
-            this.uxFilterUserGroup.CheckedChanged += new System.EventHandler(this.uxFilterUserGroup_CheckedChanged);
+            this.uxFilterNotCompleted.AutoSize = true;
+            this.uxFilterNotCompleted.Location = new System.Drawing.Point(6, 298);
+            this.uxFilterNotCompleted.Name = "uxFilterNotCompleted";
+            this.uxFilterNotCompleted.Size = new System.Drawing.Size(123, 17);
+            this.uxFilterNotCompleted.TabIndex = 3;
+            this.uxFilterNotCompleted.Text = "Show not completed";
+            this.uxFilterNotCompleted.UseVisualStyleBackColor = true;
+            this.uxFilterNotCompleted.CheckedChanged += new System.EventHandler(this.uxFilterNotCompleted_CheckedChanged);
             // 
             // uxFilterOwner
             // 
@@ -271,16 +264,45 @@
             this.uxFilterOwner.UseVisualStyleBackColor = true;
             this.uxFilterOwner.CheckedChanged += new System.EventHandler(this.uxFilterOwner_CheckedChanged);
             // 
-            // uxFilterNotCompleted
+            // uxFilterUserGroup
             // 
-            this.uxFilterNotCompleted.AutoSize = true;
-            this.uxFilterNotCompleted.Location = new System.Drawing.Point(6, 298);
-            this.uxFilterNotCompleted.Name = "uxFilterNotCompleted";
-            this.uxFilterNotCompleted.Size = new System.Drawing.Size(123, 17);
-            this.uxFilterNotCompleted.TabIndex = 3;
-            this.uxFilterNotCompleted.Text = "Show not completed";
-            this.uxFilterNotCompleted.UseVisualStyleBackColor = true;
-            this.uxFilterNotCompleted.CheckedChanged += new System.EventHandler(this.uxFilterNotCompleted_CheckedChanged);
+            this.uxFilterUserGroup.AutoSize = true;
+            this.uxFilterUserGroup.Location = new System.Drawing.Point(7, 223);
+            this.uxFilterUserGroup.Name = "uxFilterUserGroup";
+            this.uxFilterUserGroup.Size = new System.Drawing.Size(81, 17);
+            this.uxFilterUserGroup.TabIndex = 1;
+            this.uxFilterUserGroup.Text = "User group:";
+            this.uxFilterUserGroup.UseVisualStyleBackColor = true;
+            this.uxFilterUserGroup.CheckedChanged += new System.EventHandler(this.uxFilterUserGroup_CheckedChanged);
+            // 
+            // uxFilterDateRange
+            // 
+            this.uxFilterDateRange.AutoSize = true;
+            this.uxFilterDateRange.Location = new System.Drawing.Point(6, 19);
+            this.uxFilterDateRange.Name = "uxFilterDateRange";
+            this.uxFilterDateRange.Size = new System.Drawing.Size(103, 17);
+            this.uxFilterDateRange.TabIndex = 0;
+            this.uxFilterDateRange.Text = "Due date range:";
+            this.uxFilterDateRange.UseVisualStyleBackColor = true;
+            this.uxFilterDateRange.CheckedChanged += new System.EventHandler(this.uxFilterDateRange_CheckedChanged);
+            // 
+            // uxFilterName
+            // 
+            this.uxFilterName.AutoSize = true;
+            this.uxFilterName.Location = new System.Drawing.Point(6, 321);
+            this.uxFilterName.Name = "uxFilterName";
+            this.uxFilterName.Size = new System.Drawing.Size(129, 17);
+            this.uxFilterName.TabIndex = 4;
+            this.uxFilterName.Text = "Search by task name:";
+            this.uxFilterName.UseVisualStyleBackColor = true;
+            // 
+            // uxTaskName
+            // 
+            this.uxTaskName.Location = new System.Drawing.Point(6, 344);
+            this.uxTaskName.Name = "uxTaskName";
+            this.uxTaskName.Size = new System.Drawing.Size(227, 20);
+            this.uxTaskName.TabIndex = 5;
+            this.uxTaskName.TextChanged += new System.EventHandler(this.uxTaskName_TextChanged);
             // 
             // EditTasksForm
             // 
@@ -330,6 +352,8 @@
         private System.Windows.Forms.CheckBox uxFilterUserGroup;
         private System.Windows.Forms.CheckBox uxFilterDateRange;
         private System.Windows.Forms.CheckBox uxFilterNotCompleted;
+        private System.Windows.Forms.TextBox uxTaskName;
+        private System.Windows.Forms.CheckBox uxFilterName;
     }
 }
 
