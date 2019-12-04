@@ -30,9 +30,9 @@ namespace CIS560_final_project
         {
             DataGridViewRowCollection col = uxGroupTable.Rows;
             col.Clear();
-            foreach (User user in database.GetUsersInUserGroup(userGroup))
+            foreach (KeyValuePair<User, Role> kvp in database.GetUsersInUserGroup(userGroup))
             {
-                col.Add(new object[] { user.Name, user.Email, "NYI" });
+                col.Add(new object[] { kvp.Key.Name, kvp.Key.Email, kvp.Value.Name });
             }
         }
     }

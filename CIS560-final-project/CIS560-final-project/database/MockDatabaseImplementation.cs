@@ -7,7 +7,7 @@ using CIS560_final_project.model;
 
 namespace CIS560_final_project.database
 {
-    class MockDatabaseImplementation : IDatabaseManager
+    class MockDatabaseImplementation //: IDatabaseManager
     {
         List<Role> _roles = new List<Role>();
         List<User> _users = new List<User>();
