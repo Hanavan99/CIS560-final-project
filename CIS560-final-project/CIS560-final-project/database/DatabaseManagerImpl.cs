@@ -203,16 +203,6 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
-        public void AddUserToGroup(UserGroup UserGroup, User User, Role Role)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateUserInGroup(UserGroup UserGroup, User User, Role Role)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories)
         {
             SqlConnection scon = new SqlConnection(connectionString);
@@ -341,5 +331,19 @@ namespace CIS560_final_project.database
             return userGroups;
         }
 
+        Dictionary<User, Role> IDatabaseManager.GetUsersInUserGroup(UserGroup UserGroup)
+        {
+            throw new NotImplementedException();
+        }
+
+        public KeyValuePair<User, Role> AddUserToUserGroup(UserGroup UserGroup, User User, Role Role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public KeyValuePair<User, Role> UpdateUserInUserGroup(UserGroup UserGroup, User User, Role Role)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
