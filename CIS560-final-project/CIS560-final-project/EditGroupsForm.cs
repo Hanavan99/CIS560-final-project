@@ -29,5 +29,21 @@ namespace CIS560_final_project
             List<UserGroup> groups = database.GetUserGroupsForUser(user);
             uxGroupList.Items.AddRange(groups.ToArray());
         }
+
+        private void uxDeleteGroups_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uxEditGroup_Click(object sender, EventArgs e)
+        {
+            if (uxGroupList.SelectedItem != null)
+            {
+
+            } else
+            {
+                MessageBox.Show("Please select a group from the list.");
+            }
+        }
     }
 }
