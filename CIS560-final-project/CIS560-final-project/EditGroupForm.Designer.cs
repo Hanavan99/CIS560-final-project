@@ -30,14 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.uxGroupTable = new System.Windows.Forms.DataGridView();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSelectedUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.uxGroupTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -51,6 +52,7 @@
             this.uxGroupTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.uxGroupTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserName,
+            this.Email,
             this.Role});
             this.uxGroupTable.Location = new System.Drawing.Point(9, 25);
             this.uxGroupTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -59,20 +61,6 @@
             this.uxGroupTable.RowTemplate.Height = 24;
             this.uxGroupTable.Size = new System.Drawing.Size(369, 266);
             this.uxGroupTable.TabIndex = 0;
-            // 
-            // UserName
-            // 
-            this.UserName.HeaderText = "Username";
-            this.UserName.MinimumWidth = 6;
-            this.UserName.Name = "UserName";
-            this.UserName.Width = 125;
-            // 
-            // Role
-            // 
-            this.Role.HeaderText = "Role";
-            this.Role.MinimumWidth = 6;
-            this.Role.Name = "Role";
-            this.Role.Width = 125;
             // 
             // menuStrip1
             // 
@@ -114,6 +102,25 @@
             this.deleteSelectedUsersToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.deleteSelectedUsersToolStripMenuItem.Text = "Delete Selected User(s)";
             // 
+            // UserName
+            // 
+            this.UserName.HeaderText = "Username";
+            this.UserName.MinimumWidth = 6;
+            this.UserName.Name = "UserName";
+            this.UserName.Width = 125;
+            // 
+            // Email
+            // 
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            // 
+            // Role
+            // 
+            this.Role.HeaderText = "Role";
+            this.Role.MinimumWidth = 6;
+            this.Role.Name = "Role";
+            this.Role.Width = 125;
+            // 
             // EditGroupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,12 +146,13 @@
 
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataGridView uxGroupTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Role;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteSelectedUsersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editSelectedUserToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Role;
     }
 }

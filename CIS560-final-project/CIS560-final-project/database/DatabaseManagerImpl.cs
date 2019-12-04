@@ -261,21 +261,49 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT U.UserID, U.[Name] AS UserName, U.Email AS UserEmail, T.TaskID, T.TaskStateID, T.[Name] AS TaskName, T.[Description] AS TaskDescription, TS.[Name] AS TaskStateName, TS.[Description] AS TaskStateDescription, T.[Description] AS TaskDescription, T.DueDate, T.StartDate, T.CompletionDate, T.UserGroupID, UG.[Name] AS UserGroupName, UG.[Description] AS UserGroupDescription, TS.Color FROM Tasks.Tasks T INNER JOIN Tasks.TaskStates TS ON T.TaskStateID = TS.TaskStateID INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID INNER JOIN Users.UserGroups UG ON UGU.UserGroupID = UG.UserGroupID INNER JOIN Users.Users U ON T.OwnerUserID = U.UserID WHERE UGU.UserID = " + User.UserID;// modify the query
+            string query = @"
+            SELECT
+                U.UserID,
+	            U.[Name] AS UserName,
+                U.Email AS UserEmail,
+	            TC.[Name] AS TaskCategoryName,
+                T.TaskID,
+	            T.TaskStateID,
+	            T.[Name] AS TaskName,
+                T.[Description] AS TaskDescription,
+                TS.[Name] AS TaskStateName,
+                TS.[Description] AS TaskStateDescription,
+                T.[Description] AS TaskDescription,
+                T.DueDate,
+	            T.StartDate,
+                T.CompletionDate,
+                T.UserGroupID,
+                UG.[Name] AS UserGroupName,
+                UG.[Description] AS UserGroupDescription,
+	            TS.Color
+            FROM Tasks.Tasks T
+                INNER JOIN Tasks.TaskStates TS ON T.TaskStateID = TS.TaskStateID
+                INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID
+                INNER JOIN Users.UserGroups UG ON UGU.UserGroupID = UG.UserGroupID
+                INNER JOIN Users.Users U ON T.OwnerUserID = U.UserID
+                LEFT JOIN Tasks.TaskTaskCategories TTC ON T.TaskID = TTC.TaskID
+                LEFT JOIN Tasks.TaskCategories TC ON TTC.TaskCategoryID = TC.TaskCategoryID
+            WHERE UGU.UserID = @UserID";
             SqlCommand cmd = new SqlCommand(query, scon);
-            List<TaskCategory> ltc = new List<TaskCategory>();
+            cmd.Parameters.AddWithValue("@UserID", User.UserID);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
+                    List<TaskCategory> ltc = new List<TaskCategory>();
                     UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], User, reader["UserGroupName"].ToString(), reader["UserGroupDescription"].ToString());
                     TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["TaskStateName"].ToString(), reader["TaskStateDescription"].ToString(), reader["Color"].ToString());
                     Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()),
                                         reader["TaskName"].ToString(),
                                         reader["TaskDescription"].ToString(),
                                         tempUserGroup,
-                                        new User((int)reader["UserID"], (string)reader["UserName"], (string)reader["UserEmail"], null), // fix this
+                                        new User((int)reader["UserID"], (string)reader["UserName"], (string)reader["UserEmail"], null),
                                         tempTaskState,
                                         (DateTime)reader["DueDate"],
                                         (DateTime)reader["StartDate"],
