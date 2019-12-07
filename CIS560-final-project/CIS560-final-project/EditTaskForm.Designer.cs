@@ -108,6 +108,7 @@
             this.uxEditTaskCategories.TabIndex = 6;
             this.uxEditTaskCategories.Text = "Edit Task Categories...";
             this.uxEditTaskCategories.UseVisualStyleBackColor = true;
+            this.uxEditTaskCategories.Click += new System.EventHandler(this.uxEditTaskCategories_Click);
             // 
             // uxUserGroup
             // 

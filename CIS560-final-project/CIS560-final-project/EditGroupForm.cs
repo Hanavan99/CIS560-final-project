@@ -32,7 +32,21 @@ namespace CIS560_final_project
             col.Clear();   
             foreach (KeyValuePair<User, Role> kvp in database.GetUsersInUserGroup(userGroup))
             {
-                col.Add(new object[] { kvp.Key.Name, kvp.Key.Email, kvp.Value.Name });
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(uxGroupTable);
+                row.Cells[0].Value = kvp.Key;
+                row.Cells[1].Value = kvp.Key.Email;
+                ((DataGridViewComboBoxCell)row.Cells[2]).DataSource = new List<object>(new object[] { "test", "test2" });
+                col.Add(row);
+            }
+        }
+
+        private void uxGroupTable_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == 2)
+            {
+                User user = (User)uxGroupTable.Rows[e.RowIndex].Cells[0].Value;
+                //database.UpdateUserInUserGroup(userGroup, user, )
             }
         }
     }

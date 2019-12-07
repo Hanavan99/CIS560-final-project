@@ -93,5 +93,10 @@ namespace CIS560_final_project
         {
             uxCompletionDate.Enabled = uxCompleted.Checked;
         }
+
+        private void uxEditTaskCategories_Click(object sender, EventArgs e)
+        {
+            new EditTaskCategoriesForm(database, user, task).ShowDialog();
+        }
     }
 }

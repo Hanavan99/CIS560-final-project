@@ -15,5 +15,10 @@ namespace CIS560_final_project.model
 			this.Email = Email;
 			this.PasswordHash = PasswordHash;
 		}
-	}
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
 }

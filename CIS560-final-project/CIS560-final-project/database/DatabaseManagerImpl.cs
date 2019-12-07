@@ -60,7 +60,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT TS.TaskStateID, TS.[Name], TS.[Description], TS.Color,  FROM Tasks.TaskStates TS";
+            string query = "SELECT TS.TaskStateID, TS.[Name], TS.[Description], TS.Color FROM Tasks.TaskStates TS";
             SqlCommand cmd = new SqlCommand(query, scon);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
@@ -186,7 +186,25 @@ namespace CIS560_final_project.database
 
         public List<TaskCategory> GetTaskCategories()
         {
-            throw new NotImplementedException();
+            List<TaskCategory> taskCategories = new List<TaskCategory>();
+
+            SqlConnection scon = new SqlConnection(connectionString);
+
+            scon.Open();
+            string query = "SELECT * FROM Tasks.TaskCategories";
+            SqlCommand cmd = new SqlCommand(query, scon);
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    TaskCategory tempTaskCategory = new TaskCategory((int)reader["TaskCategoryID"], null, (string)reader["Name"], reader["Description"].Equals(DBNull.Value) ? null : (string)reader["Description"], (string)reader["Color"]);
+                    taskCategories.Add(tempTaskCategory);
+                }
+            }
+
+            scon.Close();
+            return taskCategories;
         }
 
         public UserGroup CreateUserGroup(User Owner, string Name, string Description)

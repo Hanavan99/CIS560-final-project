@@ -17,5 +17,10 @@ namespace CIS560_final_project.model
 			this.Description = Description;
 			this.Color = Color;
 		}
-	}
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
 }	
