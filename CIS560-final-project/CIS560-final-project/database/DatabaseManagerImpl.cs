@@ -239,6 +239,16 @@ namespace CIS560_final_project.database
             cmd.Parameters.AddWithValue("@CompletionDate", CompletionDate != null ? (object)CompletionDate : (object)DBNull.Value);
 
             int TaskID = (int)cmd.ExecuteScalar();
+
+            foreach(TaskCategory ts in TaskCategories)
+            {
+                string tsQuery = "INSERT INTO Tasks.TaskTaskCategories(TaskID, TaskCategoryID) OUTPUT INSERTED.TaskCategoryID values (@TaskID, @TaskCategoryID)";
+                SqlCommand tsCmd = new SqlCommand(tsQuery, scon);
+                tsCmd.Parameters.AddWithValue("@TaskID", TaskID);
+                tsCmd.Parameters.AddWithValue("@TaskCategoryID", ts.TaskCategoryID);
+                tsCmd.ExecuteNonQuery();
+
+            }
             scon.Close();
             Task tempTask = new Task(TaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate, null);
             return tempTask;
@@ -261,6 +271,20 @@ namespace CIS560_final_project.database
             cmd.Parameters.AddWithValue("@StartDate", StartDate);
             cmd.Parameters.AddWithValue("@CompletionDate", CompletionDate != null ? (object)CompletionDate : (object)DBNull.Value);
             cmd.ExecuteNonQuery();
+
+            string dtsQuery = "DELETE FROM Tasks.TaskTaskCategories WHERE TaskID = @TaskID";
+            SqlCommand dCmd = new SqlCommand(dtsQuery, scon);
+            dCmd.Parameters.AddWithValue("@TaskID", Task.TaskID);
+            dCmd.ExecuteNonQuery();
+
+            foreach (TaskCategory ts in TaskCategories)
+            {
+                string tsQuery = "INSERT INTO Tasks.TaskTaskCategories(TaskID, TaskCategoryID) OUTPUT INSERTED.TaskCategoryID values (@TaskID, @TaskCategoryID)";
+                SqlCommand tsCmd = new SqlCommand(tsQuery, scon);
+                tsCmd.Parameters.AddWithValue("@TaskID", Task.TaskID);
+                tsCmd.Parameters.AddWithValue("@TaskCategoryID", ts.TaskCategoryID);
+                tsCmd.ExecuteNonQuery();
+            }
 
             scon.Close();
             Task tempTask = new Task(Task.TaskID, Name, Description, UserGroup, Owner, TaskState, DueDate, StartDate, CompletionDate, null);
@@ -315,6 +339,22 @@ namespace CIS560_final_project.database
                 while (reader.Read())
                 {
                     List<TaskCategory> ltc = new List<TaskCategory>();
+
+                    string tcQuery = "SELECT TTC.TaskCategoryID AS TTCTaskCategoryID, TC.TaskCategoryID AS TCTaskCategoryID, TC.OwnerID, TC.[Name] AS TCName, TC.[Description] AS TCDescription, TC.Color" +
+                        " FROM Tasks.TaskTaskCategory TTC" +
+                        " INNER JOIN Tasks.TaskCategories TC ON TC.TaskCategoryID=TTC.TaskCategoryID WHERE TTC.TaskID = @TaskID";
+                    SqlCommand tcCmd = new SqlCommand(tcQuery, scon);
+                    tcCmd.Parameters.AddWithValue("@TaskID", (int)reader["TaskID"]);
+
+                    using (SqlDataReader tcReader = tcCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ltc.Add(new TaskCategory((int)tcReader["TTCTaskCategoryID"], null,
+                                (string)tcReader["TCName"], (string)tcReader["TCDescription"], (string)tcReader["Color"])); 
+                        }
+                    }
+
                     UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], User, reader["UserGroupName"].ToString(), reader["UserGroupDescription"].ToString());
                     TaskState tempTaskState = new TaskState((int)reader["TaskStateID"], reader["TaskStateName"].ToString(), reader["TaskStateDescription"].ToString(), reader["Color"].ToString());
                     Task tempTask = new Task(int.Parse(reader["TaskID"].ToString()),
