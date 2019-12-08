@@ -28,8 +28,36 @@ namespace CIS560_final_project
 
         private void EditTaskCategoriesForm_Load(object sender, EventArgs e)
         {
-            uxAvailableCategories.Items.AddRange(database.GetTaskCategories().ToArray());
-            uxAssignedCategories.Items.AddRange(task.TaskCategories.ToArray());
+            uxAssignedCategories.Items.AddRange(database.GetTaskCategories().ToArray());
+            List<TaskCategory> selectedCategories = task.TaskCategories;
+            for (int i = 0; i < uxAssignedCategories.Items.Count; i++)
+            {
+                if (selectedCategories.Contains(uxAssignedCategories.Items[i]))
+                {
+                    uxAssignedCategories.SetItemChecked(i, true);
+                }
+            }
+        }
+
+        private void uxSave_Click(object sender, EventArgs e)
+        {
+            List<TaskCategory> categories = new List<TaskCategory>();
+            for (int i = 0; i < uxAssignedCategories.Items.Count; i++)
+            {
+                if (uxAssignedCategories.GetItemChecked(i))
+                {
+                    categories.Add((TaskCategory) uxAssignedCategories.Items[i]);
+                }
+            }
+            //database.UpdateTask(task, task.Name, task.Description, task.UserGroup, task.Owner, task.TaskState, task.DueDate, task.StartDate, task.CompletionDate, categories);
+            task.TaskCategories.Clear();
+            task.TaskCategories.AddRange(categories);
+            Close();
+        }
+
+        private void uxCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

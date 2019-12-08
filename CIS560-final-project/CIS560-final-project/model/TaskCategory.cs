@@ -22,5 +22,14 @@ namespace CIS560_final_project.model
         {
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType().Equals(this.GetType()))
+            {
+                return TaskCategoryID == ((TaskCategory)obj).TaskCategoryID;
+            }
+            return false;
+        }
     }
 }	

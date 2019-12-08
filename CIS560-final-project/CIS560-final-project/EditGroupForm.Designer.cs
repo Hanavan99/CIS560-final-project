@@ -38,7 +38,7 @@
             this.deleteSelectedUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Role = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.uxGroupTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -59,7 +59,6 @@
             this.uxGroupTable.Location = new System.Drawing.Point(9, 25);
             this.uxGroupTable.Margin = new System.Windows.Forms.Padding(2);
             this.uxGroupTable.Name = "uxGroupTable";
-            this.uxGroupTable.ReadOnly = true;
             this.uxGroupTable.RowHeadersWidth = 51;
             this.uxGroupTable.RowTemplate.Height = 24;
             this.uxGroupTable.Size = new System.Drawing.Size(448, 266);
@@ -127,7 +126,6 @@
             this.Role.Name = "Role";
             this.Role.ReadOnly = true;
             this.Role.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Role.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Role.Width = 125;
             // 
             // EditGroupForm
@@ -162,6 +160,6 @@
         private System.Windows.Forms.ToolStripMenuItem editSelectedUserToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Role;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Role;
     }
 }

@@ -28,16 +28,17 @@ namespace CIS560_final_project
 
         private void EditGroupForm_Load(object sender, EventArgs e)
         {
+            List<Role> roles = database.GetRoles();
             DataGridViewRowCollection col = uxGroupTable.Rows;
-            col.Clear();   
+            col.Clear();
+
             foreach (KeyValuePair<User, Role> kvp in database.GetUsersInUserGroup(userGroup))
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(uxGroupTable);
                 row.Cells[0].Value = kvp.Key;
                 row.Cells[1].Value = kvp.Key.Email;
-                ((DataGridViewComboBoxCell)row.Cells[2]).DataSource = new List<object>(new object[] { "test", "test2" });
-                col.Add(row);
+                row.Cells[2].Value = kvp.Value;
             }
         }
 
@@ -46,7 +47,8 @@ namespace CIS560_final_project
             if (e.RowIndex == 2)
             {
                 User user = (User)uxGroupTable.Rows[e.RowIndex].Cells[0].Value;
-                //database.UpdateUserInUserGroup(userGroup, user, )
+                //database.UpdateUserInUserGroup(userGroup, user, new Role((int)uxGroupTable.Rows[e.RowIndex].Cells[2].Value, null, false, false, false, false));
+                database.UpdateUserInUserGroup(userGroup, user, (Role)uxGroupTable.Rows[e.RowIndex].Cells[2].Value);
             }
         }
     }

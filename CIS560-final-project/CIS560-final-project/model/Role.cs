@@ -19,5 +19,18 @@ namespace CIS560_final_project.model
 			CanDeleteTasks = CDT;
 			CanModifyTasks = CMT;
 		}
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj != null && GetType().Equals(obj.GetType())) {
+                return RoleID == ((Role)obj).RoleID;
+            }
+            return false;
+        }
     }
 }

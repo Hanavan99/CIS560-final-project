@@ -28,24 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.uxAvailableCategories = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.uxAssignedCategories = new System.Windows.Forms.ListBox();
-            this.uxAdd = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.uxRemove = new System.Windows.Forms.Button();
             this.categoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uxCancel = new System.Windows.Forms.Button();
+            this.uxSave = new System.Windows.Forms.Button();
+            this.uxAssignedCategories = new System.Windows.Forms.CheckedListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // uxAvailableCategories
-            // 
-            this.uxAvailableCategories.FormattingEnabled = true;
-            this.uxAvailableCategories.Location = new System.Drawing.Point(12, 40);
-            this.uxAvailableCategories.Name = "uxAvailableCategories";
-            this.uxAvailableCategories.Size = new System.Drawing.Size(120, 277);
-            this.uxAvailableCategories.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -53,53 +43,18 @@
             this.categoriesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(270, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(179, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // uxAssignedCategories
-            // 
-            this.uxAssignedCategories.FormattingEnabled = true;
-            this.uxAssignedCategories.Location = new System.Drawing.Point(138, 40);
-            this.uxAssignedCategories.Name = "uxAssignedCategories";
-            this.uxAssignedCategories.Size = new System.Drawing.Size(120, 277);
-            this.uxAssignedCategories.TabIndex = 2;
-            // 
-            // uxAdd
-            // 
-            this.uxAdd.Location = new System.Drawing.Point(12, 323);
-            this.uxAdd.Name = "uxAdd";
-            this.uxAdd.Size = new System.Drawing.Size(120, 23);
-            this.uxAdd.TabIndex = 3;
-            this.uxAdd.Text = "Add Selected";
-            this.uxAdd.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Available Categories:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 24);
+            this.label2.Location = new System.Drawing.Point(12, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Assigned Categories:";
-            // 
-            // uxRemove
-            // 
-            this.uxRemove.Location = new System.Drawing.Point(138, 323);
-            this.uxRemove.Name = "uxRemove";
-            this.uxRemove.Size = new System.Drawing.Size(120, 23);
-            this.uxRemove.TabIndex = 6;
-            this.uxRemove.Text = "Remove Selected";
-            this.uxRemove.UseVisualStyleBackColor = true;
             // 
             // categoriesToolStripMenuItem
             // 
@@ -107,17 +62,43 @@
             this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.categoriesToolStripMenuItem.Text = "Categories";
             // 
+            // uxCancel
+            // 
+            this.uxCancel.Location = new System.Drawing.Point(93, 305);
+            this.uxCancel.Name = "uxCancel";
+            this.uxCancel.Size = new System.Drawing.Size(75, 23);
+            this.uxCancel.TabIndex = 7;
+            this.uxCancel.Text = "Cancel";
+            this.uxCancel.UseVisualStyleBackColor = true;
+            this.uxCancel.Click += new System.EventHandler(this.uxCancel_Click);
+            // 
+            // uxSave
+            // 
+            this.uxSave.Location = new System.Drawing.Point(12, 305);
+            this.uxSave.Name = "uxSave";
+            this.uxSave.Size = new System.Drawing.Size(75, 23);
+            this.uxSave.TabIndex = 8;
+            this.uxSave.Text = "Save";
+            this.uxSave.UseVisualStyleBackColor = true;
+            this.uxSave.Click += new System.EventHandler(this.uxSave_Click);
+            // 
+            // uxAssignedCategories
+            // 
+            this.uxAssignedCategories.FormattingEnabled = true;
+            this.uxAssignedCategories.Location = new System.Drawing.Point(12, 40);
+            this.uxAssignedCategories.Name = "uxAssignedCategories";
+            this.uxAssignedCategories.Size = new System.Drawing.Size(156, 259);
+            this.uxAssignedCategories.TabIndex = 9;
+            // 
             // EditTaskCategoriesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 357);
-            this.Controls.Add(this.uxRemove);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.uxAdd);
+            this.ClientSize = new System.Drawing.Size(179, 340);
             this.Controls.Add(this.uxAssignedCategories);
-            this.Controls.Add(this.uxAvailableCategories);
+            this.Controls.Add(this.uxSave);
+            this.Controls.Add(this.uxCancel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "EditTaskCategoriesForm";
@@ -131,14 +112,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox uxAvailableCategories;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ListBox uxAssignedCategories;
-        private System.Windows.Forms.Button uxAdd;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button uxRemove;
         private System.Windows.Forms.ToolStripMenuItem categoriesToolStripMenuItem;
+        private System.Windows.Forms.Button uxCancel;
+        private System.Windows.Forms.Button uxSave;
+        private System.Windows.Forms.CheckedListBox uxAssignedCategories;
     }
 }

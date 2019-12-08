@@ -341,17 +341,17 @@ namespace CIS560_final_project.database
                     List<TaskCategory> ltc = new List<TaskCategory>();
 
                     string tcQuery = "SELECT TTC.TaskCategoryID AS TTCTaskCategoryID, TC.TaskCategoryID AS TCTaskCategoryID, TC.OwnerID, TC.[Name] AS TCName, TC.[Description] AS TCDescription, TC.Color" +
-                        " FROM Tasks.TaskTaskCategory TTC" +
+                        " FROM Tasks.TaskTaskCategories TTC" +
                         " INNER JOIN Tasks.TaskCategories TC ON TC.TaskCategoryID=TTC.TaskCategoryID WHERE TTC.TaskID = @TaskID";
                     SqlCommand tcCmd = new SqlCommand(tcQuery, scon);
                     tcCmd.Parameters.AddWithValue("@TaskID", (int)reader["TaskID"]);
 
                     using (SqlDataReader tcReader = tcCmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (tcReader.Read())
                         {
                             ltc.Add(new TaskCategory((int)tcReader["TTCTaskCategoryID"], null,
-                                (string)tcReader["TCName"], (string)tcReader["TCDescription"], (string)tcReader["Color"])); 
+                                (string)tcReader["TCName"], tcReader["TCDescription"].Equals(DBNull.Value) ? null : (string)tcReader["TCDescription"], (string)tcReader["Color"])); 
                         }
                     }
 
