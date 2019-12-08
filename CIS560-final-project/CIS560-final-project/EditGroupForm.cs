@@ -55,12 +55,18 @@ namespace CIS560_final_project
 
         private void uxSave_Click(object sender, EventArgs e)
         {
-            if (userGroup != null)
+            if (string.IsNullOrEmpty(uxGroupName.Text))
             {
-                database.UpdateUserGroup(userGroup, userGroup.Owner, uxGroupName.Text, uxDescription.Text);
-            } else
-            {
-                database.CreateUserGroup(user, uxGroupName.Text, uxDescription.Text);
+                MessageBox.Show("Please enter a valid group name.");
+            } else {
+                if (userGroup != null)
+                {
+                    database.UpdateUserGroup(userGroup, userGroup.Owner, uxGroupName.Text, uxDescription.Text);
+                }
+                else
+                {
+                    database.CreateUserGroup(user, uxGroupName.Text, uxDescription.Text);
+                }
             }
             Close();
         }
@@ -68,6 +74,12 @@ namespace CIS560_final_project
         private void uxCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+        private void uxAddUser_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

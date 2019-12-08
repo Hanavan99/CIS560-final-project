@@ -19,6 +19,8 @@ namespace CIS560_final_project.database
 
         User UpdateUser(User user, string name, string email, string password);
 
+        User GetUserForUserName(string name);
+
         User VerifyUser(string name, string password);
 
         TaskCategory CreateTaskCategory(User owner, string name, string description, string color);

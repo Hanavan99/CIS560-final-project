@@ -30,14 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.uxGroupTable = new System.Windows.Forms.DataGridView();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editSelectedUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uxAddUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.uxEditUser = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.uxGroupName = new System.Windows.Forms.TextBox();
@@ -47,6 +44,9 @@
             this.uxSave = new System.Windows.Forms.Button();
             this.uxDescription = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.uxGroupTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -54,8 +54,6 @@
             // 
             // uxGroupTable
             // 
-            this.uxGroupTable.AllowUserToAddRows = false;
-            this.uxGroupTable.AllowUserToDeleteRows = false;
             this.uxGroupTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -67,33 +65,12 @@
             this.uxGroupTable.Location = new System.Drawing.Point(11, 118);
             this.uxGroupTable.Margin = new System.Windows.Forms.Padding(2);
             this.uxGroupTable.Name = "uxGroupTable";
+            this.uxGroupTable.ReadOnly = true;
             this.uxGroupTable.RowHeadersWidth = 51;
             this.uxGroupTable.RowTemplate.Height = 24;
             this.uxGroupTable.Size = new System.Drawing.Size(405, 216);
             this.uxGroupTable.TabIndex = 0;
-            // 
-            // UserName
-            // 
-            this.UserName.HeaderText = "Username";
-            this.UserName.MinimumWidth = 6;
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            this.UserName.Width = 125;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // Role
-            // 
-            this.Role.HeaderText = "Role";
-            this.Role.MinimumWidth = 6;
-            this.Role.Name = "Role";
-            this.Role.ReadOnly = true;
-            this.Role.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Role.Width = 125;
+            this.uxGroupTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.uxGroupTable_CellValueChanged);
             // 
             // menuStrip1
             // 
@@ -110,24 +87,25 @@
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addUserToolStripMenuItem,
-            this.editSelectedUserToolStripMenuItem,
+            this.uxAddUser,
+            this.uxEditUser,
             this.deleteSelectedUsersToolStripMenuItem});
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
             this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.usersToolStripMenuItem.Text = "Users";
             // 
-            // addUserToolStripMenuItem
+            // uxAddUser
             // 
-            this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
-            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.addUserToolStripMenuItem.Text = "Add User...";
+            this.uxAddUser.Name = "uxAddUser";
+            this.uxAddUser.Size = new System.Drawing.Size(193, 22);
+            this.uxAddUser.Text = "Add User...";
+            this.uxAddUser.Click += new System.EventHandler(this.uxAddUser_Click);
             // 
-            // editSelectedUserToolStripMenuItem
+            // uxEditUser
             // 
-            this.editSelectedUserToolStripMenuItem.Name = "editSelectedUserToolStripMenuItem";
-            this.editSelectedUserToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.editSelectedUserToolStripMenuItem.Text = "Edit Selected User...";
+            this.uxEditUser.Name = "uxEditUser";
+            this.uxEditUser.Size = new System.Drawing.Size(193, 22);
+            this.uxEditUser.Text = "Edit Selected User...";
             // 
             // deleteSelectedUsersToolStripMenuItem
             // 
@@ -211,6 +189,29 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Description:";
             // 
+            // UserName
+            // 
+            this.UserName.HeaderText = "Username";
+            this.UserName.MinimumWidth = 6;
+            this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
+            this.UserName.Width = 125;
+            // 
+            // Email
+            // 
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Role
+            // 
+            this.Role.HeaderText = "Role";
+            this.Role.MinimumWidth = 6;
+            this.Role.Name = "Role";
+            this.Role.ReadOnly = true;
+            this.Role.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Role.Width = 125;
+            // 
             // EditGroupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,12 +247,9 @@
         private System.Windows.Forms.DataGridView uxGroupTable;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uxAddUser;
         private System.Windows.Forms.ToolStripMenuItem deleteSelectedUsersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editSelectedUserToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Role;
+        private System.Windows.Forms.ToolStripMenuItem uxEditUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox uxGroupName;
         private System.Windows.Forms.Label label2;
@@ -260,5 +258,8 @@
         private System.Windows.Forms.Button uxSave;
         private System.Windows.Forms.TextBox uxDescription;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Role;
     }
 }

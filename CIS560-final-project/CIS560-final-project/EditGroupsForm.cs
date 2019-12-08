@@ -26,6 +26,7 @@ namespace CIS560_final_project
 
         private void EditGroupsForm_Load(object sender, EventArgs e)
         {
+            uxGroupType.SelectedIndex = 0;
             UpdateUserGroupList();
         }
 
@@ -54,9 +55,25 @@ namespace CIS560_final_project
 
         private void UpdateUserGroupList()
         {
-            List<UserGroup> groups = database.GetUserGroupsForUser(user);
-            uxGroupList.Items.Clear();
-            uxGroupList.Items.AddRange(groups.ToArray());
+            switch (uxGroupType.SelectedIndex)
+            {
+                case 0: // I'm a member
+                    List<UserGroup> groups = database.GetUserGroupsForUser(user);
+                    uxGroupList.Items.Clear();
+                    uxGroupList.Items.AddRange(groups.ToArray());
+                    break;
+                case 1: // I'm an owner
+                    List<UserGroup> groups2 = database.GetUserGroupsForOwner(user);
+                    uxGroupList.Items.Clear();
+                    uxGroupList.Items.AddRange(groups2.ToArray());
+                    break;
+            }
+            
+        }
+
+        private void uxGroupType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateUserGroupList();
         }
     }
 }
