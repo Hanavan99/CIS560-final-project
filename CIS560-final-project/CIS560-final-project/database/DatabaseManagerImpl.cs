@@ -308,7 +308,6 @@ namespace CIS560_final_project.database
                 U.UserID,
 	            U.[Name] AS UserName,
                 U.Email AS UserEmail,
-	            TC.[Name] AS TaskCategoryName,
                 T.TaskID,
 	            T.TaskStateID,
 	            T.[Name] AS TaskName,
@@ -328,8 +327,6 @@ namespace CIS560_final_project.database
                 INNER JOIN Users.UserGroupUsers UGU ON T.UserGroupID = UGU.UserGroupID
                 INNER JOIN Users.UserGroups UG ON UGU.UserGroupID = UG.UserGroupID
                 INNER JOIN Users.Users U ON T.OwnerUserID = U.UserID
-                LEFT JOIN Tasks.TaskTaskCategories TTC ON T.TaskID = TTC.TaskID
-                LEFT JOIN Tasks.TaskCategories TC ON TTC.TaskCategoryID = TC.TaskCategoryID
             WHERE UGU.UserID = @UserID";
             SqlCommand cmd = new SqlCommand(query, scon);
             cmd.Parameters.AddWithValue("@UserID", User.UserID);
@@ -402,14 +399,15 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT * FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID WHERE UGU.UserID = " + User.UserID;
+            string query = "SELECT U.UserID, U.[Name] AS UserName, U.Email, UG.UserGroupID, UG.[Name], UG.[Description] FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID INNER JOIN Users.Users U ON UGU.UserID = U.UserID WHERE UGU.UserID = " + User.UserID;
             SqlCommand cmd = new SqlCommand(query, scon);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], User, (string)reader["Name"], (string)reader["Description"]);
+                    User tempUser = new User((int)reader["UserID"], (string)reader["UserName"], (string)reader["Email"], null);
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], tempUser, (string)reader["Name"], (string)reader["Description"]);
                     userGroups.Add(tempUserGroup);
                 }
             }

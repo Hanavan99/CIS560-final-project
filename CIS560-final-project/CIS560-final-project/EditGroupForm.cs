@@ -39,7 +39,12 @@ namespace CIS560_final_project
                 row.Cells[0].Value = kvp.Key;
                 row.Cells[1].Value = kvp.Key.Email;
                 row.Cells[2].Value = kvp.Value;
+                col.Add(row);
             }
+
+            uxGroupName.Text = userGroup.Name;
+            uxOwner.Text = userGroup.Owner.Name;
+            uxDescription.Text = userGroup.Description;
         }
 
         private void uxGroupTable_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -50,6 +55,17 @@ namespace CIS560_final_project
                 //database.UpdateUserInUserGroup(userGroup, user, new Role((int)uxGroupTable.Rows[e.RowIndex].Cells[2].Value, null, false, false, false, false));
                 database.UpdateUserInUserGroup(userGroup, user, (Role)uxGroupTable.Rows[e.RowIndex].Cells[2].Value);
             }
+        }
+
+        private void uxSave_Click(object sender, EventArgs e)
+        {
+            database.UpdateUserGroup(userGroup, userGroup.Owner, uxGroupName.Text, uxDescription.Text);
+            Close();
+        }
+
+        private void uxCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
