@@ -171,12 +171,40 @@ namespace CIS560_final_project.database
 
         public TaskCategory CreateTaskCategory(User Owner, string Name, string Description, string Color)
         {
-            throw new NotImplementedException();
+            SqlConnection scon = new SqlConnection(connectionString);
+            scon.Open();
+
+            string query = "INSERT INTO Tasks.TaskCategories (OwnerID, [Name], [Description], Color) OUTPUT INSERTED.TaskCategoryID values" +
+                " (@OwnerID, @Name, @Description, @Color)";
+            SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@OwnerID", Owner.UserID);
+            cmd.Parameters.AddWithValue("@Name", Name);
+            cmd.Parameters.AddWithValue("@Description", Description);
+            cmd.Parameters.AddWithValue("@Color", Color);
+
+            int TaskCategoryID = (int)cmd.ExecuteScalar();
+            TaskCategory temp = new TaskCategory(TaskCategoryID, Owner, Name, Description, Color);
+
+            return temp;
         }
 
         public TaskCategory UpdateTaskCategory(TaskCategory TaskCategory, User Owner, string Name, string Description, string Color)
         {
-            throw new NotImplementedException();
+            SqlConnection scon = new SqlConnection(connectionString);
+            scon.Open();
+
+            string query = "UPDATE Tasks.TaskCategories SET OwnerID = @OwnerID, [Name] = @Name, [Description] = @Description, Color = @Color WHERE TaskCategoryID = @TaskCategoryID";
+            SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@OwnerID", Owner.UserID);
+            cmd.Parameters.AddWithValue("@Name", Name);
+            cmd.Parameters.AddWithValue("@Description", Description);
+            cmd.Parameters.AddWithValue("@Color", Color);
+            cmd.Parameters.AddWithValue("@TaskCategoryID", TaskCategory.TaskCategoryID);
+            cmd.ExecuteNonQuery();
+
+            TaskCategory temp = new TaskCategory(TaskCategory.TaskCategoryID, Owner, Name, Description, Color);
+
+            return temp;
         }
 
         public List<TaskCategory> GetTaskCategoriesForOwner(User Owner)
