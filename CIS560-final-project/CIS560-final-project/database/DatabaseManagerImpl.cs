@@ -145,6 +145,28 @@ namespace CIS560_final_project.database
             throw new NotImplementedException();
         }
 
+        public User GetUserForUserName(string name)
+        {
+            User user = null;
+            SqlConnection scon = new SqlConnection(connectionString);
+
+            scon.Open();
+            string query = "SELECT * FROM Users.Users U WHERE U.[Name] = @Name";
+            SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@Name", name);
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    user = new User((int)reader["UserID"], (string)reader["UserName"], (string)reader["Email"], null);
+                }
+            }
+
+            scon.Close();
+            return user;
+        }
+
         public User VerifyUser(string Name, string Password)//done?
         {
             User tempUser;
@@ -246,7 +268,26 @@ namespace CIS560_final_project.database
 
         public List<UserGroup> GetUserGroupsForOwner(User Owner)
         {
-            throw new NotImplementedException();
+            List<UserGroup> userGroups = new List<UserGroup>();
+
+            SqlConnection scon = new SqlConnection(connectionString);
+
+            scon.Open();
+            string query = "SELECT * FROM Users.UserGroups UG WHERE UG.GroupOwnerID = @UserID";
+            SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@UserID", Owner.UserID);
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    UserGroup tempUserGroup = new UserGroup((int)reader["UserGroupID"], Owner, (string)reader["Name"], (string)reader["Description"]);
+                    userGroups.Add(tempUserGroup);
+                }
+            }
+
+            scon.Close();
+            return userGroups;
         }
 
         public Task CreateTask(string Name, string Description, UserGroup UserGroup, User Owner, TaskState TaskState, DateTime DueDate, DateTime StartDate, DateTime? CompletionDate, List<TaskCategory> TaskCategories)
