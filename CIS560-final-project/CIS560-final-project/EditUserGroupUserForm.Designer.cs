@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.uxUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.uxSave = new System.Windows.Forms.Button();
             this.uxRoleList = new System.Windows.Forms.ComboBox();
@@ -36,12 +36,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // uxUserName
             // 
-            this.textBox1.Location = new System.Drawing.Point(97, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(185, 20);
-            this.textBox1.TabIndex = 0;
+            this.uxUserName.Location = new System.Drawing.Point(97, 12);
+            this.uxUserName.Name = "uxUserName";
+            this.uxUserName.Size = new System.Drawing.Size(185, 20);
+            this.uxUserName.TabIndex = 0;
             // 
             // label1
             // 
@@ -79,6 +79,7 @@
             this.uxCancel.TabIndex = 4;
             this.uxCancel.Text = "Cancel";
             this.uxCancel.UseVisualStyleBackColor = true;
+            this.uxCancel.Click += new System.EventHandler(this.uxCancel_Click);
             // 
             // label2
             // 
@@ -99,9 +100,10 @@
             this.Controls.Add(this.uxRoleList);
             this.Controls.Add(this.uxSave);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.uxUserName);
             this.Name = "EditUserGroupUserForm";
             this.Text = "Edit User";
+            this.Load += new System.EventHandler(this.EditUserGroupUserForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,7 +111,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox uxUserName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button uxSave;
         private System.Windows.Forms.ComboBox uxRoleList;

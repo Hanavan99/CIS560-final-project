@@ -17,40 +17,54 @@ namespace CIS560_final_project
         private IDatabaseManager database;
         private UserGroup userGroup;
         private User user;
-        public EditUserGroupUserForm(IDatabaseManager database, UserGroup userGroup, User user)
+        private Role role;
+
+        public EditUserGroupUserForm(IDatabaseManager database, UserGroup userGroup, User user, Role role)
         {
             this.database = database;
             this.userGroup = userGroup;
             this.user = user;
+            this.role = role;
             InitializeComponent();
         }
 
         private void uxSave_Click(object sender, EventArgs e)
         {
-            string name = (string)row.Cells[0].Value;
-            Role role = null;
-            foreach (Role r in roles)
-            {
-                if (r.Name.ToUpper().Equals(roleName.ToUpper()))
-                {
-                    role = r;
-                    break;
-                }
-            }
+            string name = uxUserName.Text;
+            Role localRole = (Role)uxRoleList.SelectedItem;
             User localUser = database.GetUserForUserName(name);
             if (localUser == null)
             {
                 MessageBox.Show("User with that name does not exist.");
             }
-            else if (role == null)
-            {
-                MessageBox.Show("Role with that name does not exist.");
-            }
             else
             {
-                row.Cells[1].Value = localUser.Email;
-                database.AddUserToUserGroup(userGroup, localUser, role);
+                Dictionary<User, Role> userGroupUsers = database.GetUsersInUserGroup(userGroup);
+                if (!userGroupUsers.ContainsKey(localUser))
+                {
+                    database.AddUserToUserGroup(userGroup, localUser, localRole);
+                } else
+                {
+                    database.UpdateUserInUserGroup(userGroup, localUser, localRole);
+                }
             }
+            Close();
+        }
+
+        private void EditUserGroupUserForm_Load(object sender, EventArgs e)
+        {
+            List<Role> roles = database.GetRoles();
+            uxRoleList.Items.AddRange(roles.ToArray());
+            if (user != null)
+            {
+                uxUserName.Text = user.Name;
+                uxRoleList.SelectedItem = role;
+            }
+        }
+
+        private void uxCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

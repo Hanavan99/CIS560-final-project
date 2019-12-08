@@ -19,7 +19,8 @@ namespace CIS560_final_project.database
         {
             try
             {
-                StreamReader reader = new StreamReader("D:/CIS560/sqlconnstr.txt");
+                //MessageBox.Show(Directory.GetCurrentDirectory().ToString());
+                StreamReader reader = new StreamReader("../../../../../sqlconnstr.txt");
                 connectionString = reader.ReadLine();
                 reader.Close();
             }
@@ -159,7 +160,7 @@ namespace CIS560_final_project.database
             {
                 if (reader.Read())
                 {
-                    user = new User((int)reader["UserID"], (string)reader["UserName"], (string)reader["Email"], null);
+                    user = new User((int)reader["UserID"], (string)reader["Name"], (string)reader["Email"], null);
                 }
             }
 
@@ -551,12 +552,13 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "INSERT INTO Users.UserGroupUsers(UserGroupID, UserID, RoleID) OUTPUT INSERTED.UserGroupID values (@UserGroupID, UserID, RoleID)"; 
+            string query = "INSERT INTO Users.UserGroupUsers(UserGroupID, UserID, RoleID) values (@UserGroupID, @UserID, @RoleID)"; 
             SqlCommand cmd = new SqlCommand(query, scon);
 
             cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
             cmd.Parameters.AddWithValue("@UserID", User.UserID);
             cmd.Parameters.AddWithValue("@RoleID", Role.RoleID);
+            cmd.ExecuteNonQuery();
 
             scon.Close();
 
@@ -568,12 +570,13 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "UPDATE Users.UserGroupUsers SET UserGroupID = @UserGroupID, UserID = @UserID, RoleID = @RoleID WHERE UserGroupID = @UserGroupID";
+            string query = "UPDATE Users.UserGroupUsers SET RoleID = @RoleID WHERE UserGroupID = @UserGroupID AND UserID = @UserID";
             SqlCommand cmd = new SqlCommand(query, scon);
 
             cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
             cmd.Parameters.AddWithValue("@UserID", User.UserID);
-            cmd.Parameters.AddWithValue("RoleID", Role.RoleID);
+            cmd.Parameters.AddWithValue("@RoleID", Role.RoleID);
+            cmd.ExecuteNonQuery();
 
             scon.Close();
 

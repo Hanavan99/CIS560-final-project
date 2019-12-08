@@ -30,7 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.uxGroupTable = new System.Windows.Forms.DataGridView();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxAddUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,16 +46,16 @@
             this.uxSave = new System.Windows.Forms.Button();
             this.uxDescription = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.uxGroupTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // uxGroupTable
             // 
+            this.uxGroupTable.AllowUserToAddRows = false;
+            this.uxGroupTable.AllowUserToDeleteRows = false;
             this.uxGroupTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -70,7 +72,29 @@
             this.uxGroupTable.RowTemplate.Height = 24;
             this.uxGroupTable.Size = new System.Drawing.Size(405, 216);
             this.uxGroupTable.TabIndex = 0;
-            this.uxGroupTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.uxGroupTable_CellValueChanged);
+            // 
+            // UserName
+            // 
+            this.UserName.HeaderText = "Username";
+            this.UserName.MinimumWidth = 6;
+            this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
+            this.UserName.Width = 125;
+            // 
+            // Email
+            // 
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Role
+            // 
+            this.Role.HeaderText = "Role";
+            this.Role.MinimumWidth = 6;
+            this.Role.Name = "Role";
+            this.Role.ReadOnly = true;
+            this.Role.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Role.Width = 125;
             // 
             // menuStrip1
             // 
@@ -106,6 +130,7 @@
             this.uxEditUser.Name = "uxEditUser";
             this.uxEditUser.Size = new System.Drawing.Size(193, 22);
             this.uxEditUser.Text = "Edit Selected User...";
+            this.uxEditUser.Click += new System.EventHandler(this.uxEditUser_Click);
             // 
             // deleteSelectedUsersToolStripMenuItem
             // 
@@ -189,29 +214,6 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Description:";
             // 
-            // UserName
-            // 
-            this.UserName.HeaderText = "Username";
-            this.UserName.MinimumWidth = 6;
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            this.UserName.Width = 125;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // Role
-            // 
-            this.Role.HeaderText = "Role";
-            this.Role.MinimumWidth = 6;
-            this.Role.Name = "Role";
-            this.Role.ReadOnly = true;
-            this.Role.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Role.Width = 125;
-            // 
             // EditGroupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,9 +235,9 @@
             this.Text = "Edit Group";
             this.Load += new System.EventHandler(this.EditGroupForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.uxGroupTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -79,6 +79,12 @@
     <Compile Include="EditTasksForm.Designer.cs">
       <DependentUpon>EditTasksForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditUserGroupUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditUserGroupUserForm.Designer.cs">
+      <DependentUpon>EditUserGroupUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditTasksForm.resx">
       <DependentUpon>EditTasksForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditUserGroupUserForm.resx">
+      <DependentUpon>EditUserGroupUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

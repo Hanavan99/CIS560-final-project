@@ -28,29 +28,7 @@ namespace CIS560_final_project
 
         private void EditGroupForm_Load(object sender, EventArgs e)
         {
-            if (userGroup != null)
-            {
-                List<Role> roles = database.GetRoles();
-                DataGridViewRowCollection col = uxGroupTable.Rows;
-                col.Clear();
-
-                foreach (KeyValuePair<User, Role> kvp in database.GetUsersInUserGroup(userGroup))
-                {
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.CreateCells(uxGroupTable);
-                    row.Cells[0].Value = kvp.Key;
-                    row.Cells[1].Value = kvp.Key.Email;
-                    row.Cells[2].Value = kvp.Value;
-                    col.Add(row);
-                }
-
-                uxGroupName.Text = userGroup.Name;
-                uxOwner.Text = userGroup.Owner.Name;
-                uxDescription.Text = userGroup.Description;
-            } else
-            {
-                uxOwner.Text = user.Name;
-            }
+            UpdateUserGroupList();
         }
 
         private void uxSave_Click(object sender, EventArgs e)
@@ -79,7 +57,47 @@ namespace CIS560_final_project
 
         private void uxAddUser_Click(object sender, EventArgs e)
         {
+            new EditUserGroupUserForm(database, userGroup, null, null).ShowDialog();
+            UpdateUserGroupList();
+        }
 
+        private void UpdateUserGroupList()
+        {
+            if (userGroup != null)
+            {
+                List<Role> roles = database.GetRoles();
+                DataGridViewRowCollection col = uxGroupTable.Rows;
+                col.Clear();
+
+                foreach (KeyValuePair<User, Role> kvp in database.GetUsersInUserGroup(userGroup))
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(uxGroupTable);
+                    row.Cells[0].Value = kvp.Key;
+                    row.Cells[1].Value = kvp.Key.Email;
+                    row.Cells[2].Value = kvp.Value;
+                    col.Add(row);
+                }
+
+                uxGroupName.Text = userGroup.Name;
+                uxOwner.Text = userGroup.Owner.Name;
+                uxDescription.Text = userGroup.Description;
+            }
+            else
+            {
+                uxOwner.Text = user.Name;
+            }
+        }
+
+        private void uxEditUser_Click(object sender, EventArgs e)
+        {
+            if (uxGroupTable.SelectedRows.Count >= 1)
+            {
+                User selectedUser = (User)uxGroupTable.SelectedRows[0].Cells[0].Value;
+                Role role = (Role)uxGroupTable.SelectedRows[0].Cells[2].Value;
+                new EditUserGroupUserForm(database, userGroup, selectedUser, role).ShowDialog();
+                UpdateUserGroupList();
+            }
         }
     }
 }
