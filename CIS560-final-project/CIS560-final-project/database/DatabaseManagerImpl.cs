@@ -19,7 +19,7 @@ namespace CIS560_final_project.database
         {
             try
             {
-                //MessageBox.Show(Directory.GetCurrentDirectory().ToString());
+                // MessageBox.Show(Directory.GetCurrentDirectory().ToString());
                 StreamReader reader = new StreamReader("../../../../../sqlconnstr.txt");
                 connectionString = reader.ReadLine();
                 reader.Close();
