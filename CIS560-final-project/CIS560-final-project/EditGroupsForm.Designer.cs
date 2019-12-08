@@ -63,6 +63,7 @@
             this.uxCreateGroup.TabIndex = 2;
             this.uxCreateGroup.Text = "Create New Group...";
             this.uxCreateGroup.UseVisualStyleBackColor = true;
+            this.uxCreateGroup.Click += new System.EventHandler(this.uxCreateGroup_Click);
             // 
             // uxDeleteGroups
             // 

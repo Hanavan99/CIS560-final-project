@@ -26,8 +26,7 @@ namespace CIS560_final_project
 
         private void EditGroupsForm_Load(object sender, EventArgs e)
         {
-            List<UserGroup> groups = database.GetUserGroupsForUser(user);
-            uxGroupList.Items.AddRange(groups.ToArray());
+            UpdateUserGroupList();
         }
 
         private void uxDeleteGroups_Click(object sender, EventArgs e)
@@ -40,10 +39,24 @@ namespace CIS560_final_project
             if (uxGroupList.SelectedItem != null)
             {
                 new EditGroupForm(database, user, (UserGroup) uxGroupList.SelectedItem).ShowDialog();
+                UpdateUserGroupList();
             } else
             {
                 MessageBox.Show("Please select a group from the list.");
             }
+        }
+
+        private void uxCreateGroup_Click(object sender, EventArgs e)
+        {
+            new EditGroupForm(database, user, null).ShowDialog();
+            UpdateUserGroupList();
+        }
+
+        private void UpdateUserGroupList()
+        {
+            List<UserGroup> groups = database.GetUserGroupsForUser(user);
+            uxGroupList.Items.Clear();
+            uxGroupList.Items.AddRange(groups.ToArray());
         }
     }
 }

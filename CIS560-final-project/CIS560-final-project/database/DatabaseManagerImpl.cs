@@ -212,7 +212,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "INSERT INTO Users.UserGroups(OwnerID, [Name], [Description]) OUTPUT INSERTED.UserGroupID values (@OwnerID, @Name, @Description)";
+            string query = "INSERT INTO Users.UserGroups(GroupOwnerID, [Name], [Description]) OUTPUT INSERTED.UserGroupID values (@OwnerID, @Name, @Description)";
             SqlCommand cmd = new SqlCommand(query, scon);
             cmd.Parameters.AddWithValue("@OwnerID", Owner.UserID);
             cmd.Parameters.AddWithValue("@Name", Name);
@@ -229,7 +229,7 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
             scon.Open();
 
-            string query = "UPDATE Users.UserGroups SET @GroupOwnerID = GroupOwnerID, @Name = [Name], @Description = [Description] WHERE @UserGroupID = UserGroupID";
+            string query = "UPDATE Users.UserGroups SET GroupOwnerID = @GroupOwnerID, [Name] = @Name, [Description] = @Description WHERE @UserGroupID = UserGroupID";
             SqlCommand cmd = new SqlCommand(query, scon);
             cmd.Parameters.AddWithValue("@GroupOwnerID", Owner.UserID);
             cmd.Parameters.AddWithValue("@Name", Name);
@@ -426,8 +426,9 @@ namespace CIS560_final_project.database
             SqlConnection scon = new SqlConnection(connectionString);
 
             scon.Open();
-            string query = "SELECT U.UserID, U.[Name] AS UserName, U.Email, UG.UserGroupID, UG.[Name], UG.[Description] FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID INNER JOIN Users.Users U ON UGU.UserID = U.UserID WHERE UGU.UserID = " + User.UserID;
+            string query = "SELECT U.UserID, U.[Name] AS UserName, U.Email, UG.UserGroupID, UG.[Name], UG.[Description] FROM Users.UserGroups UG INNER JOIN Users.UserGroupUsers UGU ON UG.UserGroupID = UGU.UserGroupID INNER JOIN Users.Users U ON UGU.UserID = U.UserID WHERE UGU.UserID = @UserID";
             SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@UserID", User.UserID);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {

@@ -71,7 +71,6 @@
             this.uxGroupTable.RowTemplate.Height = 24;
             this.uxGroupTable.Size = new System.Drawing.Size(405, 216);
             this.uxGroupTable.TabIndex = 0;
-            this.uxGroupTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.uxGroupTable_CellValueChanged);
             // 
             // UserName
             // 
@@ -195,6 +194,8 @@
             // 
             // uxDescription
             // 
+            this.uxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.uxDescription.Location = new System.Drawing.Point(86, 53);
             this.uxDescription.Multiline = true;
             this.uxDescription.Name = "uxDescription";
