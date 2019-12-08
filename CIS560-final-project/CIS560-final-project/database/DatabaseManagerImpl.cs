@@ -209,12 +209,39 @@ namespace CIS560_final_project.database
 
         public UserGroup CreateUserGroup(User Owner, string Name, string Description)
         {
-            throw new NotImplementedException();
+            SqlConnection scon = new SqlConnection(connectionString);
+            scon.Open();
+
+            string query = "INSERT INTO Users.UserGroups(OwnerID, [Name], [Description]) OUTPUT INSERTED.UserGroupID values (@OwnerID, @Name, @Description)";
+            SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@OwnerID", Owner.UserID);
+            cmd.Parameters.AddWithValue("@Name", Name);
+            cmd.Parameters.AddWithValue("@Description", Description);
+
+            int UserGroupID = (int)cmd.ExecuteScalar();
+            UserGroup temp = new UserGroup(UserGroupID, Owner, Name, Description);
+
+            return temp;
         }
 
         public UserGroup UpdateUserGroup(UserGroup UserGroup, User Owner, string Name, string Description)
         {
-            throw new NotImplementedException();
+            SqlConnection scon = new SqlConnection(connectionString);
+            scon.Open();
+
+            string query = "UPDATE Users.UserGroups SET @GroupOwnerID = GroupOwnerID, @Name = [Name], @Description = [Description] WHERE @UserGroupID = UserGroupID";
+            SqlCommand cmd = new SqlCommand(query, scon);
+            cmd.Parameters.AddWithValue("@GroupOwnerID", Owner.UserID);
+            cmd.Parameters.AddWithValue("@Name", Name);
+            cmd.Parameters.AddWithValue("@Description", Description);
+            cmd.Parameters.AddWithValue("@UserGroupID", UserGroup.UserGroupID);
+            cmd.ExecuteNonQuery();
+
+            scon.Close();
+
+            UserGroup temp = new UserGroup(UserGroup.UserGroupID, Owner, Name, Description);
+
+            return temp;
         }
 
         public List<UserGroup> GetUserGroupsForOwner(User Owner)
